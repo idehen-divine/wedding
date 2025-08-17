@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story - Precious & Franklin Wedding</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#D4A574',
+                        secondary: '#F5C2A1'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    },
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="font-inter text-gray-800 overflow-x-hidden"
+    style="background: linear-gradient(135deg, #FDF4F0 0%, #F9E8E1 50%, #F5DDD4 100%);">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-primary/20">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="font-playfair text-2xl font-semibold text-primary">P & F</div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary transition-colors">Home</a>
+                    <a href="details.html" class="text-gray-700 hover:text-primary transition-colors">Event Details</a>
+                    <a href="rsvp.html" class="text-gray-700 hover:text-primary transition-colors">RSVP</a>
+                    <a href="gallery.html" class="text-gray-700 hover:text-primary transition-colors">Gallery</a>
+                    <a href="wishes.html" class="text-gray-700 hover:text-primary transition-colors">Wishes</a>
+                    <a href="story.html" class="text-primary font-medium">Our Story</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="musicToggle"
+                        class="w-10 h-10 flex items-center justify-center bg-primary/20 rounded-full hover:bg-primary/30 transition-colors">
+                        <i class="ri-music-line text-primary"></i>
+                    </button>
+                    <button id="mobileMenu" class="md:hidden w-10 h-10 flex items-center justify-center">
+                        <i class="ri-menu-line text-gray-700"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Love Story Timeline -->
+    <section class="pt-32 pb-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h1 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">Our Love Story</h1>
+                <p class="text-gray-600 text-lg">The journey that brought us together</p>
+            </div>
+
+            <div class="relative">
+                <!-- Timeline line -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-primary/30 h-full"></div>
+                <!-- Timeline items -->
+                <div class="space-y-16">
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                                <h3 class="font-playfair text-xl font-medium text-primary mb-2">First Meeting</h3>
+                                <p class="text-gray-600 text-sm mb-3">September 2019</p>
+                                <p class="text-gray-700">We met at a coffee shop in downtown. Precious was reading her
+                                    favorite book, and Franklin couldn't help but ask about it. The conversation lasted
+                                    for
+                                    hours.</p>
+                            </div>
+                        </div>
+                        <div class="w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10">
+                        </div>
+                        <div class="w-1/2 pl-8">
+                            <img src="https://readdy.ai/api/search-image?query=romantic%20couple%20meeting%20at%20cozy%20coffee%20shop%20first%20date%20warm%20lighting%20books%20on%20table%20soft%20blush%20and%20cream%20tones%20intimate%20atmosphere%20young%20couple%20talking%20and%20laughing%20vintage%20coffee%20shop%20interior&width=300&height=200&seq=story-1&orientation=landscape"
+                                alt="First meeting" class="w-full h-48 object-cover rounded-2xl shadow-lg">
+                        </div>
+                    </div>
+
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-8">
+                            <img src="https://readdy.ai/api/search-image?query=romantic%20couple%20on%20first%20official%20date%20elegant%20restaurant%20candlelight%20dinner%20soft%20romantic%20lighting%20blush%20and%20gold%20color%20scheme%20intimate%20dining%20setting%20couple%20holding%20hands%20across%20table&width=300&height=200&seq=story-2&orientation=landscape"
+                                alt="First date" class="w-full h-48 object-cover rounded-2xl shadow-lg">
+                        </div>
+                        <div class="w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10">
+                        </div>
+                        <div class="w-1/2 pl-8">
+                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                                <h3 class="font-playfair text-xl font-medium text-primary mb-2">First Date</h3>
+                                <p class="text-gray-600 text-sm mb-3">October 2019</p>
+                                <p class="text-gray-700">Our first official date was at a charming Italian restaurant.
+                                    Franklin was nervous, but Precious's laughter made everything perfect. We knew there
+                                    was
+                                    something special.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                                <h3 class="font-playfair text-xl font-medium text-primary mb-2">Moving In Together</h3>
+                                <p class="text-gray-600 text-sm mb-3">June 2021</p>
+                                <p class="text-gray-700">After two years of dating, we decided to take the next step.
+                                    Moving in together was an adventure filled with furniture shopping and learning each
+                                    other's habits.</p>
+                            </div>
+                        </div>
+                        <div class="w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10">
+                        </div>
+                        <div class="w-1/2 pl-8">
+                            <img src="https://readdy.ai/api/search-image?query=happy%20couple%20moving%20into%20new%20apartment%20together%20carrying%20boxes%20and%20furniture%20bright%20sunny%20day%20new%20home%20excitement%20warm%20blush%20and%20cream%20color%20palette%20cozy%20domestic%20scene&width=300&height=200&seq=story-3&orientation=landscape"
+                                alt="Moving in" class="w-full h-48 object-cover rounded-2xl shadow-lg">
+                        </div>
+                    </div>
+
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-8">
+                            <img src="https://readdy.ai/api/search-image?query=romantic%20marriage%20proposal%20at%20sunset%20beach%20man%20kneeling%20with%20ring%20woman%20surprised%20and%20happy%20golden%20hour%20lighting%20ocean%20waves%20in%20background%20dreamy%20romantic%20atmosphere%20engagement%20moment&width=300&height=200&seq=story-4&orientation=landscape"
+                                alt="Proposal" class="w-full h-48 object-cover rounded-2xl shadow-lg">
+                        </div>
+                        <div class="w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10">
+                        </div>
+                        <div class="w-1/2 pl-8">
+                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                                <h3 class="font-playfair text-xl font-medium text-primary mb-2">The Proposal</h3>
+                                <p class="text-gray-600 text-sm mb-3">December 2023</p>
+                                <p class="text-gray-700">Franklin proposed during a sunset walk on the beach where we
+                                    had
+                                    our first vacation together. Precious said yes before he could even finish asking
+                                    the
+                                    question!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media & Hashtag Section -->
+    <section class="py-20 px-6 bg-gradient-to-br from-primary/10 to-white/40">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">Share the Love</h2>
+            <p class="text-gray-600 text-lg mb-8">Follow our journey and share your photos using our wedding hashtag</p>
+
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg mb-8">
+                <div class="text-4xl mb-4">📸</div>
+                <h3 class="font-playfair text-2xl font-medium text-primary mb-4">#PreciousAndFranklinForever</h3>
+                <p class="text-gray-600">Tag us in your photos and stories so we can see our special day through your
+                    eyes!</p>
+            </div>
+
+            <div class="flex justify-center space-x-6">
+                <a href="#"
+                    class="w-12 h-12 flex items-center justify-center bg-pink-500 hover:bg-pink-600 text-white rounded-full transition-colors">
+                    <i class="ri-instagram-line text-xl"></i>
+                </a>
+                <a href="#"
+                    class="w-12 h-12 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors">
+                    <i class="ri-facebook-line text-xl"></i>
+                </a>
+                <a href="#"
+                    class="w-12 h-12 flex items-center justify-center bg-blue-400 hover:bg-blue-500 text-white rounded-full transition-colors">
+                    <i class="ri-twitter-line text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary/20 py-16 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10"
+            style="background-image: url('https://readdy.ai/api/search-image?query=delicate%20watercolor%20floral%20pattern%20background%20blush%20peach%20and%20cream%20roses%20with%20eucalyptus%20leaves%20seamless%20pattern%20wedding%20decoration%20soft%20romantic%20botanical%20design&width=800&height=400&seq=footer-bg&orientation=landscape'); background-size: cover; background-position: center;">
+        </div>
+
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="text-center md:text-left">
+                    <h3 class="font-playfair text-2xl font-medium text-primary mb-4">Precious & Franklin</h3>
+                    <p class="text-gray-600">Celebrating love, family, and the beginning of our forever journey
+                        together.</p>
+                </div>
+
+                <div class="text-center md:text-left">
+                    <h4 class="font-medium text-gray-800 mb-4">Contact</h4>
+                    <p class="text-gray-600 mb-2">wedding@preciousfranklin.com</p>
+                    <p class="text-gray-600">+1 (555) 123-4567</p>
+                </div>
+
+                <div class="text-center md:text-left">
+                    <h4 class="font-medium text-gray-800 mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="details.html" class="block text-gray-600 hover:text-primary transition-colors">Event
+                            Details</a>
+                        <a href="rsvp.html" class="block text-gray-600 hover:text-primary transition-colors">RSVP</a>
+                        <a href="gallery.html"
+                            class="block text-gray-600 hover:text-primary transition-colors">Gallery</a>
+                        <a href="story.html" class="block text-gray-600 hover:text-primary transition-colors">Our
+                            Story</a>
+                    </div>
+                </div>
+
+                <div class="text-center md:text-left">
+                    <h4 class="font-medium text-gray-800 mb-4">Follow Us</h4>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#"
+                            class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="#"
+                            class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
+                            <i class="ri-facebook-line"></i>
+                        </a>
+                        <a href="#"
+                            class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
+                            <i class="ri-twitter-line"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-primary/20 pt-8 text-center">
+                <p class="text-gray-600">&copy; 2024 Precious & Franklin Wedding. Made with love for our special day.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
