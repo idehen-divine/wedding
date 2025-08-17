@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP - Precious & Franklin Wedding</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#D4A574',
+                        secondary: '#F5C2A1'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    },
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="font-inter text-gray-800 overflow-x-hidden"
+    style="background: linear-gradient(135deg, #FDF4F0 0%, #F9E8E1 50%, #F5DDD4 100%);">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-primary/20">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="font-playfair text-2xl font-semibold text-primary">P & F</div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary transition-colors">Home</a>
+                    <a href="details.html" class="text-gray-700 hover:text-primary transition-colors">Event Details</a>
+                    <a href="rsvp.html" class="text-primary font-medium">RSVP</a>
+                    <a href="gallery.html" class="text-gray-700 hover:text-primary transition-colors">Gallery</a>
+                    <a href="wishes.html" class="text-gray-700 hover:text-primary transition-colors">Wishes</a>
+                    <a href="story.html" class="text-gray-700 hover:text-primary transition-colors">Our Story</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="musicToggle"
+                        class="w-10 h-10 flex items-center justify-center bg-primary/20 rounded-full hover:bg-primary/30 transition-colors">
+                        <i class="ri-music-line text-primary"></i>
+                    </button>
+                    <button id="mobileMenu" class="md:hidden w-10 h-10 flex items-center justify-center">
+                        <i class="ri-menu-line text-gray-700"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- RSVP Section -->
+    <section class="pt-32 pb-20 px-6 bg-gradient-to-br from-white/40 to-primary/10">
+        <div class="max-w-2xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">RSVP</h1>
+                <p class="text-gray-600 text-lg">Please let us know if you'll be joining us</p>
+            </div>
+
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg relative">
+                <!-- Decorative floral border -->
+                <div class="absolute -top-4 -left-4 w-16 h-16 opacity-30">
+                    <img src="https://readdy.ai/api/search-image?query=small%20delicate%20watercolor%20blush%20peach%20rose%20corner%20decoration%20transparent%20background%20elegant%20floral%20accent%20wedding%20invitation%20style%20champagne%20gold%20details&width=100&height=100&seq=corner-1&orientation=squarish"
+                        alt="Corner decoration" class="w-full h-full object-contain">
+                </div>
+                <div class="absolute -bottom-4 -right-4 w-16 h-16 opacity-30 rotate-180">
+                    <img src="https://readdy.ai/api/search-image?query=small%20delicate%20watercolor%20blush%20peach%20rose%20corner%20decoration%20transparent%20background%20elegant%20floral%20accent%20wedding%20invitation%20style%20champagne%20gold%20details&width=100&height=100&seq=corner-2&orientation=squarish"
+                        alt="Corner decoration" class="w-full h-full object-contain">
+                </div>
+
+                <form id="rsvpForm" class="space-y-6">
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Full Name *</label>
+                        <input type="text" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Email Address *</label>
+                        <input type="email" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Number of Guests *</label>
+                        <select
+                            class="w-full px-4 py-3 pr-8 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm">
+                            <option>1 Guest</option>
+                            <option>2 Guests</option>
+                            <option>3 Guests</option>
+                            <option>4 Guests</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Dietary Preferences</label>
+                        <textarea rows="3"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm"
+                            placeholder="Please let us know about any dietary restrictions or allergies"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Will you be attending? *</label>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="attendance" value="yes" class="sr-only">
+                                <div
+                                    class="w-5 h-5 border-2 border-primary rounded-full mr-2 flex items-center justify-center cursor-pointer">
+                                    <div class="w-2 h-2 bg-primary rounded-full opacity-0 transition-opacity"></div>
+                                </div>
+                                <span class="text-gray-700">Yes, I'll be there</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="attendance" value="no" class="sr-only">
+                                <div
+                                    class="w-5 h-5 border-2 border-primary rounded-full mr-2 flex items-center justify-center cursor-pointer">
+                                    <div class="w-2 h-2 bg-primary rounded-full opacity-0 transition-opacity"></div>
+                                </div>
+                                <span class="text-gray-700">Sorry, can't make it</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-primary hover:bg-primary/90 text-white py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
+                        Send RSVP
+                    </button>
+                </form>
+
+                <div id="rsvpSuccess" class="hidden text-center py-8">
+                    <div class="w-16 h-16 flex items-center justify-center bg-green-100 rounded-full mx-auto mb-4">
+                        <i class="ri-check-line text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-playfair text-2xl font-medium text-primary mb-2">Thank You!</h3>
+                    <p class="text-gray-600 mb-6">Your RSVP has been received. We can't wait to celebrate with you!</p>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <button
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 !rounded-button text-sm font-medium transition-colors whitespace-nowrap">
+                            <i class="ri-google-line mr-1"></i>Add to Google
+                        </button>
+                        <button
+                            class="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 !rounded-button text-sm font-medium transition-colors whitespace-nowrap">
+                            <i class="ri-apple-line mr-1"></i>Add to Apple
+                        </button>
+                        <button
+                            class="bg-blue-800 hover:bg-blue-900 text-white px-4 py-2 !rounded-button text-sm font-medium transition-colors whitespace-nowrap">
+                            <i class="ri-microsoft-line mr-1"></i>Add to Outlook
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary/20 py-16 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10"
+            style="background-image: url('https://readdy.ai/api/search-image?query=delicate%20watercolor%20floral%20pattern%20background%20blush%20peach%20and%20cream%20roses%20with%20eucalyptus%20leaves%20seamless%20pattern%20wedding%20decoration%20soft%20romantic%20botanical%20design&width=800&height=400&seq=footer-bg&orientation=landscape'); background-size: cover; background-position: center;">
+        </div>
+
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="text-center md:text-left">
+                    <h3 class="font-playfair text-2xl font-medium text-primary mb-4">Precious & Franklin</h3>
+                    <p class="text-gray-600">Celebrating love, family, and the beginning of our forever journey
+                        together.</p>
+                </div>
+
+                <div class="text-center md:text-left">
+                    <h4 class="font-medium text-gray-800 mb-4">Contact</h4>
+                    <p class="text-gray-600 mb-2">wedding@preciousfranklin.com</p>
+                    <p class="text-gray-600">+1 (555) 123-4567</p>
+                </div>
+
+                <div class="text-center md:text-left">
+                    <h4 class="font-medium text-gray-800 mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="details.html" class="block text-gray-600 hover:text-primary transition-colors">Event
+                            Details</a>
+                        <a href="rsvp.html" class="block text-gray-600 hover:text-primary transition-colors">RSVP</a>
+                        <a href="gallery.html"
+                            class="block text-gray-600 hover:text-primary transition-colors">Gallery</a>
+                        <a href="story.html" class="block text-gray-600 hover:text-primary transition-colors">Our
+                            Story</a>
+                    </div>
+                </div>
+
+                <div class="text-center md:text-left">
+                    <h4 class="font-medium text-gray-800 mb-4">Follow Us</h4>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#"
+                            class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="#"
+                            class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
+                            <i class="ri-facebook-line"></i>
+                        </a>
+                        <a href="#"
+                            class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
+                            <i class="ri-twitter-line"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-primary/20 pt-8 text-center">
+                <p class="text-gray-600">&copy; 2024 Precious & Franklin Wedding. Made with love for our special day.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
