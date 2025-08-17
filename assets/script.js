@@ -5,7 +5,7 @@
 // COUNTDOWN TIMER
 // ========================================
 document.addEventListener("DOMContentLoaded", function () {
-    const weddingDate = new Date("2024-08-30T16:00:00");
+    const weddingDate = new Date("2025-12-30T14:00:00");
 
     function updateCountdown() {
         const now = new Date();
@@ -123,19 +123,38 @@ document.addEventListener("DOMContentLoaded", function () {
     const musicToggle = document.getElementById("musicToggle");
     const audio = new Audio("assets/harmony.mp3");
     audio.loop = true;
-    let isPlaying = true;
+    let isPlaying = false;
 
-    // Start playing music automatically when page loads
-    audio.play().then(() => {
-        // Update button to show pause state when autoplay succeeds
-        const icon = musicToggle.querySelector("i");
-        icon.className = "ri-pause-line text-primary";
-        musicToggle.classList.add("bg-primary/30");
-    }).catch(e => {
-        // If autoplay fails (browser policy), reset to default state
-        console.log("Audio autoplay failed:", e);
-        isPlaying = false;
-    });
+    // Try to start music automatically after 2 seconds
+    setTimeout(() => {
+        // Simulate a click to bypass autoplay restrictions
+        const clickEvent = new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+            view: window
+        });
+        
+        // First try direct autoplay
+        audio.play().then(() => {
+            isPlaying = true;
+            const icon = musicToggle.querySelector("i");
+            icon.className = "ri-pause-line text-primary";
+            musicToggle.classList.add("bg-primary/30");
+        }).catch(() => {
+            // If direct autoplay fails, try simulating user interaction
+            document.dispatchEvent(clickEvent);
+            setTimeout(() => {
+                audio.play().then(() => {
+                    isPlaying = true;
+                    const icon = musicToggle.querySelector("i");
+                    icon.className = "ri-pause-line text-primary";
+                    musicToggle.classList.add("bg-primary/30");
+                }).catch(() => {
+                    console.log("All autoplay attempts failed, waiting for real user interaction");
+                });
+            }, 100);
+        });
+    }, 2000);
 
     musicToggle.addEventListener("click", function () {
         isPlaying = !isPlaying;
