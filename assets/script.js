@@ -123,7 +123,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const musicToggle = document.getElementById("musicToggle");
     const audio = new Audio("assets/harmony.mp3");
     audio.loop = true;
-    let isPlaying = false;
+    let isPlaying = true;
+
+    // Start playing music automatically when page loads
+    audio.play().then(() => {
+        // Update button to show pause state when autoplay succeeds
+        const icon = musicToggle.querySelector("i");
+        icon.className = "ri-pause-line text-primary";
+        musicToggle.classList.add("bg-primary/30");
+    }).catch(e => {
+        // If autoplay fails (browser policy), reset to default state
+        console.log("Audio autoplay failed:", e);
+        isPlaying = false;
+    });
 
     musicToggle.addEventListener("click", function () {
         isPlaying = !isPlaying;
