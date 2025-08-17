@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Details - Precious & Franklin Wedding</title>
+    <title>RSVP - Precious & Franklin Wedding</title>
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,8 +57,8 @@
                 <div class="font-playfair text-2xl font-semibold text-primary">P & F</div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="index.html" class="text-gray-700 hover:text-primary transition-colors">Home</a>
-                    <a href="details.html" class="text-primary font-medium">Event Details</a>
-                    <a href="rsvp.html" class="text-gray-700 hover:text-primary transition-colors">RSVP</a>
+                    <a href="details.html" class="text-gray-700 hover:text-primary transition-colors">Event Details</a>
+                    <a href="rsvp.html" class="text-primary font-medium">RSVP</a>
                     <a href="gallery.html" class="text-gray-700 hover:text-primary transition-colors">Gallery</a>
                     <a href="wishes.html" class="text-gray-700 hover:text-primary transition-colors">Wishes</a>
                     <a href="story.html" class="text-gray-700 hover:text-primary transition-colors">Our Story</a>
@@ -76,74 +76,102 @@
         </div>
     </nav>
 
-    <!-- Event Details Section -->
-    <section class="pt-32 pb-20 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h1 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">Event Details</h1>
-                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Join us as we celebrate the beginning of our forever
-                </p>
+    <!-- RSVP Section -->
+    <section class="pt-32 pb-20 px-6 bg-gradient-to-br from-white/40 to-primary/10">
+        <div class="max-w-2xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">RSVP</h1>
+                <p class="text-gray-600 text-lg">Please let us know if you'll be joining us</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8 mb-16">
-                <div
-                    class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow">
-                    <div class="w-16 h-16 flex items-center justify-center bg-primary/20 rounded-full mx-auto mb-6">
-                        <i class="ri-church-line text-primary text-2xl"></i>
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg relative">
+                <!-- Decorative floral border -->
+                <div class="absolute -top-4 -left-4 w-16 h-16 opacity-30">
+                    <img src="assets/images/corner-1.png" alt="Corner decoration" class="w-full h-full object-contain">
+                </div>
+                <div class="absolute -bottom-4 -right-4 w-16 h-16 opacity-30 rotate-180">
+                    <img src="assets/images/corner-2.png" alt="Corner decoration" class="w-full h-full object-contain">
+                </div>
+
+                <form id="rsvpForm" class="space-y-6">
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Full Name *</label>
+                        <input type="text" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm">
                     </div>
-                    <h3 class="font-playfair text-2xl font-medium text-primary mb-4">Ceremony</h3>
-                    <p class="text-gray-700 mb-2">St. Mary's Cathedral</p>
-                    <p class="text-gray-600 mb-2">123 Wedding Lane, Love City</p>
-                    <p class="text-primary font-medium">4:00 PM</p>
-                </div>
 
-                <div
-                    class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow">
-                    <div class="w-16 h-16 flex items-center justify-center bg-primary/20 rounded-full mx-auto mb-6">
-                        <i class="ri-goblet-line text-primary text-2xl"></i>
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Email Address *</label>
+                        <input type="email" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm">
                     </div>
-                    <h3 class="font-playfair text-2xl font-medium text-primary mb-4">Reception</h3>
-                    <p class="text-gray-700 mb-2">Grand Ballroom</p>
-                    <p class="text-gray-600 mb-2">456 Celebration Ave, Love City</p>
-                    <p class="text-primary font-medium">6:00 PM - 11:00 PM</p>
-                </div>
 
-                <div
-                    class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow">
-                    <div class="w-16 h-16 flex items-center justify-center bg-primary/20 rounded-full mx-auto mb-6">
-                        <i class="ri-shirt-line text-primary text-2xl"></i>
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Number of Guests *</label>
+                        <select
+                            class="w-full px-4 py-3 pr-8 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm">
+                            <option>1 Guest</option>
+                            <option>2 Guests</option>
+                            <option>3 Guests</option>
+                            <option>4 Guests</option>
+                        </select>
                     </div>
-                    <h3 class="font-playfair text-2xl font-medium text-primary mb-4">Dress Code</h3>
-                    <p class="text-gray-700 mb-2">Formal Attire</p>
-                    <p class="text-gray-600 mb-2">Cocktail dresses & suits</p>
-                    <p class="text-primary font-medium">Blush & Gold Welcome</p>
-                </div>
-            </div>
 
-            <!-- Map -->
-            <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 shadow-lg mb-8">
-                <h3 class="font-playfair text-2xl font-medium text-primary mb-6 text-center">Venue Location</h3>
-                <div class="w-full h-96 rounded-xl overflow-hidden"
-                    style="background-image: url('assets/images/map-placeholder.png'); background-size: cover; background-position: center;">
-                </div>
-            </div>
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Dietary Preferences</label>
+                        <textarea rows="3"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm"
+                            placeholder="Please let us know about any dietary restrictions or allergies"></textarea>
+                    </div>
 
-            <!-- Add to Calendar -->
-            <div class="text-center">
-                <h3 class="font-playfair text-2xl font-medium text-primary mb-6">Add to Your Calendar</h3>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <button
-                        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
-                        <i class="ri-google-line mr-2"></i>Google Calendar
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Will you be attending? *</label>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="attendance" value="yes" class="sr-only">
+                                <div
+                                    class="w-5 h-5 border-2 border-primary rounded-full mr-2 flex items-center justify-center cursor-pointer">
+                                    <div class="w-2 h-2 bg-primary rounded-full opacity-0 transition-opacity"></div>
+                                </div>
+                                <span class="text-gray-700">Yes, I'll be there</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="attendance" value="no" class="sr-only">
+                                <div
+                                    class="w-5 h-5 border-2 border-primary rounded-full mr-2 flex items-center justify-center cursor-pointer">
+                                    <div class="w-2 h-2 bg-primary rounded-full opacity-0 transition-opacity"></div>
+                                </div>
+                                <span class="text-gray-700">Sorry, can't make it</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-primary hover:bg-primary/90 text-white py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
+                        Send RSVP
                     </button>
-                    <button
-                        class="bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
-                        <i class="ri-apple-line mr-2"></i>Apple Calendar
-                    </button>
-                    <button
-                        class="bg-blue-800 hover:bg-blue-900 text-white px-6 py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
-                        <i class="ri-microsoft-line mr-2"></i>Outlook
-                    </button>
+                </form>
+
+                <div id="rsvpSuccess" class="hidden text-center py-8">
+                    <div class="w-16 h-16 flex items-center justify-center bg-green-100 rounded-full mx-auto mb-4">
+                        <i class="ri-check-line text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-playfair text-2xl font-medium text-primary mb-2">Thank You!</h3>
+                    <p class="text-gray-600 mb-6">Your RSVP has been received. We can't wait to celebrate with you!</p>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <button
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 !rounded-button text-sm font-medium transition-colors whitespace-nowrap">
+                            <i class="ri-google-line mr-1"></i>Add to Google
+                        </button>
+                        <button
+                            class="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 !rounded-button text-sm font-medium transition-colors whitespace-nowrap">
+                            <i class="ri-apple-line mr-1"></i>Add to Apple
+                        </button>
+                        <button
+                            class="bg-blue-800 hover:bg-blue-900 text-white px-4 py-2 !rounded-button text-sm font-medium transition-colors whitespace-nowrap">
+                            <i class="ri-microsoft-line mr-1"></i>Add to Outlook
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -202,7 +230,7 @@
             </div>
 
             <div class="border-t border-primary/20 pt-8 text-center">
-                <p class="text-gray-600">&copy; 2024 Precious & Franklin Wedding. Made with love for our special day.
+                <p class="text-gray-600">&copy; 2025 Precious & Franklin Wedding. Made with love for our special day.
                 </p>
             </div>
         </div>

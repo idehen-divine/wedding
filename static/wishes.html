@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSVP - Precious & Franklin Wedding</title>
+    <title>Guest Wishes - Precious & Franklin Wedding</title>
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,9 +58,9 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="index.html" class="text-gray-700 hover:text-primary transition-colors">Home</a>
                     <a href="details.html" class="text-gray-700 hover:text-primary transition-colors">Event Details</a>
-                    <a href="rsvp.html" class="text-primary font-medium">RSVP</a>
+                    <a href="rsvp.html" class="text-gray-700 hover:text-primary transition-colors">RSVP</a>
                     <a href="gallery.html" class="text-gray-700 hover:text-primary transition-colors">Gallery</a>
-                    <a href="wishes.html" class="text-gray-700 hover:text-primary transition-colors">Wishes</a>
+                    <a href="wishes.html" class="text-primary font-medium">Wishes</a>
                     <a href="story.html" class="text-gray-700 hover:text-primary transition-colors">Our Story</a>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -76,105 +76,101 @@
         </div>
     </nav>
 
-    <!-- RSVP Section -->
+    <!-- Guest Wishes Section -->
     <section class="pt-32 pb-20 px-6 bg-gradient-to-br from-white/40 to-primary/10">
-        <div class="max-w-2xl mx-auto">
-            <div class="text-center mb-12">
-                <h1 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">RSVP</h1>
-                <p class="text-gray-600 text-lg">Please let us know if you'll be joining us</p>
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h1 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">Guest Wishes</h1>
+                <p class="text-gray-600 text-lg">Share your congratulations and well wishes</p>
             </div>
 
-            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg relative">
-                <!-- Decorative floral border -->
-                <div class="absolute -top-4 -left-4 w-16 h-16 opacity-30">
-                    <img src="assets/images/corner-1.png"
-                        alt="Corner decoration" class="w-full h-full object-contain">
-                </div>
-                <div class="absolute -bottom-4 -right-4 w-16 h-16 opacity-30 rotate-180">
-                    <img src="assets/images/corner-2.png"
-                        alt="Corner decoration" class="w-full h-full object-contain">
-                </div>
-
-                <form id="rsvpForm" class="space-y-6">
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">Full Name *</label>
-                        <input type="text" required
-                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm">
-                    </div>
-
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">Email Address *</label>
-                        <input type="email" required
-                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm">
-                    </div>
-
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">Number of Guests *</label>
-                        <select
-                            class="w-full px-4 py-3 pr-8 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm">
-                            <option>1 Guest</option>
-                            <option>2 Guests</option>
-                            <option>3 Guests</option>
-                            <option>4 Guests</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">Dietary Preferences</label>
-                        <textarea rows="3"
-                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm"
-                            placeholder="Please let us know about any dietary restrictions or allergies"></textarea>
-                    </div>
-
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">Will you be attending? *</label>
-                        <div class="flex space-x-4">
-                            <label class="flex items-center">
-                                <input type="radio" name="attendance" value="yes" class="sr-only">
-                                <div
-                                    class="w-5 h-5 border-2 border-primary rounded-full mr-2 flex items-center justify-center cursor-pointer">
-                                    <div class="w-2 h-2 bg-primary rounded-full opacity-0 transition-opacity"></div>
-                                </div>
-                                <span class="text-gray-700">Yes, I'll be there</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="attendance" value="no" class="sr-only">
-                                <div
-                                    class="w-5 h-5 border-2 border-primary rounded-full mr-2 flex items-center justify-center cursor-pointer">
-                                    <div class="w-2 h-2 bg-primary rounded-full opacity-0 transition-opacity"></div>
-                                </div>
-                                <span class="text-gray-700">Sorry, can't make it</span>
-                            </label>
+            <div class="grid md:grid-cols-2 gap-6 mb-12">
+                <div class="bg-gradient-to-br from-white/80 to-primary/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
+                            <span class="text-primary font-medium">MJ</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-800 mb-1">Michael Johnson</h4>
+                            <p class="text-gray-600 text-sm mb-2">2 days ago</p>
+                            <p class="text-gray-700">"Wishing you both a lifetime of love, happiness, and endless
+                                adventures together. Congratulations on your beautiful union!"</p>
                         </div>
                     </div>
+                </div>
 
-                    <button type="submit"
-                        class="w-full bg-primary hover:bg-primary/90 text-white py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
-                        Send RSVP
-                    </button>
-                </form>
-
-                <div id="rsvpSuccess" class="hidden text-center py-8">
-                    <div class="w-16 h-16 flex items-center justify-center bg-green-100 rounded-full mx-auto mb-4">
-                        <i class="ri-check-line text-green-600 text-2xl"></i>
-                    </div>
-                    <h3 class="font-playfair text-2xl font-medium text-primary mb-2">Thank You!</h3>
-                    <p class="text-gray-600 mb-6">Your RSVP has been received. We can't wait to celebrate with you!</p>
-                    <div class="flex flex-wrap justify-center gap-3">
-                        <button
-                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 !rounded-button text-sm font-medium transition-colors whitespace-nowrap">
-                            <i class="ri-google-line mr-1"></i>Add to Google
-                        </button>
-                        <button
-                            class="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 !rounded-button text-sm font-medium transition-colors whitespace-nowrap">
-                            <i class="ri-apple-line mr-1"></i>Add to Apple
-                        </button>
-                        <button
-                            class="bg-blue-800 hover:bg-blue-900 text-white px-4 py-2 !rounded-button text-sm font-medium transition-colors whitespace-nowrap">
-                            <i class="ri-microsoft-line mr-1"></i>Add to Outlook
-                        </button>
+                <div class="bg-gradient-to-br from-white/80 to-primary/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
+                            <span class="text-primary font-medium">SB</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-800 mb-1">Sarah Brown</h4>
+                            <p class="text-gray-600 text-sm mb-2">3 days ago</p>
+                            <p class="text-gray-700">"So excited to celebrate with you both! May your marriage be filled
+                                with all the right ingredients: love, laughter, and lots of wine!"</p>
+                        </div>
                     </div>
                 </div>
+
+                <div class="bg-gradient-to-br from-white/80 to-primary/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
+                            <span class="text-primary font-medium">DW</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-800 mb-1">David Wilson</h4>
+                            <p class="text-gray-600 text-sm mb-2">5 days ago</p>
+                            <p class="text-gray-700">"Congratulations to the perfect couple! Your love story is truly
+                                inspiring. Can't wait to dance at your wedding!"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-white/80 to-primary/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
+                            <span class="text-primary font-medium">LM</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-800 mb-1">Lisa Martinez</h4>
+                            <p class="text-gray-600 text-sm mb-2">1 week ago</p>
+                            <p class="text-gray-700">"Wishing you a wonderful journey as you build your new lives
+                                together. May your love continue to grow stronger each day!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button id="addWishBtn"
+                    class="bg-primary hover:bg-primary/90 text-white px-8 py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
+                    <i class="ri-heart-line mr-2"></i>Add Your Wish
+                </button>
+            </div>
+        </div>
+
+        <!-- Add Wish Modal -->
+        <div id="wishModal"
+            class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-6">
+            <div class="bg-white rounded-2xl p-8 max-w-md w-full">
+                <h3 class="font-playfair text-2xl font-medium text-primary mb-6">Share Your Wishes</h3>
+                <form id="wishForm" class="space-y-4">
+                    <input type="text" placeholder="Your Name" required
+                        class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm">
+                    <textarea rows="4" placeholder="Your message for the couple..." required
+                        class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm"></textarea>
+                    <div class="flex space-x-4">
+                        <button type="button" id="cancelWish"
+                            class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
+                            Cancel
+                        </button>
+                        <button type="submit"
+                            class="flex-1 bg-primary hover:bg-primary/90 text-white py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
+                            Share Wish
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
@@ -232,7 +228,7 @@
             </div>
 
             <div class="border-t border-primary/20 pt-8 text-center">
-                <p class="text-gray-600">&copy; 2024 Precious & Franklin Wedding. Made with love for our special day.
+                <p class="text-gray-600">&copy; 2025 Precious & Franklin Wedding. Made with love for our special day.
                 </p>
             </div>
         </div>
