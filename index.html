@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emma & James Wedding - August 30, 2024</title>
+    <title>Precious & Franklin Wedding - August 30, 2024</title>
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
     <style>
-        :where([class^="ri-"])::before { content: "\f3c2"; }
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
     </style>
     <script>
         tailwind.config = {
@@ -41,23 +46,26 @@
         }
     </script>
 </head>
-<body class="font-inter text-gray-800 overflow-x-hidden" style="background: linear-gradient(135deg, #FDF4F0 0%, #F9E8E1 50%, #F5DDD4 100%);">
+
+<body class="font-inter text-gray-800 overflow-x-hidden"
+    style="background: linear-gradient(135deg, #FDF4F0 0%, #F9E8E1 50%, #F5DDD4 100%);">
 
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-primary/20">
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <div class="font-playfair text-2xl font-semibold text-primary">E & J</div>
+                <div class="font-playfair text-2xl font-semibold text-primary">P & F</div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-gray-700 hover:text-primary transition-colors">Home</a>
-                    <a href="#details" class="text-gray-700 hover:text-primary transition-colors">Event Details</a>
-                    <a href="#rsvp" class="text-gray-700 hover:text-primary transition-colors">RSVP</a>
-                    <a href="#gallery" class="text-gray-700 hover:text-primary transition-colors">Gallery</a>
-                    <a href="#wishes" class="text-gray-700 hover:text-primary transition-colors">Wishes</a>
-                    <a href="#story" class="text-gray-700 hover:text-primary transition-colors">Our Story</a>
+                    <a href="index.html" class="text-primary font-medium">Home</a>
+                    <a href="details.html" class="text-gray-700 hover:text-primary transition-colors">Event Details</a>
+                    <a href="rsvp.html" class="text-gray-700 hover:text-primary transition-colors">RSVP</a>
+                    <a href="gallery.html" class="text-gray-700 hover:text-primary transition-colors">Gallery</a>
+                    <a href="wishes.html" class="text-gray-700 hover:text-primary transition-colors">Wishes</a>
+                    <a href="story.html" class="text-gray-700 hover:text-primary transition-colors">Our Story</a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button id="musicToggle" class="w-10 h-10 flex items-center justify-center bg-primary/20 rounded-full hover:bg-primary/30 transition-colors">
+                    <button id="musicToggle"
+                        class="w-10 h-10 flex items-center justify-center bg-primary/20 rounded-full hover:bg-primary/30 transition-colors">
                         <i class="ri-music-line text-primary"></i>
                     </button>
                     <button id="mobileMenu" class="md:hidden w-10 h-10 flex items-center justify-center">
@@ -69,606 +77,64 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden" style="background-image: url('https://readdy.ai/api/search-image?query=elegant%20romantic%20wedding%20background%20with%20soft%20blush%20peach%20and%20cream%20tones%20delicate%20watercolor%20floral%20elements%20roses%20and%20eucalyptus%20leaves%20scattered%20around%20dreamy%20ethereal%20atmosphere%20with%20golden%20light%20bokeh%20effect%20perfect%20for%20wedding%20invitation%20luxurious%20and%20sophisticated%20design%20with%20champagne%20gold%20accents&width=1920&height=1080&seq=hero-bg&orientation=landscape'); background-size: cover; background-position: center;">
+    <section class="h-screen flex items-center justify-center relative overflow-hidden pt-20 pb-10"
+        style="background-image: url('https://readdy.ai/api/search-image?query=elegant%20romantic%20wedding%20background%20with%20soft%20blush%20peach%20and%20cream%20tones%20delicate%20watercolor%20floral%20elements%20roses%20and%20eucalyptus%20leaves%20scattered%20around%20dreamy%20ethereal%20atmosphere%20with%20golden%20light%20bokeh%20effect%20perfect%20for%20wedding%20invitation%20luxurious%20and%20sophisticated%20design%20with%20champagne%20gold%20accents&width=1920&height=1080&seq=hero-bg&orientation=landscape'); background-size: cover; background-position: center;">
         <div class="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-primary/20"></div>
 
         <!-- Floating Floral Elements -->
-        <div class="absolute top-20 left-20 w-32 h-32 opacity-30">
-            <img src="https://readdy.ai/api/search-image?query=delicate%20watercolor%20blush%20peach%20roses%20with%20eucalyptus%20leaves%20elegant%20floral%20arrangement%20transparent%20background%20soft%20romantic%20style%20wedding%20decoration%20champagne%20gold%20accents%20dreamy%20botanical%20illustration&width=200&height=200&seq=floral-1&orientation=squarish" alt="Floral decoration" class="w-full h-full object-contain">
+        <div class="absolute top-32 left-20 w-32 h-32 opacity-30">
+            <img src="https://readdy.ai/api/search-image?query=delicate%20watercolor%20blush%20peach%20roses%20with%20eucalyptus%20leaves%20elegant%20floral%20arrangement%20transparent%20background%20soft%20romantic%20style%20wedding%20decoration%20champagne%20gold%20accents%20dreamy%20botanical%20illustration&width=200&height=200&seq=floral-1&orientation=squarish"
+                alt="Floral decoration" class="w-full h-full object-contain">
         </div>
-        <div class="absolute bottom-20 right-20 w-40 h-40 opacity-25">
-            <img src="https://readdy.ai/api/search-image?query=elegant%20watercolor%20peach%20and%20cream%20flowers%20with%20golden%20leaves%20romantic%20floral%20corner%20decoration%20transparent%20background%20wedding%20invitation%20style%20soft%20blush%20tones%20luxurious%20botanical%20design&width=240&height=240&seq=floral-2&orientation=squarish" alt="Floral decoration" class="w-full h-full object-contain">
+        <div class="absolute bottom-32 right-20 w-40 h-40 opacity-25">
+            <img src="https://readdy.ai/api/search-image?query=elegant%20watercolor%20peach%20and%20cream%20flowers%20with%20golden%20leaves%20romantic%20floral%20corner%20decoration%20transparent%20background%20wedding%20invitation%20style%20soft%20blush%20tones%20luxurious%20botanical%20design&width=240&height=240&seq=floral-2&orientation=squarish"
+                alt="Floral decoration" class="w-full h-full object-contain">
         </div>
 
         <div class="relative z-10 text-center max-w-4xl mx-auto px-6">
-            <p class="text-primary font-inter text-lg tracking-widest uppercase mb-6">Save The Date</p>
-            <h1 class="font-playfair text-6xl md:text-8xl font-light text-primary mb-4 italic">
-                Emma<br>
-                <span class="text-5xl md:text-6xl">&</span><br>
-                James
+            <h1 class="font-playfair text-7xl 2xl:text-8xl font-light text-primary mb-4 italic">
+                Precious<br>
+                <span class="text-5xl lg:text-6xl xl:text-7xl">&</span><br>
+                Franklin
             </h1>
-            <p class="text-primary font-inter text-2xl tracking-wider uppercase mb-12">August 30, 2024</p>
+            <p class="text-primary font-inter text-xl md:text-2xl tracking-wider uppercase mb-8">August 30, 2024</p>
 
             <!-- Countdown Timer -->
-            <div class="flex justify-center space-x-4 mb-12">
-                <div class="bg-primary/80 backdrop-blur-sm rounded-lg p-4 min-w-[80px]">
-                    <div id="days" class="text-white text-3xl font-bold">120</div>
-                    <div class="text-white/90 text-sm uppercase tracking-wide">Days</div>
+            <div class="flex justify-center space-x-4 md:space-x-6 mb-2">
+                <div class="bg-primary/80 backdrop-blur-sm rounded-lg p-3 md:p-4 min-w-[60px] md:min-w-[70px]">
+                    <div id="days" class="text-white text-xl md:text-2xl font-bold">120</div>
+                    <div class="text-white/90 text-xs md:text-sm uppercase tracking-wide">Days</div>
                 </div>
-                <div class="bg-primary/80 backdrop-blur-sm rounded-lg p-4 min-w-[80px]">
-                    <div id="hours" class="text-white text-3xl font-bold">07</div>
-                    <div class="text-white/90 text-sm uppercase tracking-wide">Hours</div>
+                <div class="bg-primary/80 backdrop-blur-sm rounded-lg p-3 md:p-4 min-w-[60px] md:min-w-[70px]">
+                    <div id="hours" class="text-white text-xl md:text-2xl font-bold">07</div>
+                    <div class="text-white/90 text-xs md:text-sm uppercase tracking-wide">Hrs</div>
                 </div>
-                <div class="bg-primary/80 backdrop-blur-sm rounded-lg p-4 min-w-[80px]">
-                    <div id="minutes" class="text-white text-3xl font-bold">33</div>
-                    <div class="text-white/90 text-sm uppercase tracking-wide">Minutes</div>
+                <div class="bg-primary/80 backdrop-blur-sm rounded-lg p-3 md:p-4 min-w-[60px] md:min-w-[70px]">
+                    <div id="minutes" class="text-white text-xl md:text-2xl font-bold">33</div>
+                    <div class="text-white/90 text-xs md:text-sm uppercase tracking-wide">Mins</div>
                 </div>
-                <div class="bg-primary/80 backdrop-blur-sm rounded-lg p-4 min-w-[80px]">
-                    <div id="seconds" class="text-white text-3xl font-bold">03</div>
-                    <div class="text-white/90 text-sm uppercase tracking-wide">Seconds</div>
+                <div class="bg-primary/80 backdrop-blur-sm rounded-lg p-3 md:p-4 min-w-[60px] md:min-w-[70px]">
+                    <div id="seconds" class="text-white text-xl md:text-2xl font-bold">03</div>
+                    <div class="text-white/90 text-xs md:text-sm uppercase tracking-wide">Secs</div>
                 </div>
             </div>
-            <p class="text-primary text-xl mb-8 font-light">You are cordially invited to celebrate our wedding</p>
 
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button onclick="scrollToSection('rsvp')" class="bg-primary hover:bg-primary/90 text-white px-8 py-3 !rounded-button font-medium transition-all whitespace-nowrap">
+            <p class="text-primary text-lg md:text-xl mb-2 font-mdedium bg-white/80 px-4 py-2 rounded-lg inline-block my-4 sm:my-2 2xl:my-10">You are cordially invited to celebrate our wedding
+            </p>
+
+            <div class="flex flex-row gap-3 md:gap-4 justify-center my-4 sm:my-0">
+                <a href="rsvp.html"
+                    class="bg-primary hover:bg-primary/90 text-white px-6 md:px-8 py-2.5 md:py-3 !rounded-button font-medium transition-all whitespace-nowrap inline-block text-center text-sm md:text-base">
                     RSVP
-                </button>
-                <button onclick="scrollToSection('details')" class="bg-white/80 hover:bg-white text-primary border border-primary px-8 py-3 !rounded-button font-medium transition-all whitespace-nowrap">
+                </a>
+                <a href="details.html"
+                    class="bg-white/80 hover:bg-white text-primary border border-primary px-6 md:px-8 py-2.5 md:py-3 !rounded-button font-medium transition-all whitespace-nowrap inline-block text-center text-sm md:text-base">
                     Event Details
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Event Details Section -->
-    <section id="details" class="py-20 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">Event Details</h2>
-                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Join us as we celebrate the beginning of our forever</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8 mb-16">
-                <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow">
-                    <div class="w-16 h-16 flex items-center justify-center bg-primary/20 rounded-full mx-auto mb-6">
-                        <i class="ri-church-line text-primary text-2xl"></i>
-                    </div>
-                    <h3 class="font-playfair text-2xl font-medium text-primary mb-4">Ceremony</h3>
-                    <p class="text-gray-700 mb-2">St. Mary's Cathedral</p>
-                    <p class="text-gray-600 mb-2">123 Wedding Lane, Love City</p>
-                    <p class="text-primary font-medium">4:00 PM</p>
-                </div>
-
-                <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow">
-                    <div class="w-16 h-16 flex items-center justify-center bg-primary/20 rounded-full mx-auto mb-6">
-                        <i class="ri-goblet-line text-primary text-2xl"></i>
-                    </div>
-                    <h3 class="font-playfair text-2xl font-medium text-primary mb-4">Reception</h3>
-                    <p class="text-gray-700 mb-2">Grand Ballroom</p>
-                    <p class="text-gray-600 mb-2">456 Celebration Ave, Love City</p>
-                    <p class="text-primary font-medium">6:00 PM - 11:00 PM</p>
-                </div>
-
-                <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow">
-                    <div class="w-16 h-16 flex items-center justify-center bg-primary/20 rounded-full mx-auto mb-6">
-                        <i class="ri-shirt-line text-primary text-2xl"></i>
-                    </div>
-                    <h3 class="font-playfair text-2xl font-medium text-primary mb-4">Dress Code</h3>
-                    <p class="text-gray-700 mb-2">Formal Attire</p>
-                    <p class="text-gray-600 mb-2">Cocktail dresses & suits</p>
-                    <p class="text-primary font-medium">Blush & Gold Welcome</p>
-                </div>
-            </div>
-
-            <!-- Map -->
-            <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 shadow-lg mb-8">
-                <h3 class="font-playfair text-2xl font-medium text-primary mb-6 text-center">Venue Location</h3>
-                <div class="w-full h-96 rounded-xl overflow-hidden" style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-size: cover; background-position: center;"></div>
-            </div>
-
-            <!-- Add to Calendar -->
-            <div class="text-center">
-                <h3 class="font-playfair text-2xl font-medium text-primary mb-6">Add to Your Calendar</h3>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
-                        <i class="ri-google-line mr-2"></i>Google Calendar
-                    </button>
-                    <button class="bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
-                        <i class="ri-apple-line mr-2"></i>Apple Calendar
-                    </button>
-                    <button class="bg-blue-800 hover:bg-blue-900 text-white px-6 py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
-                        <i class="ri-microsoft-line mr-2"></i>Outlook
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- RSVP Section -->
-    <section id="rsvp" class="py-20 px-6 bg-gradient-to-br from-white/40 to-primary/10">
-        <div class="max-w-2xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">RSVP</h2>
-                <p class="text-gray-600 text-lg">Please let us know if you'll be joining us</p>
-            </div>
-
-            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg relative">
-                <!-- Decorative floral border -->
-                <div class="absolute -top-4 -left-4 w-16 h-16 opacity-30">
-                    <img src="https://readdy.ai/api/search-image?query=small%20delicate%20watercolor%20blush%20peach%20rose%20corner%20decoration%20transparent%20background%20elegant%20floral%20accent%20wedding%20invitation%20style%20champagne%20gold%20details&width=100&height=100&seq=corner-1&orientation=squarish" alt="Corner decoration" class="w-full h-full object-contain">
-                </div>
-                <div class="absolute -bottom-4 -right-4 w-16 h-16 opacity-30 rotate-180">
-                    <img src="https://readdy.ai/api/search-image?query=small%20delicate%20watercolor%20blush%20peach%20rose%20corner%20decoration%20transparent%20background%20elegant%20floral%20accent%20wedding%20invitation%20style%20champagne%20gold%20details&width=100&height=100&seq=corner-2&orientation=squarish" alt="Corner decoration" class="w-full h-full object-contain">
-                </div>
-
-                <form id="rsvpForm" class="space-y-6">
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">Full Name *</label>
-                        <input type="text" required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm">
-                    </div>
-
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">Email Address *</label>
-                        <input type="email" required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm">
-                    </div>
-
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">Number of Guests *</label>
-                        <select class="w-full px-4 py-3 pr-8 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm">
-                            <option>1 Guest</option>
-                            <option>2 Guests</option>
-                            <option>3 Guests</option>
-                            <option>4 Guests</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">Dietary Preferences</label>
-                        <textarea rows="3" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm" placeholder="Please let us know about any dietary restrictions or allergies"></textarea>
-                    </div>
-
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">Will you be attending? *</label>
-                        <div class="flex space-x-4">
-                            <label class="flex items-center">
-                                <input type="radio" name="attendance" value="yes" class="sr-only">
-                                <div class="w-5 h-5 border-2 border-primary rounded-full mr-2 flex items-center justify-center cursor-pointer">
-                                    <div class="w-2 h-2 bg-primary rounded-full opacity-0 transition-opacity"></div>
-                                </div>
-                                <span class="text-gray-700">Yes, I'll be there</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="attendance" value="no" class="sr-only">
-                                <div class="w-5 h-5 border-2 border-primary rounded-full mr-2 flex items-center justify-center cursor-pointer">
-                                    <div class="w-2 h-2 bg-primary rounded-full opacity-0 transition-opacity"></div>
-                                </div>
-                                <span class="text-gray-700">Sorry, can't make it</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
-                        Send RSVP
-                    </button>
-                </form>
-
-                <div id="rsvpSuccess" class="hidden text-center py-8">
-                    <div class="w-16 h-16 flex items-center justify-center bg-green-100 rounded-full mx-auto mb-4">
-                        <i class="ri-check-line text-green-600 text-2xl"></i>
-                    </div>
-                    <h3 class="font-playfair text-2xl font-medium text-primary mb-2">Thank You!</h3>
-                    <p class="text-gray-600 mb-6">Your RSVP has been received. We can't wait to celebrate with you!</p>
-                    <div class="flex flex-wrap justify-center gap-3">
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 !rounded-button text-sm font-medium transition-colors whitespace-nowrap">
-                            <i class="ri-google-line mr-1"></i>Add to Google
-                        </button>
-                        <button class="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 !rounded-button text-sm font-medium transition-colors whitespace-nowrap">
-                            <i class="ri-apple-line mr-1"></i>Add to Apple
-                        </button>
-                        <button class="bg-blue-800 hover:bg-blue-900 text-white px-4 py-2 !rounded-button text-sm font-medium transition-colors whitespace-nowrap">
-                            <i class="ri-microsoft-line mr-1"></i>Add to Outlook
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="py-20 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">Photo Gallery</h2>
-                <p class="text-gray-600 text-lg">Memories from our special day</p>
-            </div>
-
-            <div class="text-center py-20">
-                <div class="w-24 h-24 flex items-center justify-center bg-primary/20 rounded-full mx-auto mb-6">
-                    <i class="ri-camera-line text-primary text-3xl"></i>
-                </div>
-                <h3 class="font-playfair text-3xl font-light text-primary mb-4">Coming Soon</h3>
-                <p class="text-gray-600 text-lg max-w-md mx-auto">Our wedding photos will be available here after the celebration. Check back soon!</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Guest Wishes Section -->
-    <section id="wishes" class="py-20 px-6 bg-gradient-to-br from-white/40 to-primary/10">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">Guest Wishes</h2>
-                <p class="text-gray-600 text-lg">Share your congratulations and well wishes</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-6 mb-12">
-                <div class="bg-gradient-to-br from-white/80 to-primary/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
-                            <span class="text-primary font-medium">MJ</span>
-                        </div>
-                        <div class="flex-1">
-                            <h4 class="font-medium text-gray-800 mb-1">Michael Johnson</h4>
-                            <p class="text-gray-600 text-sm mb-2">2 days ago</p>
-                            <p class="text-gray-700">"Wishing you both a lifetime of love, happiness, and endless adventures together. Congratulations on your beautiful union!"</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-br from-white/80 to-primary/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
-                            <span class="text-primary font-medium">SB</span>
-                        </div>
-                        <div class="flex-1">
-                            <h4 class="font-medium text-gray-800 mb-1">Sarah Brown</h4>
-                            <p class="text-gray-600 text-sm mb-2">3 days ago</p>
-                            <p class="text-gray-700">"So excited to celebrate with you both! May your marriage be filled with all the right ingredients: love, laughter, and lots of wine!"</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-br from-white/80 to-primary/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
-                            <span class="text-primary font-medium">DW</span>
-                        </div>
-                        <div class="flex-1">
-                            <h4 class="font-medium text-gray-800 mb-1">David Wilson</h4>
-                            <p class="text-gray-600 text-sm mb-2">5 days ago</p>
-                            <p class="text-gray-700">"Congratulations to the perfect couple! Your love story is truly inspiring. Can't wait to dance at your wedding!"</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-br from-white/80 to-primary/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
-                            <span class="text-primary font-medium">LM</span>
-                        </div>
-                        <div class="flex-1">
-                            <h4 class="font-medium text-gray-800 mb-1">Lisa Martinez</h4>
-                            <p class="text-gray-600 text-sm mb-2">1 week ago</p>
-                            <p class="text-gray-700">"Wishing you a wonderful journey as you build your new lives together. May your love continue to grow stronger each day!"</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center">
-                <button id="addWishBtn" class="bg-primary hover:bg-primary/90 text-white px-8 py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
-                    <i class="ri-heart-line mr-2"></i>Add Your Wish
-                </button>
-            </div>
-        </div>
-
-        <!-- Add Wish Modal -->
-        <div id="wishModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-6">
-            <div class="bg-white rounded-2xl p-8 max-w-md w-full">
-                <h3 class="font-playfair text-2xl font-medium text-primary mb-6">Share Your Wishes</h3>
-                <form id="wishForm" class="space-y-4">
-                    <input type="text" placeholder="Your Name" required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm">
-                    <textarea rows="4" placeholder="Your message for the couple..." required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm"></textarea>
-                    <div class="flex space-x-4">
-                        <button type="button" id="cancelWish" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
-                            Cancel
-                        </button>
-                        <button type="submit" class="flex-1 bg-primary hover:bg-primary/90 text-white py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
-                            Share Wish
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Love Story Timeline -->
-    <section id="story" class="py-20 px-6">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">Our Love Story</h2>
-                <p class="text-gray-600 text-lg">The journey that brought us together</p>
-            </div>
-
-            <div class="relative">
-                <!-- Timeline line -->
-                <div class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-primary/30 h-full"></div>
-                <!-- Timeline items -->
-                <div class="space-y-16">
-                    <div class="flex items-center">
-                        <div class="w-1/2 pr-8 text-right">
-                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                                <h3 class="font-playfair text-xl font-medium text-primary mb-2">First Meeting</h3>
-                                <p class="text-gray-600 text-sm mb-3">September 2019</p>
-                                <p class="text-gray-700">We met at a coffee shop in downtown. Emma was reading her favorite book, and James couldn't help but ask about it. The conversation lasted for hours.</p>
-                            </div>
-                        </div>
-                        <div class="w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10"></div>
-                        <div class="w-1/2 pl-8">
-                            <img src="https://readdy.ai/api/search-image?query=romantic%20couple%20meeting%20at%20cozy%20coffee%20shop%20first%20date%20warm%20lighting%20books%20on%20table%20soft%20blush%20and%20cream%20tones%20intimate%20atmosphere%20young%20couple%20talking%20and%20laughing%20vintage%20coffee%20shop%20interior&width=300&height=200&seq=story-1&orientation=landscape" alt="First meeting" class="w-full h-48 object-cover rounded-2xl shadow-lg">
-                        </div>
-                    </div>
-
-                    <div class="flex items-center">
-                        <div class="w-1/2 pr-8">
-                            <img src="https://readdy.ai/api/search-image?query=romantic%20couple%20on%20first%20official%20date%20elegant%20restaurant%20candlelight%20dinner%20soft%20romantic%20lighting%20blush%20and%20gold%20color%20scheme%20intimate%20dining%20setting%20couple%20holding%20hands%20across%20table&width=300&height=200&seq=story-2&orientation=landscape" alt="First date" class="w-full h-48 object-cover rounded-2xl shadow-lg">
-                        </div>
-                        <div class="w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10"></div>
-                        <div class="w-1/2 pl-8">
-                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                                <h3 class="font-playfair text-xl font-medium text-primary mb-2">First Date</h3>
-                                <p class="text-gray-600 text-sm mb-3">October 2019</p>
-                                <p class="text-gray-700">Our first official date was at a charming Italian restaurant. James was nervous, but Emma's laughter made everything perfect. We knew there was something special.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center">
-                        <div class="w-1/2 pr-8 text-right">
-                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                                <h3 class="font-playfair text-xl font-medium text-primary mb-2">Moving In Together</h3>
-                                <p class="text-gray-600 text-sm mb-3">June 2021</p>
-                                <p class="text-gray-700">After two years of dating, we decided to take the next step. Moving in together was an adventure filled with furniture shopping and learning each other's habits.</p>
-                            </div>
-                        </div>
-                        <div class="w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10"></div>
-                        <div class="w-1/2 pl-8">
-                            <img src="https://readdy.ai/api/search-image?query=happy%20couple%20moving%20into%20new%20apartment%20together%20carrying%20boxes%20and%20furniture%20bright%20sunny%20day%20new%20home%20excitement%20warm%20blush%20and%20cream%20color%20palette%20cozy%20domestic%20scene&width=300&height=200&seq=story-3&orientation=landscape" alt="Moving in" class="w-full h-48 object-cover rounded-2xl shadow-lg">
-                        </div>
-                    </div>
-
-                    <div class="flex items-center">
-                        <div class="w-1/2 pr-8">
-                            <img src="https://readdy.ai/api/search-image?query=romantic%20marriage%20proposal%20at%20sunset%20beach%20man%20kneeling%20with%20ring%20woman%20surprised%20and%20happy%20golden%20hour%20lighting%20ocean%20waves%20in%20background%20dreamy%20romantic%20atmosphere%20engagement%20moment&width=300&height=200&seq=story-4&orientation=landscape" alt="Proposal" class="w-full h-48 object-cover rounded-2xl shadow-lg">
-                        </div>
-                        <div class="w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10"></div>
-                        <div class="w-1/2 pl-8">
-                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                                <h3 class="font-playfair text-xl font-medium text-primary mb-2">The Proposal</h3>
-                                <p class="text-gray-600 text-sm mb-3">December 2023</p>
-                                <p class="text-gray-700">James proposed during a sunset walk on the beach where we had our first vacation together. Emma said yes before he could even finish asking the question!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Social Media & Hashtag Section -->
-    <section class="py-20 px-6 bg-gradient-to-br from-primary/10 to-white/40">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">Share the Love</h2>
-            <p class="text-gray-600 text-lg mb-8">Follow our journey and share your photos using our wedding hashtag</p>
-
-            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg mb-8">
-                <div class="text-4xl mb-4">📸</div>
-                <h3 class="font-playfair text-2xl font-medium text-primary mb-4">#EmmaAndJamesForever</h3>
-                <p class="text-gray-600">Tag us in your photos and stories so we can see our special day through your eyes!</p>
-            </div>
-
-            <div class="flex justify-center space-x-6">
-                <a href="#" class="w-12 h-12 flex items-center justify-center bg-pink-500 hover:bg-pink-600 text-white rounded-full transition-colors">
-                    <i class="ri-instagram-line text-xl"></i>
-                </a>
-                <a href="#" class="w-12 h-12 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors">
-                    <i class="ri-facebook-line text-xl"></i>
-                </a>
-                <a href="#" class="w-12 h-12 flex items-center justify-center bg-blue-400 hover:bg-blue-500 text-white rounded-full transition-colors">
-                    <i class="ri-twitter-line text-xl"></i>
                 </a>
             </div>
         </div>
     </section>
-    <!-- Footer -->
-    <footer class="bg-primary/20 py-16 px-6 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10" style="background-image: url('https://readdy.ai/api/search-image?query=delicate%20watercolor%20floral%20pattern%20background%20blush%20peach%20and%20cream%20roses%20with%20eucalyptus%20leaves%20seamless%20pattern%20wedding%20decoration%20soft%20romantic%20botanical%20design&width=800&height=400&seq=footer-bg&orientation=landscape'); background-size: cover; background-position: center;"></div>
-
-        <div class="max-w-6xl mx-auto relative z-10">
-            <div class="grid md:grid-cols-4 gap-8 mb-12">
-                <div class="text-center md:text-left">
-                    <h3 class="font-playfair text-2xl font-medium text-primary mb-4">Emma & James</h3>
-                    <p class="text-gray-600">Celebrating love, family, and the beginning of our forever journey together.</p>
-                </div>
-
-                <div class="text-center md:text-left">
-                    <h4 class="font-medium text-gray-800 mb-4">Contact</h4>
-                    <p class="text-gray-600 mb-2">wedding@emmajames.com</p>
-                    <p class="text-gray-600">+1 (555) 123-4567</p>
-                </div>
-
-                <div class="text-center md:text-left">
-                    <h4 class="font-medium text-gray-800 mb-4">Quick Links</h4>
-                    <div class="space-y-2">
-                        <a href="#details" class="block text-gray-600 hover:text-primary transition-colors">Event Details</a>
-                        <a href="#rsvp" class="block text-gray-600 hover:text-primary transition-colors">RSVP</a>
-                        <a href="#gallery" class="block text-gray-600 hover:text-primary transition-colors">Gallery</a>
-                        <a href="#story" class="block text-gray-600 hover:text-primary transition-colors">Our Story</a>
-                    </div>
-                </div>
-
-                <div class="text-center md:text-left">
-                    <h4 class="font-medium text-gray-800 mb-4">Follow Us</h4>
-                    <div class="flex justify-center md:justify-start space-x-4">
-                        <a href="#" class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
-                            <i class="ri-instagram-line"></i>
-                        </a>
-                        <a href="#" class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
-                            <i class="ri-facebook-line"></i>
-                        </a>
-                        <a href="#" class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
-                            <i class="ri-twitter-line"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="border-t border-primary/20 pt-8 text-center">
-                <p class="text-gray-600">&copy; 2024 Emma & James Wedding. Made with love for our special day.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Floating Add Wish Button -->
-    <button id="floatingWishBtn" class="fixed bottom-8 right-8 w-14 h-14 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all z-40 flex items-center justify-center">
-        <i class="ri-heart-line text-xl"></i>
-    </button>
-
-    <script id="countdown-timer">
-        document.addEventListener('DOMContentLoaded', function() {
-            const weddingDate = new Date('2024-08-30T16:00:00');
-
-            function updateCountdown() {
-                const now = new Date();
-                const timeDiff = weddingDate - now;
-
-                if (timeDiff > 0) {
-                    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-
-                    document.getElementById('days').textContent = days.toString().padStart(2, '0');
-                    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-                }
-            }
-
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
-        });
-    </script>
-
-    <script id="navigation-scroll">
-        document.addEventListener('DOMContentLoaded', function() {
-            function scrollToSection(sectionId) {
-                const element = document.getElementById(sectionId);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-
-            window.scrollToSection = scrollToSection;
-
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    scrollToSection(targetId);
-                });
-            });
-        });
-    </script>
-
-    <script id="rsvp-form">
-        document.addEventListener('DOMContentLoaded', function() {
-            const rsvpForm = document.getElementById('rsvpForm');
-            const rsvpSuccess = document.getElementById('rsvpSuccess');
-
-            rsvpForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                rsvpForm.style.display = 'none';
-                rsvpSuccess.classList.remove('hidden');
-            });
-
-            document.querySelectorAll('input[name="attendance"]').forEach(radio => {
-                radio.addEventListener('change', function() {
-                    document.querySelectorAll('input[name="attendance"]').forEach(r => {
-                        const indicator = r.parentElement.querySelector('div > div');
-                        indicator.style.opacity = r.checked ? '1' : '0';
-                    });
-                });
-            });
-        });
-    </script>
-
-    <script id="wish-modal">
-        document.addEventListener('DOMContentLoaded', function() {
-            const addWishBtn = document.getElementById('addWishBtn');
-            const floatingWishBtn = document.getElementById('floatingWishBtn');
-            const wishModal = document.getElementById('wishModal');
-            const cancelWish = document.getElementById('cancelWish');
-            const wishForm = document.getElementById('wishForm');
-
-            function openModal() {
-                wishModal.classList.remove('hidden');
-                wishModal.classList.add('flex');
-            }
-
-            function closeModal() {
-                wishModal.classList.add('hidden');
-                wishModal.classList.remove('flex');
-                wishForm.reset();
-            }
-
-            addWishBtn.addEventListener('click', openModal);
-            floatingWishBtn.addEventListener('click', openModal);
-            cancelWish.addEventListener('click', closeModal);
-
-            wishModal.addEventListener('click', function(e) {
-                if (e.target === wishModal) {
-                    closeModal();
-                }
-            });
-
-            wishForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                closeModal();
-                alert('Thank you for your wishes! Your message has been shared.');
-            });
-        });
-    </script>
-
-    <script id="music-toggle">
-        document.addEventListener('DOMContentLoaded', function() {
-            const musicToggle = document.getElementById('musicToggle');
-            let isPlaying = false;
-
-            musicToggle.addEventListener('click', function() {
-                isPlaying = !isPlaying;
-                const icon = musicToggle.querySelector('i');
-
-                if (isPlaying) {
-                    icon.className = 'ri-pause-line text-primary';
-                    musicToggle.classList.add('bg-primary/30');
-                } else {
-                    icon.className = 'ri-music-line text-primary';
-                    musicToggle.classList.remove('bg-primary/30');
-                }
-            });
-        });
-    </script>
-
-    <script id="mobile-menu">
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenu = document.getElementById('mobileMenu');
-
-            mobileMenu.addEventListener('click', function() {
-                alert('Mobile menu functionality would be implemented here');
-            });
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
+
 </html>
