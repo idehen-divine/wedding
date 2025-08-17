@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Wishes - Precious & Franklin Wedding</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#D4A574',
+                        secondary: '#F5C2A1'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    },
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="font-inter text-gray-800 overflow-x-hidden"
+    style="background: linear-gradient(135deg, #FDF4F0 0%, #F9E8E1 50%, #F5DDD4 100%);">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-primary/20">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="font-playfair text-2xl font-semibold text-primary">P & F</div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary transition-colors">Home</a>
+                    <a href="details.html" class="text-gray-700 hover:text-primary transition-colors">Event Details</a>
+                    <a href="rsvp.html" class="text-gray-700 hover:text-primary transition-colors">RSVP</a>
+                    <a href="gallery.html" class="text-gray-700 hover:text-primary transition-colors">Gallery</a>
+                    <a href="wishes.html" class="text-primary font-medium">Wishes</a>
+                    <a href="story.html" class="text-gray-700 hover:text-primary transition-colors">Our Story</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="musicToggle"
+                        class="w-10 h-10 flex items-center justify-center bg-primary/20 rounded-full hover:bg-primary/30 transition-colors">
+                        <i class="ri-music-line text-primary"></i>
+                    </button>
+                    <button id="mobileMenu" class="md:hidden w-10 h-10 flex items-center justify-center">
+                        <i class="ri-menu-line text-gray-700"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Guest Wishes Section -->
+    <section class="pt-32 pb-20 px-6 bg-gradient-to-br from-white/40 to-primary/10">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h1 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">Guest Wishes</h1>
+                <p class="text-gray-600 text-lg">Share your congratulations and well wishes</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-12">
+                <div class="bg-gradient-to-br from-white/80 to-primary/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
+                            <span class="text-primary font-medium">MJ</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-800 mb-1">Michael Johnson</h4>
+                            <p class="text-gray-600 text-sm mb-2">2 days ago</p>
+                            <p class="text-gray-700">"Wishing you both a lifetime of love, happiness, and endless
+                                adventures together. Congratulations on your beautiful union!"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-white/80 to-primary/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
+                            <span class="text-primary font-medium">SB</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-800 mb-1">Sarah Brown</h4>
+                            <p class="text-gray-600 text-sm mb-2">3 days ago</p>
+                            <p class="text-gray-700">"So excited to celebrate with you both! May your marriage be filled
+                                with all the right ingredients: love, laughter, and lots of wine!"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-white/80 to-primary/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
+                            <span class="text-primary font-medium">DW</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-800 mb-1">David Wilson</h4>
+                            <p class="text-gray-600 text-sm mb-2">5 days ago</p>
+                            <p class="text-gray-700">"Congratulations to the perfect couple! Your love story is truly
+                                inspiring. Can't wait to dance at your wedding!"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-white/80 to-primary/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
+                            <span class="text-primary font-medium">LM</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-800 mb-1">Lisa Martinez</h4>
+                            <p class="text-gray-600 text-sm mb-2">1 week ago</p>
+                            <p class="text-gray-700">"Wishing you a wonderful journey as you build your new lives
+                                together. May your love continue to grow stronger each day!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button id="addWishBtn"
+                    class="bg-primary hover:bg-primary/90 text-white px-8 py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
+                    <i class="ri-heart-line mr-2"></i>Add Your Wish
+                </button>
+            </div>
+        </div>
+
+        <!-- Add Wish Modal -->
+        <div id="wishModal"
+            class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-6">
+            <div class="bg-white rounded-2xl p-8 max-w-md w-full">
+                <h3 class="font-playfair text-2xl font-medium text-primary mb-6">Share Your Wishes</h3>
+                <form id="wishForm" class="space-y-4">
+                    <input type="text" placeholder="Your Name" required
+                        class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm">
+                    <textarea rows="4" placeholder="Your message for the couple..." required
+                        class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors text-sm"></textarea>
+                    <div class="flex space-x-4">
+                        <button type="button" id="cancelWish"
+                            class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
+                            Cancel
+                        </button>
+                        <button type="submit"
+                            class="flex-1 bg-primary hover:bg-primary/90 text-white py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
+                            Share Wish
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary/20 py-16 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10"
+            style="background-image: url('https://readdy.ai/api/search-image?query=delicate%20watercolor%20floral%20pattern%20background%20blush%20peach%20and%20cream%20roses%20with%20eucalyptus%20leaves%20seamless%20pattern%20wedding%20decoration%20soft%20romantic%20botanical%20design&width=800&height=400&seq=footer-bg&orientation=landscape'); background-size: cover; background-position: center;">
+        </div>
+
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="text-center md:text-left">
+                    <h3 class="font-playfair text-2xl font-medium text-primary mb-4">Precious & Franklin</h3>
+                    <p class="text-gray-600">Celebrating love, family, and the beginning of our forever journey
+                        together.</p>
+                </div>
+
+                <div class="text-center md:text-left">
+                    <h4 class="font-medium text-gray-800 mb-4">Contact</h4>
+                    <p class="text-gray-600 mb-2">wedding@preciousfranklin.com</p>
+                    <p class="text-gray-600">+1 (555) 123-4567</p>
+                </div>
+
+                <div class="text-center md:text-left">
+                    <h4 class="font-medium text-gray-800 mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="details.html" class="block text-gray-600 hover:text-primary transition-colors">Event
+                            Details</a>
+                        <a href="rsvp.html" class="block text-gray-600 hover:text-primary transition-colors">RSVP</a>
+                        <a href="gallery.html"
+                            class="block text-gray-600 hover:text-primary transition-colors">Gallery</a>
+                        <a href="story.html" class="block text-gray-600 hover:text-primary transition-colors">Our
+                            Story</a>
+                    </div>
+                </div>
+
+                <div class="text-center md:text-left">
+                    <h4 class="font-medium text-gray-800 mb-4">Follow Us</h4>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#"
+                            class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="#"
+                            class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
+                            <i class="ri-facebook-line"></i>
+                        </a>
+                        <a href="#"
+                            class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
+                            <i class="ri-twitter-line"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-primary/20 pt-8 text-center">
+                <p class="text-gray-600">&copy; 2024 Precious & Franklin Wedding. Made with love for our special day.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
