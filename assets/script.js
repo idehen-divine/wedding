@@ -52,25 +52,30 @@ document.addEventListener("DOMContentLoaded", function () {
     const rsvpForm = document.getElementById("rsvpForm");
     const rsvpSuccess = document.getElementById("rsvpSuccess");
 
-    // Handle form submission
-    rsvpForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        rsvpForm.style.display = "none";
-        rsvpSuccess.classList.remove("hidden");
-    });
-
-    // Handle attendance radio button selection
-    document.querySelectorAll('input[name="attendance"]').forEach((radio) => {
-        radio.addEventListener("change", function () {
-            document
-                .querySelectorAll('input[name="attendance"]')
-                .forEach((r) => {
-                    const indicator =
-                        r.parentElement.querySelector("div > div");
-                    indicator.style.opacity = r.checked ? "1" : "0";
-                });
+    // Only add event listeners if elements exist
+    if (rsvpForm && rsvpSuccess) {
+        // Handle form submission
+        rsvpForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            rsvpForm.style.display = "none";
+            rsvpSuccess.classList.remove("hidden");
         });
-    });
+
+        // Handle attendance radio button selection
+        document.querySelectorAll('input[name="attendance"]').forEach((radio) => {
+            radio.addEventListener("change", function () {
+                document
+                    .querySelectorAll('input[name="attendance"]')
+                    .forEach((r) => {
+                        const indicator =
+                            r.parentElement.querySelector("div > div");
+                        if (indicator) {
+                            indicator.style.opacity = r.checked ? "1" : "0";
+                        }
+                    });
+            });
+        });
+    }
 });
 
 // ========================================
@@ -83,37 +88,46 @@ document.addEventListener("DOMContentLoaded", function () {
     const cancelWish = document.getElementById("cancelWish");
     const wishForm = document.getElementById("wishForm");
 
-    function openModal() {
-        wishModal.classList.remove("hidden");
-        wishModal.classList.add("flex");
-    }
-
-    function closeModal() {
-        wishModal.classList.add("hidden");
-        wishModal.classList.remove("flex");
-        wishForm.reset();
-    }
-
-    // Event listeners for opening modal
-    addWishBtn.addEventListener("click", openModal);
-    floatingWishBtn.addEventListener("click", openModal);
-
-    // Event listeners for closing modal
-    cancelWish.addEventListener("click", closeModal);
-
-    // Close modal when clicking outside
-    wishModal.addEventListener("click", function (e) {
-        if (e.target === wishModal) {
-            closeModal();
+    // Only add event listeners if elements exist
+    if (wishModal && wishForm) {
+        function openModal() {
+            wishModal.classList.remove("hidden");
+            wishModal.classList.add("flex");
         }
-    });
 
-    // Handle wish form submission
-    wishForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        closeModal();
-        alert("Thank you for your wishes! Your message has been shared.");
-    });
+        function closeModal() {
+            wishModal.classList.add("hidden");
+            wishModal.classList.remove("flex");
+            wishForm.reset();
+        }
+
+        // Event listeners for opening modal (with null checks)
+        if (addWishBtn) {
+            addWishBtn.addEventListener("click", openModal);
+        }
+        if (floatingWishBtn) {
+            floatingWishBtn.addEventListener("click", openModal);
+        }
+
+        // Event listeners for closing modal
+        if (cancelWish) {
+            cancelWish.addEventListener("click", closeModal);
+        }
+
+        // Close modal when clicking outside
+        wishModal.addEventListener("click", function (e) {
+            if (e.target === wishModal) {
+                closeModal();
+            }
+        });
+
+        // Handle wish form submission
+        wishForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            closeModal();
+            alert("Thank you for your wishes! Your message has been shared.");
+        });
+    }
 });
 
 // ========================================
@@ -121,42 +135,60 @@ document.addEventListener("DOMContentLoaded", function () {
 // ========================================
 document.addEventListener("DOMContentLoaded", function () {
     const musicToggle = document.getElementById("musicToggle");
+
+    // Only proceed if music toggle exists
+    if (!musicToggle) return;
+
     const audio = new Audio("assets/harmony.mp3");
     audio.loop = true;
+    audio.preload = "auto"; // Preload the audio for instant playback
     let isPlaying = false;
+    let hasStarted = false;
 
-    // Try to start music automatically after 2 seconds
-    setTimeout(() => {
-        // Simulate a click to bypass autoplay restrictions
-        const clickEvent = new MouseEvent('click', {
-            bubbles: true,
-            cancelable: true,
-            view: window
-        });
-        
-        // First try direct autoplay
-        audio.play().then(() => {
-            isPlaying = true;
-            const icon = musicToggle.querySelector("i");
-            icon.className = "ri-pause-line text-primary";
-            musicToggle.classList.add("bg-primary/30");
-        }).catch(() => {
-            // If direct autoplay fails, try simulating user interaction
-            document.dispatchEvent(clickEvent);
-            setTimeout(() => {
-                audio.play().then(() => {
-                    isPlaying = true;
-                    const icon = musicToggle.querySelector("i");
-                    icon.className = "ri-pause-line text-primary";
-                    musicToggle.classList.add("bg-primary/30");
-                }).catch(() => {
-                    console.log("All autoplay attempts failed, waiting for real user interaction");
-                });
-            }, 100);
-        });
-    }, 2000);
+    // Ensure initial state shows play icon
+    const icon = musicToggle.querySelector("i");
+    if (icon) {
+        icon.className = "ri-music-line text-primary";
+        musicToggle.classList.remove("bg-primary/30");
+    }
 
-    musicToggle.addEventListener("click", function () {
+    // Function to start music
+    const startMusic = () => {
+        if (!hasStarted) {
+            audio.play().then(() => {
+                isPlaying = true;
+                hasStarted = true;
+                const icon = musicToggle.querySelector("i");
+                icon.className = "ri-pause-line text-primary";
+                musicToggle.classList.add("bg-primary/30");
+                console.log("Music started on user interaction");
+            }).catch(e => {
+                console.log("Audio play failed:", e);
+                // Ensure toggle shows "play" icon if autoplay fails
+                const icon = musicToggle.querySelector("i");
+                icon.className = "ri-music-line text-primary";
+                musicToggle.classList.remove("bg-primary/30");
+                isPlaying = false;
+            });
+        }
+    };
+
+    // Start music on ANY user gesture
+    const userGestureEvents = [
+        'click', 'touchstart', 'keydown', 'mousedown', 'scroll', 'wheel',
+        'pointerdown', 'focus',
+    ];
+
+    userGestureEvents.forEach(eventType => {
+        document.addEventListener(eventType, startMusic, { once: true, passive: true });
+        window.addEventListener(eventType, startMusic, { once: true, passive: true });
+    });
+
+    // Music toggle button functionality
+    musicToggle.addEventListener("click", function (e) {
+        // Don't let this click trigger the autostart
+        e.stopPropagation();
+
         isPlaying = !isPlaying;
         const icon = musicToggle.querySelector("i");
 
@@ -164,6 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
             audio.play().catch(e => console.log("Audio play failed:", e));
             icon.className = "ri-pause-line text-primary";
             musicToggle.classList.add("bg-primary/30");
+            hasStarted = true;
         } else {
             audio.pause();
             icon.className = "ri-music-line text-primary";
@@ -178,7 +211,10 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     const mobileMenu = document.getElementById("mobileMenu");
 
-    mobileMenu.addEventListener("click", function () {
-        alert("Mobile menu functionality would be implemented here");
-    });
+    // Only add event listener if element exists
+    if (mobileMenu) {
+        mobileMenu.addEventListener("click", function () {
+            alert("Mobile menu functionality would be implemented here");
+        });
+    }
 });
