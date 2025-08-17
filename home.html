@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emma & James Wedding - August 30, 2024</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#D4A574',
+                        secondary: '#F5C2A1'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    },
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="font-inter text-gray-800 overflow-x-hidden"
+    style="background: linear-gradient(135deg, #FDF4F0 0%, #F9E8E1 50%, #F5DDD4 100%);">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-primary/20">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="font-playfair text-2xl font-semibold text-primary">E & J</div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-primary font-medium">Home</a>
+                    <a href="details.html" class="text-gray-700 hover:text-primary transition-colors">Event Details</a>
+                    <a href="rsvp.html" class="text-gray-700 hover:text-primary transition-colors">RSVP</a>
+                    <a href="gallery.html" class="text-gray-700 hover:text-primary transition-colors">Gallery</a>
+                    <a href="wishes.html" class="text-gray-700 hover:text-primary transition-colors">Wishes</a>
+                    <a href="story.html" class="text-gray-700 hover:text-primary transition-colors">Our Story</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="musicToggle"
+                        class="w-10 h-10 flex items-center justify-center bg-primary/20 rounded-full hover:bg-primary/30 transition-colors">
+                        <i class="ri-music-line text-primary"></i>
+                    </button>
+                    <button id="mobileMenu" class="md:hidden w-10 h-10 flex items-center justify-center">
+                        <i class="ri-menu-line text-gray-700"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center relative overflow-hidden"
+        style="background-image: url('https://readdy.ai/api/search-image?query=elegant%20romantic%20wedding%20background%20with%20soft%20blush%20peach%20and%20cream%20tones%20delicate%20watercolor%20floral%20elements%20roses%20and%20eucalyptus%20leaves%20scattered%20around%20dreamy%20ethereal%20atmosphere%20with%20golden%20light%20bokeh%20effect%20perfect%20for%20wedding%20invitation%20luxurious%20and%20sophisticated%20design%20with%20champagne%20gold%20accents&width=1920&height=1080&seq=hero-bg&orientation=landscape'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-primary/20"></div>
+
+        <!-- Floating Floral Elements -->
+        <div class="absolute top-20 left-20 w-32 h-32 opacity-30">
+            <img src="https://readdy.ai/api/search-image?query=delicate%20watercolor%20blush%20peach%20roses%20with%20eucalyptus%20leaves%20elegant%20floral%20arrangement%20transparent%20background%20soft%20romantic%20style%20wedding%20decoration%20champagne%20gold%20accents%20dreamy%20botanical%20illustration&width=200&height=200&seq=floral-1&orientation=squarish"
+                alt="Floral decoration" class="w-full h-full object-contain">
+        </div>
+        <div class="absolute bottom-20 right-20 w-40 h-40 opacity-25">
+            <img src="https://readdy.ai/api/search-image?query=elegant%20watercolor%20peach%20and%20cream%20flowers%20with%20golden%20leaves%20romantic%20floral%20corner%20decoration%20transparent%20background%20wedding%20invitation%20style%20soft%20blush%20tones%20luxurious%20botanical%20design&width=240&height=240&seq=floral-2&orientation=squarish"
+                alt="Floral decoration" class="w-full h-full object-contain">
+        </div>
+
+        <div class="relative z-10 text-center max-w-4xl mx-auto px-6">
+            <p class="text-primary font-inter text-lg tracking-widest uppercase mb-6">Save The Date</p>
+            <h1 class="font-playfair text-6xl md:text-8xl font-light text-primary mb-4 italic">
+                Emma<br>
+                <span class="text-5xl md:text-6xl">&</span><br>
+                James
+            </h1>
+            <p class="text-primary font-inter text-2xl tracking-wider uppercase mb-12">August 30, 2024</p>
+
+            <!-- Countdown Timer -->
+            <div class="flex justify-center space-x-4 mb-12">
+                <div class="bg-primary/80 backdrop-blur-sm rounded-lg p-4 min-w-[80px]">
+                    <div id="days" class="text-white text-3xl font-bold">120</div>
+                    <div class="text-white/90 text-sm uppercase tracking-wide">Days</div>
+                </div>
+                <div class="bg-primary/80 backdrop-blur-sm rounded-lg p-4 min-w-[80px]">
+                    <div id="hours" class="text-white text-3xl font-bold">07</div>
+                    <div class="text-white/90 text-sm uppercase tracking-wide">Hours</div>
+                </div>
+                <div class="bg-primary/80 backdrop-blur-sm rounded-lg p-4 min-w-[80px]">
+                    <div id="minutes" class="text-white text-3xl font-bold">33</div>
+                    <div class="text-white/90 text-sm uppercase tracking-wide">Minutes</div>
+                </div>
+                <div class="bg-primary/80 backdrop-blur-sm rounded-lg p-4 min-w-[80px]">
+                    <div id="seconds" class="text-white text-3xl font-bold">03</div>
+                    <div class="text-white/90 text-sm uppercase tracking-wide">Seconds</div>
+                </div>
+            </div>
+            <p class="text-primary text-xl mb-8 font-light">You are cordially invited to celebrate our wedding</p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="rsvp.html"
+                    class="bg-primary hover:bg-primary/90 text-white px-8 py-3 !rounded-button font-medium transition-all whitespace-nowrap inline-block text-center">
+                    RSVP
+                </a>
+                <a href="details.html"
+                    class="bg-white/80 hover:bg-white text-primary border border-primary px-8 py-3 !rounded-button font-medium transition-all whitespace-nowrap inline-block text-center">
+                    Event Details
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
