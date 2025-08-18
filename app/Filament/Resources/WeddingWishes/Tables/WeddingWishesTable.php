@@ -52,7 +52,7 @@ class WeddingWishesTable
             ])
             ->recordActions([
                 DeleteAction::make()
-                    // ->label('Delete')
+                    ->label('Delete')
                     ->icon('heroicon-o-trash')
                     ->color('danger')
                     ->requiresConfirmation()
