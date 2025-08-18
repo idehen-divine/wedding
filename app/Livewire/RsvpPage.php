@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Rsvp;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -9,75 +10,52 @@ use Livewire\Component;
 class RsvpPage extends Component
 {
     public string $name = '';
-
     public string $email = '';
-
+    public string $whatsapp = '';
     public string $guests = '';
-
     public string $attendance = '';
-
     public bool $submitted = false;
 
-    protected array $rules = [
-        'name' => 'required|string|min:2|max:255',
-        'email' => 'required|email|max:255',
-        'guests' => 'required|in:1,2,3,4',
-        'attendance' => 'required|in:yes,no',
-    ];
-
-    protected array $messages = [
-        'name.required' => 'Please enter your full name.',
-        'name.min' => 'Name must be at least 2 characters.',
-        'name.max' => 'Name cannot exceed 255 characters.',
-        'email.required' => 'Please enter your email address.',
-        'email.email' => 'Please enter a valid email address.',
-        'email.max' => 'Email cannot exceed 255 characters.',
-        'guests.required' => 'Please select the number of guests.',
-        'guests.in' => 'Please select a valid number of guests (1-4).',
-        'attendance.required' => 'Please let us know if you\'ll be attending.',
-        'attendance.in' => 'Please select a valid attendance option.',
-    ];
-
-    public function updatedName(): void
-    {
-        $this->validateOnly('name');
-    }
-
-    public function updatedEmail(): void
-    {
-        $this->validateOnly('email');
-    }
-
-    public function updatedGuests(): void
-    {
-        $this->validateOnly('guests');
-    }
-
-    public function updatedAttendance(): void
-    {
-        $this->validateOnly('attendance');
-    }
 
     public function submit(): void
     {
-        $this->validate();
+        try {
+            // Basic safety checks to prevent database errors
+            if (empty(trim($this->name)) || empty(trim($this->email)) || empty($this->guests) || empty($this->attendance)) {
+                $this->dispatch('rsvp-error', 'Please fill in all required fields.');
+                return;
+            }
 
-        // Here you could save to database, send email, etc.
-        // For now, we'll just show the success message
-        $this->submitted = true;
+            // Save RSVP to database (client-side validation already handled)
+            Rsvp::create([
+                'name' => trim($this->name),
+                'email' => trim($this->email),
+                'whatsapp' => $this->whatsapp ? trim($this->whatsapp) : null,
+                'guests' => (int) $this->guests,
+                'attendance' => $this->attendance,
+            ]);
 
-        // Optional: Flash success message
-        session()->flash('rsvp_success', 'Thank you for your RSVP! We can\'t wait to celebrate with you.');
+            $this->submitted = true;
+
+            // Dispatch success event for SweetAlert2
+            $this->dispatch('rsvp-submitted');
+
+            // Flash success message
+            session()->flash('rsvp_success', 'Thank you for your RSVP! We can\'t wait to celebrate with you.');
+        } catch (\Exception $e) {
+            // Only catch genuine errors (database issues, etc.)
+            $this->dispatch('rsvp-error', 'Something went wrong. Please try again.');
+        }
     }
 
     public function resetForm(): void
     {
         $this->name = '';
         $this->email = '';
+        $this->whatsapp = '';
         $this->guests = '';
         $this->attendance = '';
         $this->submitted = false;
-        $this->resetErrorBag();
     }
 
     public function render()
