@@ -7,7 +7,7 @@
     <div class="max-w-6xl mx-auto relative z-10">
         <div class="grid md:grid-cols-4 gap-8 mb-4">
             <div class="text-center md:text-left">
-                <a href="{{ route('home') }}" wire:navigate.hover class="font-playfair text-2xl font-medium text-primary mb-4">Precious & Franklin</a >
+                <a href="{{ route('home') }}" class="font-playfair text-2xl font-medium text-primary mb-4">Precious & Franklin</a>
                 <p class="text-gray-600">Celebrating love, family, and the beginning of our forever journey
                     together.</p>
             </div>
@@ -21,12 +21,11 @@
             <div class="text-center md:text-left">
                 <h4 class="font-medium text-gray-800 mb-4">Quick Links</h4>
                 <div class="space-y-2">
-                    <a href="{{ route('details') }}" wire:navigate class="block text-gray-600 hover:text-primary transition-colors">Event
+                    <a href="{{ route('details') }}" class="block text-gray-600 hover:text-primary transition-colors">Event
                         Details</a>
-                    <a href="{{ route('rsvp') }}" wire:navigate class="block text-gray-600 hover:text-primary transition-colors">RSVP</a>
-                    <a href="{{ route('gallery') }}" wire:navigate
-                        class="block text-gray-600 hover:text-primary transition-colors">Gallery</a>
-                    <a href="{{ route('story') }}" wire:navigate class="block text-gray-600 hover:text-primary transition-colors">Our
+                    <a href="{{ route('rsvp') }}" class="block text-gray-600 hover:text-primary transition-colors">RSVP</a>
+                    <a href="{{ route('gallery') }}" class="block text-gray-600 hover:text-primary transition-colors">Gallery</a>
+                    <a href="{{ route('story') }}" class="block text-gray-600 hover:text-primary transition-colors">Our
                         Story</a>
                 </div>
             </div>
