@@ -1,6 +1,79 @@
 ---
 alwaysApply: true
 ---
+
+# Wedding Website - AI Development Guidelines
+
+This is a wedding website for Precious & Franklin built with Laravel 12, Livewire 3, and Filament 4.
+
+## Project Architecture
+
+### Core Structure
+- **Frontend**: Pure Livewire 3 components with shared `components.layouts.wedding` layout
+- **Admin Panel**: Filament 4 for RSVP and wedding wish management
+- **Database**: SQLite with models: `Rsvp`, `WeddingWish`, `User`
+- **Styling**: Tailwind CSS 4 with custom wedding theme gradient
+- **Static Assets**: Separate `/static` directory contains HTML prototypes
+
+### Key Components
+```php
+// All pages use this pattern:
+#[Layout('components.layouts.wedding')]
+class HomePage extends Component {
+    public function render() {
+        return view('livewire.home-page');
+    }
+}
+```
+
+### Route Structure
+- Simple Livewire route mapping in `routes/web.php`:
+  - `/` → HomePage
+  - `/rsvp` → RsvpPage (with form validation)
+  - `/details`, `/gallery`, `/story`, `/wishes` → respective pages
+
+### Filament Admin Structure
+- Uses Laravel 12's streamlined structure (no `app/Console/Kernel.php`)
+- Resources in `app/Filament/Resources/{ModelName}s/` pattern
+- Auto-generated table/page classes follow Filament 4 conventions
+
+## Development Workflow
+
+### Commands
+```bash
+# Frontend development
+npm run dev          # Watch mode
+npm run build        # Production build
+composer run dev     # Alternative dev command
+
+# Filament resources
+php artisan make:filament-resource WeddingWish --generate --no-interaction
+```
+
+### Form Validation Pattern
+RSVP component uses inline validation rules:
+```php
+protected array $rules = [
+    'name' => 'required|string|min:2|max:255',
+    'attendance' => 'required|in:yes,no',
+];
+```
+
+## Project-Specific Conventions
+
+### Layout & Styling
+- Wedding layout includes SweetAlert2 and Remix icons
+- Gradient background: `linear-gradient(135deg, #FDF4F0 0%, #F9E8E1 50%, #F5DDD4 100%)`
+- Home page uses special overflow handling for full-screen effect
+
+### Database Models
+- Simple fillable arrays, modern `casts()` method pattern
+- No relationships between models (simple wedding data)
+
+### Static Assets
+- `/static` directory contains original HTML prototypes - reference for styling
+- `/public/assets` for images/audio
+
 <laravel-boost-guidelines>
 === foundation rules ===
 
