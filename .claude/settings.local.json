@@ -6,10 +6,27 @@
       "Bash(mkdir:*)",
       "Bash(grep:*)",
       "Bash(cat:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "mcp__laravel-boost__application-info",
+      "Bash(cp:*)",
+      "Bash(php artisan make:livewire:*)",
+      "Bash(npm install:*)",
+      "WebFetch(domain:tailwindcss.com)",
+      "Bash(sed:*)",
+      "WebFetch(domain:livewire.laravel.com)",
+      "mcp__laravel-boost__search-docs",
+      "Bash(vendor/bin/pint:*)",
+      "mcp__laravel-boost__last-error",
+      "mcp__laravel-boost__browser-logs",
+      "Bash(php artisan route:list:*)",
+      "mcp__laravel-boost__get-absolute-url"
     ],
     "deny": [],
     "ask": [],
     "defaultMode": "acceptEdits"
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "laravel-boost"
+  ]
 }
