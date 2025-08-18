@@ -15,4 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
-    })->create();
+    })
+    ->booted(function ($app) {
+        // Force HTTPS for asset URLs when serving over HTTPS
+        if (request()->isSecure()) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+    })
+    ->create();
