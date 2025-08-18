@@ -1,0 +1,52 @@
+@import "../../../../vendor/filament/filament/resources/css/theme.css";
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+/* Wedding Theme Customizations */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap");
+
+/* Apply wedding theme gradient background */
+body {
+    background: linear-gradient(
+        135deg,
+        #fdf4f0 0%,
+        #f9e8e1 50%,
+        #f5ddd4 100%
+    ) !important;
+    min-height: 100vh;
+}
+
+/* Ensure main content has transparent background to show gradient */
+.fi-main {
+    background: transparent !important;
+}
+
+/* Make sidebar slightly transparent to blend with background */
+.fi-sidebar {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+}
+
+/* Use Inter font for body text to match frontend */
+body,
+.fi-body {
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif !important;
+}
+
+/* Style cards and panels to blend with theme */
+.fi-section,
+.fi-table,
+.fi-form,
+.fi-widget {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(212, 165, 116, 0.2) !important;
+}
+
+/* Top bar styling */
+.fi-topbar {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(212, 165, 116, 0.3) !important;
+}
