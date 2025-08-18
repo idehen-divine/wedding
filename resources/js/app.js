@@ -41,7 +41,7 @@ function initializeCountdown() {
 }
 
 // ========================================
-// GLOBAL MUSIC PLAYER - Persistent across navigation
+// GLOBAL MUSIC PLAYER - Persistent across navigation and page reloads
 // ========================================
 window.musicPlayer = {
     audio: null,
@@ -49,6 +49,7 @@ window.musicPlayer = {
     hasUserInteracted: false,
     shouldAutoPlay: false,
     autoPlayTriggered: false,
+    storageKey: 'wedding-music-state',
     
     init() {
         if (!this.audio) {
@@ -56,8 +57,73 @@ window.musicPlayer = {
             this.audio.loop = true;
             this.audio.preload = "auto";
             
+            // Save current time periodically when playing
+            this.audio.addEventListener('timeupdate', () => {
+                if (this.isPlaying) {
+                    this.saveState();
+                }
+            });
+            
+            // Restore music state from localStorage
+            this.restoreState();
+            
             // Listen for user interaction to enable auto-play
             this.setupUserInteractionListener();
+        }
+    },
+    
+    saveState() {
+        try {
+            const state = {
+                isPlaying: this.isPlaying,
+                hasUserInteracted: this.hasUserInteracted,
+                currentTime: this.audio ? this.audio.currentTime : 0,
+                timestamp: Date.now(),
+                userPaused: !this.isPlaying && this.hasUserInteracted
+            };
+            localStorage.setItem(this.storageKey, JSON.stringify(state));
+        } catch (e) {
+            console.log('Failed to save music state:', e);
+        }
+    },
+    
+    restoreState() {
+        try {
+            const saved = localStorage.getItem(this.storageKey);
+            if (saved) {
+                const state = JSON.parse(saved);
+                
+                // Check if state is expired (24 hours = 86400000 ms)
+                const now = Date.now();
+                const stateAge = now - (state.timestamp || 0);
+                const dayInMs = 24 * 60 * 60 * 1000;
+                
+                if (stateAge > dayInMs) {
+                    console.log('🕒 Music state expired, clearing localStorage');
+                    localStorage.removeItem(this.storageKey);
+                    return;
+                }
+                
+                this.hasUserInteracted = state.hasUserInteracted || false;
+                
+                // If user explicitly paused the music, don't auto-play
+                if (state.userPaused) {
+                    console.log('🚫 User previously paused music, not auto-playing');
+                    this.shouldAutoPlay = false;
+                    return;
+                }
+                
+                // If music was playing and user had interacted before, prepare to resume
+                if (state.isPlaying && this.hasUserInteracted) {
+                    this.shouldAutoPlay = true;
+                    // Restore audio position
+                    if (this.audio && state.currentTime) {
+                        this.audio.currentTime = state.currentTime;
+                    }
+                }
+            }
+        } catch (e) {
+            console.log('Failed to restore music state:', e);
         }
     },
     
@@ -68,6 +134,9 @@ window.musicPlayer = {
         const enableAutoPlay = (event) => {
             this.hasUserInteracted = true;
             console.log('✅ User interaction detected:', event.type, 'Target:', event.target.tagName);
+            
+            // Save user interaction state
+            this.saveState();
             
             // Prevent multiple triggers
             if (this.autoPlayTriggered) {
@@ -123,6 +192,7 @@ window.musicPlayer = {
         
         if (!this.hasUserInteracted) {
             this.shouldAutoPlay = true;
+            this.saveState();
             return false;
         }
         
@@ -131,6 +201,9 @@ window.musicPlayer = {
             return false;
         });
         this.isPlaying = true;
+        
+        // Save state to localStorage
+        this.saveState();
         
         // Dispatch event for UI updates
         window.dispatchEvent(new CustomEvent('music-state-changed', { 
@@ -158,6 +231,9 @@ window.musicPlayer = {
             this.isPlaying = true;
             console.log("🎉 Music started successfully from user gesture");
             
+            // Save state to localStorage
+            this.saveState();
+            
             // Dispatch event for UI updates
             window.dispatchEvent(new CustomEvent('music-state-changed', { 
                 detail: { isPlaying: this.isPlaying } 
@@ -175,6 +251,9 @@ window.musicPlayer = {
         if (this.audio) {
             this.audio.pause();
             this.isPlaying = false;
+            
+            // Save state to localStorage
+            this.saveState();
             
             // Dispatch event for UI updates
             window.dispatchEvent(new CustomEvent('music-state-changed', { 
@@ -197,6 +276,20 @@ window.musicPlayer = {
     
     // Method to start music automatically on first user interaction
     enableAutoPlayOnInteraction() {
+        // Only enable auto-play if user hasn't explicitly paused it
+        const saved = localStorage.getItem(this.storageKey);
+        if (saved) {
+            try {
+                const state = JSON.parse(saved);
+                if (state.userPaused) {
+                    console.log('🚫 Not enabling auto-play - user previously paused');
+                    return;
+                }
+            } catch (e) {
+                console.log('Failed to check saved state:', e);
+            }
+        }
+        
         this.shouldAutoPlay = true;
         // Reset autoPlayTriggered to allow music to start if user interacts again
         this.autoPlayTriggered = false;
