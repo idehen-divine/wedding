@@ -153,6 +153,15 @@
                 @endforelse
             </div>
 
+            <!-- Pagination -->
+            @if ($approvedWishes->hasPages())
+                <div class="flex justify-center mb-12">
+                    <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
+                        {{ $approvedWishes->links('pagination.tailwind') }}
+                    </div>
+                </div>
+            @endif
+
             <div class="text-center">
                 <button @click="resetForm(); showModal = true"
                     class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-button font-medium transition-colors whitespace-nowrap">
