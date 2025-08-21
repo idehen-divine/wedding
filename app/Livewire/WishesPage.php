@@ -11,38 +11,41 @@ class WishesPage extends Component
 {
     public string $name = '';
     public string $wish = '';
-    public bool $showSuccessMessage = false;
-
-    protected array $rules = [
-        'name' => 'required|string|min:2|max:255',
-        'wish' => 'required|string|min:10|max:1000',
-    ];
-
-    protected array $messages = [
-        'name.required' => 'Please tell us your name so we know who this beautiful wish is from! 💕',
-        'name.min' => 'Your name should be at least 2 characters long.',
-        'name.max' => 'Please keep your name under 255 characters.',
-        'wish.required' => 'Please share your heartfelt wish for our special day! ✨',
-        'wish.min' => 'Please share a wish that\'s at least 10 characters long.',
-        'wish.max' => 'Please keep your wish under 1000 characters.',
-    ];
 
     public function submitWish(): void
     {
-        $this->validate();
+        try {
+            // Basic safety checks to prevent database errors
+            if (empty(trim($this->name)) || empty(trim($this->wish))) {
+                $this->dispatch('wish-error', 'Please fill in all required fields.');
+                return;
+            }
 
-        WeddingWish::create([
-            'name' => trim($this->name),
-            'wish' => trim($this->wish),
-            'approved' => false, // Will be reviewed by admin
-        ]);
+            // Validate the data
+            $this->validate([
+                'name' => 'required|string|min:2|max:255',
+                'wish' => 'required|string|min:10|max:1000',
+            ]);
 
-        // Reset form
-        $this->reset(['name', 'wish']);
-        $this->showSuccessMessage = true;
+            // Save wish to database
+            WeddingWish::create([
+                'name' => trim($this->name),
+                'wish' => trim($this->wish),
+                'approved' => true
+            ]);
 
-        // Hide success message after 5 seconds
-        $this->dispatch('wish-submitted');
+            // Reset form data
+            $this->reset(['name', 'wish']);
+
+            // Dispatch success event for SweetAlert2
+            $this->dispatch('wish-submitted');
+
+            // Flash success message
+            session()->flash('wish_success', 'Thank you for your beautiful wish! It has been added.');
+        } catch (\Exception $e) {
+            // Only catch genuine errors (database issues, etc.)
+            $this->dispatch('wish-error', 'Something went wrong. Please try again.');
+        }
     }
 
     public function render()
