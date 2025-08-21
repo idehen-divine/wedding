@@ -2,13 +2,17 @@
 
 namespace App\Livewire;
 
-use App\Models\WeddingWish;
-use Livewire\Attributes\Layout;
 use Livewire\Component;
+use App\Models\WeddingWish;
+use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
+use Livewire\WithoutUrlPagination;
 
 #[Layout('components.layouts.wedding')]
 class WishesPage extends Component
 {
+    use WithPagination, WithoutUrlPagination;
+
     public string $name = '';
     public string $wish = '';
 
@@ -37,6 +41,9 @@ class WishesPage extends Component
             // Reset form data
             $this->reset(['name', 'wish']);
 
+            // Reset to page 1 to show the new wish
+            $this->resetPage();
+
             // Dispatch success event for SweetAlert2
             $this->dispatch('wish-submitted');
 
@@ -52,7 +59,7 @@ class WishesPage extends Component
     {
         $approvedWishes = WeddingWish::where('approved', true)
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(6);
 
         return view('livewire.wishes-page', compact('approvedWishes'));
     }
