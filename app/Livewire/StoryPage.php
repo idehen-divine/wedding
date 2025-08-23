@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\StoryTimeline;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -10,6 +11,12 @@ class StoryPage extends Component
 {
     public function render()
     {
-        return view('livewire.story-page')->title('Our Love Story - Precious & Franklin Wedding');
+        $storyEvents = StoryTimeline::where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
+
+        return view('livewire.story-page', compact('storyEvents'))
+            ->title('Our Love Story - Precious & Franklin Wedding');
     }
 }
