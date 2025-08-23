@@ -28,7 +28,13 @@
       "Bash(php artisan:*)",
       "Bash(npm run build:*)",
       "mcp__laravel-boost__tinker",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "mcp__laravel-boost__database-schema",
+      "WebFetch(domain:filamentphp.com)",
+      "mcp__laravel-boost__database-query",
+      "mcp__laravel-boost__get-config",
+      "Bash(php:*)",
+      "Bash(mv:*)"
     ],
     "deny": [],
     "ask": [],
