@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
 
         // Call the WeddingWishSeeder
         $this->call([
-            // WeddingWishSeeder::class,
+            WeddingWishSeeder::class,
+            StoryTimelineSeeder::class,
         ]);
     }
 }
