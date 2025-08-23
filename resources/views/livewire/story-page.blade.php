@@ -1,3 +1,6 @@
+@php
+use Illuminate\Support\Facades\Storage;
+@endphp
 <div>
     <!-- Love Story Timeline -->
     <section class="pt-32 pb-20 px-6">
@@ -9,86 +12,54 @@
 
             <!-- Love Story Timeline -->
             <div class="relative">
-                <!-- Timeline line -->
-                <div class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-primary/30 h-full"></div>
-                <!-- Timeline items -->
-                <div class="space-y-16">
-                    <div class="flex items-center">
-                        <div class="w-1/2 pr-8 text-right">
-                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                                <h3 class="font-playfair text-xl font-medium text-primary mb-2">First Meeting</h3>
-                                <p class="text-gray-600 text-sm mb-3">September 2019</p>
-                                <p class="text-gray-700">We met at a coffee shop in downtown. Precious was reading her
-                                    favorite book, and Franklin couldn't help but ask about it. The conversation lasted
-                                    for
-                                    hours.</p>
+                @if($storyEvents->count() > 0)
+                    <!-- Timeline line -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-primary/30 h-full"></div>
+                    <!-- Timeline items -->
+                    <div class="space-y-16">
+                        @foreach($storyEvents as $index => $event)
+                            <div class="flex items-center">
+                                @if($index % 2 === 0)
+                                    {{-- Right image, left text --}}
+                                    <div class="w-1/2 pr-8 text-right">
+                                        <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                                            <h3 class="font-playfair text-xl font-medium text-primary mb-2">{{ $event->title }}</h3>
+                                            <p class="text-gray-600 text-sm mb-3">{{ $event->date }}</p>
+                                            <p class="text-gray-700">{{ $event->description }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10"></div>
+                                    <div class="w-1/2 pl-8">
+                                        @if($event->image_path)
+                                            <img src="{{ Storage::url($event->image_path) }}" alt="{{ $event->title }}"
+                                                class="w-full h-48 object-cover rounded-2xl shadow-lg" loading="lazy">
+                                        @endif
+                                    </div>
+                                @else
+                                    {{-- Left image, right text --}}
+                                    <div class="w-1/2 pr-8">
+                                        @if($event->image_path)
+                                            <img src="{{ Storage::url($event->image_path) }}" alt="{{ $event->title }}"
+                                                class="w-full h-48 object-cover rounded-2xl shadow-lg" loading="lazy">
+                                        @endif
+                                    </div>
+                                    <div class="w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10"></div>
+                                    <div class="w-1/2 pl-8">
+                                        <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+                                            <h3 class="font-playfair text-xl font-medium text-primary mb-2">{{ $event->title }}</h3>
+                                            <p class="text-gray-600 text-sm mb-3">{{ $event->date }}</p>
+                                            <p class="text-gray-700">{{ $event->description }}</p>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
-                        </div>
-                        <div class="w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10">
-                        </div>
-                        <div class="w-1/2 pl-8">
-                            <img src="{{ asset('assets/images/story-1.jpg') }}" alt="First meeting"
-                                class="w-full h-48 object-cover rounded-2xl shadow-lg" loading="lazy">
-                        </div>
+                        @endforeach
                     </div>
-
-                    <div class="flex items-center">
-                        <div class="w-1/2 pr-8">
-                            <img src="{{ asset('assets/images/story-2.jpg') }}" alt="First date"
-                                class="w-full h-48 object-cover rounded-2xl shadow-lg" loading="lazy">
-                        </div>
-                        <div class="w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10">
-                        </div>
-                        <div class="w-1/2 pl-8">
-                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                                <h3 class="font-playfair text-xl font-medium text-primary mb-2">First Date</h3>
-                                <p class="text-gray-600 text-sm mb-3">October 2019</p>
-                                <p class="text-gray-700">Our first official date was at a charming Italian restaurant.
-                                    Franklin was nervous, but Precious's laughter made everything perfect. We knew there
-                                    was
-                                    something special.</p>
-                            </div>
-                        </div>
+                @else
+                    <div class="text-center py-12">
+                        <p class="text-gray-600 text-lg">Our love story timeline will be available soon...</p>
                     </div>
-
-                    <div class="flex items-center">
-                        <div class="w-1/2 pr-8 text-right">
-                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                                <h3 class="font-playfair text-xl font-medium text-primary mb-2">Moving In Together</h3>
-                                <p class="text-gray-600 text-sm mb-3">June 2021</p>
-                                <p class="text-gray-700">After two years of dating, we decided to take the next step.
-                                    Moving in together was an adventure filled with furniture shopping and learning each
-                                    other's habits.</p>
-                            </div>
-                        </div>
-                        <div class="w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10">
-                        </div>
-                        <div class="w-1/2 pl-8">
-                            <img src="{{ asset('assets/images/story-3.jpg') }}" alt="Moving in"
-                                class="w-full h-48 object-cover rounded-2xl shadow-lg" loading="lazy">
-                        </div>
-                    </div>
-
-                    <div class="flex items-center">
-                        <div class="w-1/2 pr-8">
-                            <img src="{{ asset('assets/images/story-4.jpg') }}" alt="Proposal"
-                                class="w-full h-48 object-cover rounded-2xl shadow-lg" loading="lazy">
-                        </div>
-                        <div class="w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10">
-                        </div>
-                        <div class="w-1/2 pl-8">
-                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                                <h3 class="font-playfair text-xl font-medium text-primary mb-2">The Proposal</h3>
-                                <p class="text-gray-600 text-sm mb-3">December 2023</p>
-                                <p class="text-gray-700">Franklin proposed during a sunset walk on the beach where we
-                                    had
-                                    our first vacation together. Precious said yes before he could even finish asking
-                                    the
-                                    question!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endif
             </div>
         </div>
     </section>
@@ -124,5 +95,5 @@
     </section>
 
 
-    <livewire:footer />
+@include('partials.footer')
 </div>
