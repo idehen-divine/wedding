@@ -9,7 +9,12 @@
             audioLink.href = '/assets/audio/harmony.mp3';
             document.head.appendChild(audioLink);
 
-            // Sync with global music state
+            // Initialize music player if it exists
+            if (window.musicPlayer) {
+                window.musicPlayer.init();
+            }
+
+            // Sync with global music state (including restored state)
             this.musicPlaying = window.musicPlayer?.isPlaying || false;
 
             // Listen for global music state changes
@@ -20,7 +25,7 @@
      }">
     <div class="max-w-7xl mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
-            <a href="{{ route('home') }}" wire:navigate.hover class="font-playfair text-2xl font-semibold text-primary">P & F</a >
+            <a href="{{ route('home') }}" wire:navigate.hover class="font-playfair text-2xl font-semibold text-primary">P & F</a>
 
             <!-- Desktop Navigation -->
             <div class="hidden md:flex items-center space-x-8">
