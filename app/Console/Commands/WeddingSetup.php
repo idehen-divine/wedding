@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\StoryTimeline;
+use App\Models\User;
+use App\Models\WeddingWish;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -71,18 +73,24 @@ class WeddingSetup extends Command
             $this->newLine();
         }
 
-        // Step 6: Verify setup
+        // Step 6: Create admin user
+        $this->info('👤 Setting up admin user...');
+        $this->createAdminUser($reset);
+        $this->newLine();
+
+        // Step 7: Verify setup
         $this->info('✅ Verifying setup...');
         $this->verifySetup();
 
         $this->info('🎊 Wedding website setup completed successfully!');
         $this->newLine();
-        
+
         $this->info('Next steps:');
-        $this->line('• Visit /admin to manage content');
+        $this->line('• Visit /admin to manage content (admin@wedding.com / password)');
         $this->line('• Visit /story to see the timeline');
         $this->line('• Run "npm run dev" for frontend development');
-        
+        $this->line('• Change admin password in /admin/profile');
+
         return SymfonyCommand::SUCCESS;
     }
 
@@ -110,11 +118,11 @@ class WeddingSetup extends Command
         $assetsDir = public_path('assets/images');
         $storageDir = storage_path('app/public/story-images');
         $imageFiles = ['story-1.jpg', 'story-2.jpg', 'story-3.jpg', 'story-4.jpg'];
-        
+
         foreach ($imageFiles as $file) {
             $sourcePath = $assetsDir . '/' . $file;
             $destinationPath = $storageDir . '/' . $file;
-            
+
             if (File::exists($sourcePath) && !File::exists($destinationPath)) {
                 File::copy($sourcePath, $destinationPath);
                 $this->info("Copied: {$file}");
@@ -126,12 +134,48 @@ class WeddingSetup extends Command
         }
     }
 
+    private function createAdminUser(bool $reset): void
+    {
+        // Check if admin user already exists
+        $adminExists = User::where('email', 'admin@wedding.com')->exists();
+
+        if (!$reset && $adminExists) {
+            $this->info('Admin user already exists: admin@wedding.com');
+            return;
+        }
+
+        if ($reset && $adminExists) {
+            User::where('email', 'admin@wedding.com')->delete();
+            $this->info('Removed existing admin user');
+        }
+
+        // Create admin user
+        $user = User::create([
+            'name' => 'Wedding Admin',
+            'email' => 'admin@wedding.com',
+            'password' => bcrypt('Password'),
+            'email_verified_at' => now(),
+        ]);
+
+        $this->info('✓ Admin user created:');
+        $this->line('  Email: admin@wedding.com');
+        $this->line('  Password: Password');
+        $this->warn('  ⚠️  Change the password after first login!');
+    }
 
     private function verifySetup(): void
     {
         // Check database
         $storyCount = StoryTimeline::count();
         $this->line("• Story timeline events: {$storyCount}");
+
+        $wishCount = WeddingWish::count();
+        $approvedWishCount = WeddingWish::where('approved', true)->count();
+        $this->line("• Wedding wishes: {$wishCount} ({$approvedWishCount} approved)");
+
+        $userCount = User::count();
+        $adminExists = User::where('email', 'admin@wedding.com')->exists();
+        $this->line("• Users: {$userCount} " . ($adminExists ? '(admin ✓)' : '(no admin)'));
 
         // Check storage directories
         $storageExists = File::exists(storage_path('app/public/story-images'));
