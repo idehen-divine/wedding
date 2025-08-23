@@ -37,6 +37,10 @@ class HomePage extends Component {
 
 ### Commands
 ```bash
+# Setup & Deployment
+php artisan wedding:setup          # Complete website setup (interactive)
+php artisan wedding:setup --reset  # Reset and setup with default data
+
 # Frontend development
 npm run dev          # Watch mode
 npm run build        # Production build
@@ -45,6 +49,18 @@ composer run dev     # Alternative dev command
 # Filament resources
 php artisan make:filament-resource WeddingWish --generate --no-interaction
 ```
+
+### Server Deployment
+
+**Initial Setup:**
+1. Clone repository
+2. Run `composer install --optimize-autoloader --no-dev`
+3. Copy `.env.example` to `.env` and configure
+4. Run `php artisan wedding:setup`
+5. Run `npm run build`
+
+**Data Reset/Restore:**
+- Run `php artisan wedding:setup --reset` to restore default content
 
 ### Form Validation Pattern
 RSVP component uses inline validation rules:
