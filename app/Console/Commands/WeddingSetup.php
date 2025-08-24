@@ -4,9 +4,9 @@ namespace App\Console\Commands;
 
 use App\Models\StoryTimeline;
 use App\Models\User;
+use App\Models\WeddingSetting;
 use App\Models\WeddingWish;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
@@ -49,7 +49,7 @@ class WeddingSetup extends Command
 
         // Step 2: Create storage link
         $this->info('🔗 Creating storage symbolic link...');
-        if (!File::exists(public_path('storage'))) {
+        if (! File::exists(public_path('storage'))) {
             $this->call('storage:link');
         } else {
             $this->info('Storage link already exists');
@@ -99,12 +99,12 @@ class WeddingSetup extends Command
         $directories = [
             'story-images',
             'gallery-images',
-            'uploads'
+            'uploads',
         ];
 
         foreach ($directories as $dir) {
             $storageDir = storage_path("app/public/{$dir}");
-            if (!File::exists($storageDir)) {
+            if (! File::exists($storageDir)) {
                 File::makeDirectory($storageDir, 0755, true);
                 $this->info("Created: {$dir}/");
             } else {
@@ -120,10 +120,10 @@ class WeddingSetup extends Command
         $imageFiles = ['story-1.jpg', 'story-2.jpg', 'story-3.jpg', 'story-4.jpg'];
 
         foreach ($imageFiles as $file) {
-            $sourcePath = $assetsDir . '/' . $file;
-            $destinationPath = $storageDir . '/' . $file;
+            $sourcePath = $assetsDir.'/'.$file;
+            $destinationPath = $storageDir.'/'.$file;
 
-            if (File::exists($sourcePath) && !File::exists($destinationPath)) {
+            if (File::exists($sourcePath) && ! File::exists($destinationPath)) {
                 File::copy($sourcePath, $destinationPath);
                 $this->info("Copied: {$file}");
             } elseif (File::exists($destinationPath)) {
@@ -139,7 +139,7 @@ class WeddingSetup extends Command
         // Check if admin user already exists
         $adminExists = User::where('email', 'admin@wedding.com')->exists();
 
-        if (!$reset && $adminExists) {
+        if (! $reset && $adminExists) {
             $this->info('Admin user already exists: admin@wedding.com');
             return;
         }
@@ -175,15 +175,18 @@ class WeddingSetup extends Command
 
         $userCount = User::count();
         $adminExists = User::where('email', 'admin@wedding.com')->exists();
-        $this->line("• Users: {$userCount} " . ($adminExists ? '(admin ✓)' : '(no admin)'));
+        $this->line("• Users: {$userCount} ".($adminExists ? '(admin ✓)' : '(no admin)'));
+
+        $settingCount = WeddingSetting::count();
+        $this->line("• Wedding settings: {$settingCount}");
 
         // Check storage directories
         $storageExists = File::exists(storage_path('app/public/story-images'));
-        $this->line("• Story images directory: " . ($storageExists ? '✓' : '✗'));
+        $this->line('• Story images directory: '.($storageExists ? '✓' : '✗'));
 
         // Check symlink
         $symlinkExists = File::exists(public_path('storage'));
-        $this->line("• Storage symlink: " . ($symlinkExists ? '✓' : '✗'));
+        $this->line('• Storage symlink: '.($symlinkExists ? '✓' : '✗'));
 
         // Check sample images
         $imageCount = count(File::glob(storage_path('app/public/story-images/*.jpg')));
