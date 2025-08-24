@@ -18,12 +18,13 @@ class DatabaseSeeder extends Seeder
         User::factory()->create(attributes: [
             'name' => 'Idehen Divine',
             'email' => 'idehendivine16@gmail.com',
+            'password' => bcrypt('Password'),
         ]);
 
-        // Call the WeddingWishSeeder
         $this->call([
             WeddingWishSeeder::class,
             StoryTimelineSeeder::class,
+            WeddingSettingSeeder::class,
         ]);
     }
 }
