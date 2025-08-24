@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\WeddingSetting;
 use App\Models\WeddingWish;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
@@ -37,7 +38,14 @@ class WeddingSetup extends Command
 
         $reset = $this->option('reset');
 
-        // Step 1: Run migrations
+        // Step 1: Clean storage files if reset
+        if ($reset) {
+            $this->info('🧹 Cleaning up storage files...');
+            $this->cleanupStorageFiles();
+            $this->newLine();
+        }
+
+        // Step 2: Run migrations
         if ($reset) {
             $this->info('📋 Running fresh database migrations...');
             $this->call('migrate:fresh', ['--force' => true]);
@@ -47,7 +55,7 @@ class WeddingSetup extends Command
         }
         $this->newLine();
 
-        // Step 2: Create storage link
+        // Step 3: Create storage link
         $this->info('🔗 Creating storage symbolic link...');
         if (! File::exists(public_path('storage'))) {
             $this->call('storage:link');
@@ -56,34 +64,43 @@ class WeddingSetup extends Command
         }
         $this->newLine();
 
-        // Step 3: Set up storage directories
+        // Step 4: Set up storage directories
         $this->info('📁 Setting up storage directories...');
         $this->setupStorageDirectories();
         $this->newLine();
 
-        // Step 4: Copy story images
+        // Step 5: Copy story images
         $this->info('🖼️  Copying story images to storage...');
         $this->copyStoryImages();
         $this->newLine();
 
-        // Step 5: Copy audio files
+        // Step 7: Copy audio files
         $this->info('🎵 Copying audio files to storage...');
         $this->copyAudioFiles();
         $this->newLine();
 
-        // Step 6: Seed database
-        if ($reset || $this->confirm('Seed the database with default data?', true)) {
+        // Step 8: Seed database
+        if ($reset || $this->confirm('Seed the database with default data?', false)) {
             $this->info('🌱 Seeding database with default data...');
+
+            // Truncate tables before seeding
+            $this->info('Truncating existing data...');
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+            StoryTimeline::truncate();
+            WeddingWish::truncate();
+            WeddingSetting::truncate();
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
             $this->call('db:seed');
             $this->newLine();
         }
 
-        // Step 7: Create admin user
+        // Step 9: Create admin user
         $this->info('👤 Setting up admin user...');
         $this->createAdminUser($reset);
         $this->newLine();
 
-        // Step 8: Verify setup
+        // Step 10: Verify setup
         $this->info('✅ Verifying setup...');
         $this->verifySetup();
 
@@ -99,6 +116,34 @@ class WeddingSetup extends Command
         return SymfonyCommand::SUCCESS;
     }
 
+    private function cleanupStorageFiles(): void
+    {
+        $directories = [
+            'story-images',
+            'gallery-images',
+            'uploads',
+            'audio',
+            'temp-audio',
+        ];
+
+        foreach ($directories as $dir) {
+            $storageDir = storage_path("app/public/{$dir}");
+            if (File::exists($storageDir)) {
+                // Get all files in directory
+                $files = File::allFiles($storageDir);
+                $fileCount = count($files);
+
+                if ($fileCount > 0) {
+                    // Delete all files in the directory
+                    File::cleanDirectory($storageDir);
+                    $this->info("Cleaned: {$dir}/ ({$fileCount} files removed)");
+                } else {
+                    $this->line("Already clean: {$dir}/");
+                }
+            }
+        }
+    }
+
     private function setupStorageDirectories(): void
     {
         $directories = [
@@ -106,6 +151,7 @@ class WeddingSetup extends Command
             'gallery-images',
             'uploads',
             'audio',
+            'temp-audio',
         ];
 
         foreach ($directories as $dir) {
@@ -144,11 +190,11 @@ class WeddingSetup extends Command
     {
         $assetsDir = public_path('assets/audio');
         $storageDir = storage_path('app/public/audio');
-        
+
         // Get all audio files from assets directory
         if (File::exists($assetsDir)) {
             $audioFiles = File::files($assetsDir);
-            
+
             foreach ($audioFiles as $file) {
                 if (in_array($file->getExtension(), ['mp3', 'wav', 'ogg'])) {
                     $fileName = $file->getFilename();
@@ -175,6 +221,7 @@ class WeddingSetup extends Command
 
         if (! $reset && $adminExists) {
             $this->info('Admin user already exists: admin@wedding.com');
+
             return;
         }
 
