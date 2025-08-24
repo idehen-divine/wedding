@@ -10,4 +10,5 @@ enum SettingType: string
     case TIME = 'time';
     case URL = 'url';
     case BOOLEAN = 'boolean';
+    case AUDIO = 'audio';
 }
