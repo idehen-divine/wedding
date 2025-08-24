@@ -203,6 +203,17 @@ class WeddingSettingSeeder extends Seeder
                 'description' => 'Twitter profile URL',
                 'sort_order' => 52,
             ],
+
+            // Music Settings
+            [
+                'key' => 'background_music',
+                'value' => 'storage/audio/Harmony (Default).mp3',
+                'type' => SettingType::AUDIO->value,
+                'group' => SettingGroup::MUSIC->value,
+                'label' => 'Background Music',
+                'description' => 'Background music for the website',
+                'sort_order' => 60,
+            ],
         ];
 
         foreach ($settings as $settingData) {
