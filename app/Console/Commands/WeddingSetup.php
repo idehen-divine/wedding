@@ -66,19 +66,24 @@ class WeddingSetup extends Command
         $this->copyStoryImages();
         $this->newLine();
 
-        // Step 5: Seed database
+        // Step 5: Copy audio files
+        $this->info('🎵 Copying audio files to storage...');
+        $this->copyAudioFiles();
+        $this->newLine();
+
+        // Step 6: Seed database
         if ($reset || $this->confirm('Seed the database with default data?', true)) {
             $this->info('🌱 Seeding database with default data...');
             $this->call('db:seed');
             $this->newLine();
         }
 
-        // Step 6: Create admin user
+        // Step 7: Create admin user
         $this->info('👤 Setting up admin user...');
         $this->createAdminUser($reset);
         $this->newLine();
 
-        // Step 7: Verify setup
+        // Step 8: Verify setup
         $this->info('✅ Verifying setup...');
         $this->verifySetup();
 
@@ -100,6 +105,7 @@ class WeddingSetup extends Command
             'story-images',
             'gallery-images',
             'uploads',
+            'audio',
         ];
 
         foreach ($directories as $dir) {
@@ -131,6 +137,34 @@ class WeddingSetup extends Command
             } else {
                 $this->warn("Source not found: {$file}");
             }
+        }
+    }
+
+    private function copyAudioFiles(): void
+    {
+        $assetsDir = public_path('assets/audio');
+        $storageDir = storage_path('app/public/audio');
+        
+        // Get all audio files from assets directory
+        if (File::exists($assetsDir)) {
+            $audioFiles = File::files($assetsDir);
+            
+            foreach ($audioFiles as $file) {
+                if (in_array($file->getExtension(), ['mp3', 'wav', 'ogg'])) {
+                    $fileName = $file->getFilename();
+                    $sourcePath = $file->getPathname();
+                    $destinationPath = $storageDir.'/'.$fileName;
+
+                    if (! File::exists($destinationPath)) {
+                        File::copy($sourcePath, $destinationPath);
+                        $this->info("Copied: {$fileName}");
+                    } else {
+                        $this->line("Exists: {$fileName}");
+                    }
+                }
+            }
+        } else {
+            $this->warn('Assets audio directory not found');
         }
     }
 
@@ -191,5 +225,9 @@ class WeddingSetup extends Command
         // Check sample images
         $imageCount = count(File::glob(storage_path('app/public/story-images/*.jpg')));
         $this->line("• Story images copied: {$imageCount}");
+
+        // Check audio files
+        $audioCount = count(File::glob(storage_path('app/public/audio/*.{mp3,wav,ogg}'), GLOB_BRACE));
+        $this->line("• Audio files copied: {$audioCount}");
     }
 }
