@@ -204,13 +204,11 @@ class ManageWeddingSettings extends Page implements HasForms
                                                 $set('pending_upload', null);
                                             })
                                             ->extraAttributes([
-                                                'onchange' => "
-                                                    // Immediately stop all playing audio when selection changes
-                                                    document.querySelectorAll('audio').forEach(function(audio) {
-                                                        audio.pause();
-                                                        audio.currentTime = 0;
-                                                    });
-                                                ",
+                                                'x-data' => '{}',
+                                                // Keep x-init minimal to avoid Alpine expression parsing issues
+                                                'x-init' => 'window.weddingAudio = window.weddingAudio || window.weddingAudio',
+                                                // Single-line, comment-free expression to avoid Alpine AsyncFunction parse errors
+                                                'x-on:change' => "document.querySelectorAll('audio').forEach(function(a){a.pause();a.currentTime=0;});try{if(window.weddingAudio && window.weddingAudio.setLoading)window.weddingAudio.setLoading(\$event.target.value);}catch(e){};try{setTimeout(function(){if(window.weddingAudio && window.weddingAudio.setSelected)window.weddingAudio.setSelected(\$event.target.value);},250);}catch(e){}",
                                             ]),
                                     ]),
 
@@ -224,118 +222,65 @@ class ManageWeddingSettings extends Page implements HasForms
                                             ->content(function (callable $get) {
                                                 $selectedFile = $get('background_music');
                                                 if (! $selectedFile) {
-                                                    return '<div class="text-gray-500 italic text-sm">Select a file to preview</div>';
+                                                    return new \Illuminate\Support\HtmlString('<div class="text-gray-500 italic text-sm">Select a file to preview</div>');
                                                 }
 
                                                 $audioUrl = asset($selectedFile);
                                                 $fileName = basename($selectedFile);
                                                 $audioId = 'audio-preview-'.md5($selectedFile);
 
-                                                return new \Illuminate\Support\HtmlString("
-                                                    <div class='border rounded-lg p-3 bg-gray-50 dark:bg-gray-800'>
-                                                        <div class='text-sm font-medium text-gray-900 dark:text-gray-100 mb-2'>{$fileName}</div>
-                                                        <audio id='{$audioId}' controls class='w-full' preload='metadata'>
-                                                            <source src='{$audioUrl}' type='audio/mpeg'>
-                                                            Your browser does not support the audio element.
-                                                        </audio>
-                                                    </div>
-
-                                                    <script>
-                                                        document.addEventListener('DOMContentLoaded', function() {
-                                                            const currentAudio = document.getElementById('{$audioId}');
-                                                            if (currentAudio) {
-                                                                currentAudio.addEventListener('play', function() {
-                                                                    document.querySelectorAll('audio').forEach(function(audio) {
-                                                                        if (audio !== currentAudio) {
-                                                                            audio.pause();
-                                                                            audio.currentTime = 0;
-                                                                        }
-                                                                    });
-                                                                });
-                                                            }
-                                                        });
-                                                    </script>
-                                                ");
+                                                return view('filament.partials.music-preview', compact('audioUrl', 'fileName', 'audioId'));
                                             }),
                                     ]),
                             ]),
 
-                        \Filament\Schemas\Components\Grid::make(2)
-                            ->extraAttributes(['class' => 'gap-6 items-stretch'])
+                        \Filament\Schemas\Components\Fieldset::make('Upload New File')
                             ->schema([
-                                // Upload Column
-                                \Filament\Schemas\Components\Fieldset::make('Upload New File')
-                                    ->extraAttributes(['class' => 'h-full w-full'])
-                                    ->schema([
-                                        FileUpload::make('pending_upload')
-                                            ->label('Choose File to Upload')
-                                            ->columnSpanFull()
-                                            ->directory('temp-audio')
-                                            ->disk('public')
-                                            ->acceptedFileTypes(['audio/mpeg', 'audio/wav', 'audio/ogg'])
-                                            ->maxSize(10240) // 10MB
-                                            ->live()
-                                            ->afterStateUpdated(function ($state, callable $set) {
-                                                // Clear selection when uploading new file
-                                                if ($state) {
-                                                    $set('background_music', null);
-                                                }
-                                            }),
-                                    ]),
+                                FileUpload::make('pending_upload')
+                                    ->label('Choose File to Upload')
+                                    ->columnSpanFull()
+                                    ->directory('temp-audio')
+                                    ->disk('public')
+                                    ->acceptedFileTypes(['audio/mpeg', 'audio/wav', 'audio/ogg'])
+                                    ->maxSize(10240) // 10MB
+                                    ->live()
+                                    ->afterStateUpdated(function ($state, callable $set) {
+                                        // Clear selection when uploading new file
+                                        if ($state) {
+                                            $set('background_music', null);
+                                        }
+                                    }),
 
-                                // Upload Preview Column
-                                \Filament\Schemas\Components\Fieldset::make('Upload Preview')
-                                    ->extraAttributes(['class' => 'h-full w-full'])
-                                    ->schema([
-                                        Placeholder::make('upload_preview')
-                                            ->hiddenLabel()
-                                            ->columnSpanFull()
-                                            ->content(function (callable $get) {
-                                                $uploadedFile = $get('pending_upload');
-                                                if (! $uploadedFile) {
-                                                    return '<div class="text-gray-500 italic text-sm">Upload a file to preview</div>';
-                                                }
+                                Placeholder::make('upload_actions')
+                                    ->hiddenLabel()
+                                    ->columnSpanFull()
+                                    ->content(function (callable $get) {
+                                        $uploadedFile = $get('pending_upload');
+                                        if (! $uploadedFile) {
+                                            return '';
+                                        }
 
-                                                $fileName = is_array($uploadedFile) ? $uploadedFile[0] : $uploadedFile;
-                                                $audioUrl = asset('storage/temp-audio/'.basename($fileName));
-                                                $displayName = basename($fileName);
-                                                $audioId = 'audio-upload-'.md5($fileName);
-
-                                                return new \Illuminate\Support\HtmlString("
-                                                    <div class='border rounded-lg p-3 bg-blue-50 dark:bg-blue-900'>
-                                                        <div class='flex items-center justify-between mb-2'>
-                                                            <span class='text-sm font-medium text-gray-900 dark:text-gray-100'>{$displayName}</span>
-                                                            <span class='text-xs text-blue-600 dark:text-blue-400'>Preview</span>
-                                                        </div>
-                                                        <audio id='{$audioId}' controls class='w-full mb-3' preload='metadata'>
-                                                            <source src='{$audioUrl}' type='audio/mpeg'>
-                                                            Your browser does not support the audio element.
-                                                        </audio>
-                                                        <div class='flex gap-2'>
-                                                            <button type='button' onclick='confirmUpload()' class='px-2 py-1 bg-green-600 text-white rounded text-xs hover:bg-green-700'>
-                                                                Use This File
-                                                            </button>
-                                                            <button type='button' onclick='cancelUpload()' class='px-2 py-1 bg-gray-600 text-white rounded text-xs hover:bg-gray-700'>
-                                                                Cancel
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-                                                    <script>
-                                                        function confirmUpload() {
-                                                            \$wire.confirmUpload();
-                                                        }
-                                                        function cancelUpload() {
-                                                            \$wire.cancelUpload();
-                                                        }
-                                                    </script>
-                                                ");
-                                            }),
-                                    ]),
+                                        return new \Illuminate\Support\HtmlString('
+                                            <div class="flex gap-2 mt-2">
+                                                <button type="button" wire:click="confirmUpload" wire:loading.attr="disabled" wire:target="confirmUpload"
+                                                    class="px-3 py-2 bg-green-600 hover:bg-green-700 disabled:bg-green-400 disabled:cursor-not-allowed text-white rounded-md text-sm font-medium transition-colors flex items-center gap-2">
+                                                    <svg wire:loading wire:target="confirmUpload" class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                    </svg>
+                                                    <span wire:loading.remove wire:target="confirmUpload">Use This File</span>
+                                                    <span wire:loading wire:target="confirmUpload">Processing...</span>
+                                                </button>
+                                                <button type="button" wire:click="cancelUpload" wire:loading.attr="disabled" wire:target="confirmUpload"
+                                                    class="px-3 py-2 bg-gray-600 hover:bg-gray-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-md text-sm font-medium transition-colors">
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                       ');
+                                    }),
                             ]),
 
-                    ])
-                    ->columns(1),
+                    ]),
             ])
             ->statePath('data')
             ->model(WeddingSetting::class);
@@ -354,9 +299,7 @@ class ManageWeddingSettings extends Page implements HasForms
 
             // Save each setting
             foreach ($data as $key => $value) {
-                // Handle empty values properly
                 $settingValue = $value === null ? '' : $value;
-
                 WeddingSetting::where('key', $key)->update([
                     'value' => $settingValue,
                 ]);
@@ -384,8 +327,21 @@ class ManageWeddingSettings extends Page implements HasForms
     public function confirmUpload()
     {
         try {
-            $data = $this->form->getState();
-            $pendingFile = $data['pending_upload'] ?? null;
+            // Get form data without validation to avoid the required field error
+            $formData = $this->form->getRawState();
+            $pendingFile = $formData['pending_upload'] ?? null;
+
+            // Debug logging
+            \Log::info('Upload confirmation debug', [
+                'pending_file' => $pendingFile,
+                'form_data_keys' => array_keys($formData),
+            ]);
+
+            // Also log to browser console
+            $this->js('console.log("Upload debug:", '.json_encode([
+                'pending_file' => $pendingFile,
+                'form_data_keys' => array_keys($formData),
+            ]).')');
 
             if (! $pendingFile) {
                 Notification::make()
@@ -396,18 +352,53 @@ class ManageWeddingSettings extends Page implements HasForms
                 return;
             }
 
-            $fileName = is_array($pendingFile) ? $pendingFile[0] : $pendingFile;
-            $tempPath = storage_path('app/public/temp-audio/'.basename($fileName));
-            $finalPath = storage_path('app/public/audio/'.basename($fileName));
+            // Handle the file name properly - it's a TemporaryUploadedFile object
+            if (is_array($pendingFile)) {
+                $tempUploadedFile = reset($pendingFile); // Get first value from array regardless of key
+            } else {
+                $tempUploadedFile = $pendingFile;
+            }
+
+            // Get the original filename and temp path from the TemporaryUploadedFile
+            $originalFileName = $tempUploadedFile->getClientOriginalName();
+            $tempPath = $tempUploadedFile->getRealPath();
+            $finalPath = storage_path('app/public/audio/'.basename($originalFileName));
+
+            \Log::info('File path debug', [
+                'originalFileName' => $originalFileName,
+                'tempPath' => $tempPath,
+                'finalPath' => $finalPath,
+                'tempExists' => \File::exists($tempPath),
+                'tempUploadedFile' => get_class($tempUploadedFile),
+            ]);
+
+            $this->js('console.log("File path debug:", '.json_encode([
+                'originalFileName' => $originalFileName,
+                'tempPath' => $tempPath,
+                'finalPath' => $finalPath,
+                'tempExists' => \File::exists($tempPath),
+            ]).')');
 
             // Move file from temp to permanent location
             if (\File::exists($tempPath)) {
+                // Ensure audio directory exists
+                $audioDir = storage_path('app/public/audio');
+                if (! \File::exists($audioDir)) {
+                    \File::makeDirectory($audioDir, 0755, true);
+                }
+
                 \File::move($tempPath, $finalPath);
 
-                // Update the form with the new file
+                // Update the form with the new file - use fill to set the state properly
+                $newPath = 'storage/audio/'.basename($originalFileName);
                 $this->form->fill([
-                    'background_music' => 'storage/audio/'.basename($fileName),
+                    'background_music' => $newPath,
                     'pending_upload' => null,
+                ]);
+
+                // Also update the wedding setting in the database
+                WeddingSetting::where('key', 'background_music')->update([
+                    'value' => $newPath,
                 ]);
 
                 Notification::make()
@@ -422,11 +413,23 @@ class ManageWeddingSettings extends Page implements HasForms
                     ->send();
             }
         } catch (\Exception $e) {
-            \Log::error('Audio upload confirmation error: '.$e->getMessage());
+            \Log::error('Audio upload confirmation error: '.$e->getMessage(), [
+                'exception' => $e,
+                'trace' => $e->getTraceAsString(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
+
+            // Also log to browser console for debugging
+            $this->js('console.error("Upload error: " + '.json_encode($e->getMessage()).', '.json_encode([
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString(),
+            ]).')');
 
             Notification::make()
                 ->title('Error confirming upload')
-                ->body('An error occurred while processing the upload.')
+                ->body('Error: '.$e->getMessage())
                 ->danger()
                 ->send();
         }
@@ -439,7 +442,12 @@ class ManageWeddingSettings extends Page implements HasForms
             $pendingFile = $data['pending_upload'] ?? null;
 
             if ($pendingFile) {
-                $fileName = is_array($pendingFile) ? $pendingFile[0] : $pendingFile;
+                // Handle the file name properly - it's an object with UUID keys
+                if (is_array($pendingFile)) {
+                    $fileName = reset($pendingFile); // Get first value from array regardless of key
+                } else {
+                    $fileName = $pendingFile;
+                }
                 $tempPath = storage_path('app/public/temp-audio/'.basename($fileName));
 
                 // Delete the temporary file
