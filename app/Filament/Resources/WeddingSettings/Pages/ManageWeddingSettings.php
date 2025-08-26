@@ -401,6 +401,9 @@ class ManageWeddingSettings extends Page implements HasForms
                     'value' => $newPath,
                 ]);
 
+                // Trigger form refresh to update select dropdown and preview
+                $this->dispatch('$refresh');
+
                 Notification::make()
                     ->title('Audio file uploaded successfully!')
                     ->success()
@@ -471,7 +474,8 @@ class ManageWeddingSettings extends Page implements HasForms
     public function deleteAudioFile()
     {
         try {
-            $data = $this->form->getState();
+            // Get form data without validation to avoid required field errors
+            $data = $this->form->getRawState();
             $selectedFile = $data['background_music'] ?? null;
 
             if (! $selectedFile) {
@@ -506,8 +510,16 @@ class ManageWeddingSettings extends Page implements HasForms
             if (\File::exists($filePath)) {
                 \File::delete($filePath);
 
-                // Reset to default if this was the selected file
-                $this->form->fill(['background_music' => 'storage/audio/Harmony (Default).mp3']);
+                // Reset to no selection (empty) after deletion
+                $this->form->fill(['background_music' => null]);
+
+                // Also update the wedding setting in the database to empty
+                WeddingSetting::where('key', 'background_music')->update([
+                    'value' => '',
+                ]);
+
+                // Trigger form refresh to update select dropdown and preview
+                $this->dispatch('$refresh');
 
                 Notification::make()
                     ->title('Audio file deleted')
@@ -522,11 +534,23 @@ class ManageWeddingSettings extends Page implements HasForms
                     ->send();
             }
         } catch (\Exception $e) {
-            \Log::error('Audio delete error: '.$e->getMessage());
+            \Log::error('Audio delete error: '.$e->getMessage(), [
+                'exception' => $e,
+                'trace' => $e->getTraceAsString(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
+
+            // Also log to browser console for debugging
+            $this->js('console.error("Delete error: " + '.json_encode($e->getMessage()).', '.json_encode([
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString(),
+            ]).')');
 
             Notification::make()
                 ->title('Error deleting file')
-                ->body('An error occurred while deleting the file.')
+                ->body('Error: '.$e->getMessage())
                 ->danger()
                 ->send();
         }
