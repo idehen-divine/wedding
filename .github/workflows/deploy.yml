@@ -2,8 +2,7 @@ name: Deploy Wedding Website
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -11,72 +10,147 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Deploy Wedding Website
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          password: ${{ secrets.VPS_PASSWORD }}
-          port: ${{ secrets.VPS_PORT }}
-          script: |
-            # Navigate to project directory or create if doesn't exist
-            echo "📍 Setting up project directory"
-            mkdir -p wedding/wedding
-            cd wedding/wedding
-            
-            # Clone or pull repository
-            if [ ! -d ".git" ]; then
-              echo "📥 Cloning repository"
-              git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git .
-            else
-              echo "🔄 Pulling latest changes"
-              git pull origin main
-            fi
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.3'
+        extensions: pdo, pdo_sqlite, mbstring, xml, ctype, json, tokenizer, openssl, zip, curl, fileinfo
+        coverage: none
 
-            # Check Environment File
-            echo "⚙️ Setting up environment file"
-            php -r "file_exists('.env') || copy('.env.example', '.env');"
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
 
-            # Update Environment variables
-            echo "🔧 Updating environment variables"
+    - name: Install Composer dependencies
+      run: composer install --optimize-autoloader --no-dev
+
+    - name: Install NPM dependencies
+      run: npm ci
+
+    - name: Build assets
+      run: npm run build
+
+    - name: Create deployment archive
+      run: |
+        tar -czf wedding-app.tar.gz \
+          --exclude='.git' \
+          --exclude='.github' \
+          --exclude='node_modules' \
+          --exclude='tests' \
+          --exclude='.env' \
+          --exclude='storage/logs/*.log' \
+          --exclude='storage/framework/sessions/*' \
+          --exclude='storage/framework/cache/*' \
+          --exclude='database/database.sqlite' \
+          .
+
+    - name: Upload and Deploy
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        password: ${{ secrets.VPS_PASSWORD }}
+        port: ${{ secrets.VPS_PORT }}
+        script_stop: true
+        script: |
+          # Create deployment directories
+          mkdir -p /home/lonely/wedding/wedding/releases
+          mkdir -p /home/lonely/wedding/wedding/shared/storage
+
+          # Create release directory with timestamp
+          RELEASE_DIR="/home/lonely/wedding/wedding/releases/$(date +%Y%m%d_%H%M%S)"
+          mkdir -p $RELEASE_DIR
+
+          echo "📥 Uploading application files..."
+
+    - name: Upload files
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        password: ${{ secrets.VPS_PASSWORD }}
+        port: ${{ secrets.VPS_PORT }}
+        source: wedding-app.tar.gz
+        target: /tmp/
+
+    - name: Complete deployment
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        password: ${{ secrets.VPS_PASSWORD }}
+        port: ${{ secrets.VPS_PORT }}
+        script_stop: true
+        script: |
+          # Set release directory
+          RELEASE_DIR="/home/lonely/wedding/wedding/releases/$(date +%Y%m%d_%H%M%S)"
+
+          # Move and extract
+          cd $RELEASE_DIR
+          mv /tmp/wedding-app.tar.gz .
+          tar -xzf wedding-app.tar.gz
+          rm wedding-app.tar.gz
+
+          echo "⚙️ Setting up environment file"
+          if [ -f "/home/lonely/wedding/wedding/.env" ]; then
+            cp /home/lonely/wedding/wedding/.env .env
+          else
+            cp .env.example .env
             sed -i "s|^APP_NAME=.*|APP_NAME=\"Wedding\"|" .env
             sed -i "s|^APP_ENV=.*|APP_ENV=production|" .env
             sed -i "s|^APP_URL=.*|APP_URL=http://www.preshlin25.com|" .env
             sed -i "s|^DB_CONNECTION=.*|DB_CONNECTION=sqlite|" .env
+            cp .env /home/lonely/wedding/wedding/.env
+          fi
 
-            # Create SQLite database if it doesn't exist
-            echo "🗄️ Setting up SQLite database"
+          echo "🗄️ Setting up SQLite database"
+          if [ -f "/home/lonely/wedding/wedding/database.sqlite" ]; then
+            cp /home/lonely/wedding/wedding/database.sqlite database/database.sqlite
+          else
             touch database/database.sqlite
+            cp database/database.sqlite /home/lonely/wedding/wedding/database.sqlite
+          fi
 
-            # Install PHP dependencies
-            echo "📦 Installing PHP dependencies"
-            composer install --optimize-autoloader --no-dev
+          echo "📦 Installing PHP dependencies"
+          composer install --optimize-autoloader --no-dev --no-interaction
 
-            # Database setup
-            echo "🗃️ Setting up database"
-            php artisan wedding:setup
+          echo "🔑 Generating app key"
+          php artisan key:generate --force
 
-            # Install Node dependencies and build assets
-            echo "🎨 Building frontend assets"
-            npm ci
-            npm run build
+          echo "🗃️ Running database setup"
+          php artisan migrate --force
 
-            # Generate App Key if needed
-            echo "🔑 Generating app key"
-            php artisan key:generate --force
+          echo "🧹 Optimizing application"
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
 
-            # Clear and optimize caches
-            echo "🧹 Clearing caches"
-            php artisan optimize:clear
-            php artisan optimize
+          echo "🔒 Setting permissions"
+          chown -R www-data:www-data .
+          chmod -R 755 .
+          chmod -R 775 storage bootstrap/cache
+          chmod 644 database/database.sqlite
 
-            # Set proper permissions
-            echo "🔒 Setting permissions"
-            chmod -R 755 storage bootstrap/cache
-            chmod -R 755 storage/app/public
-            chmod 644 database/database.sqlite
+          echo "🔄 Switching to new release"
+          cd /var/www/wedding
+          if [ -L current ]; then
+            OLD_RELEASE=$(readlink current)
+          fi
+          ln -sfn $RELEASE_DIR current
 
-            echo "🎉 Wedding website deployment successful!"
+          # Restart web server if needed
+          if command -v systemctl &> /dev/null; then
+            sudo systemctl reload nginx 2>/dev/null || true
+            sudo systemctl restart php8.3-fpm 2>/dev/null || true
+          fi
+
+          echo "🧹 Cleaning up old releases (keeping last 3)"
+          cd releases
+          ls -t | tail -n +4 | xargs rm -rf 2>/dev/null || true
+
+          echo "🎉 Wedding website deployment successful!"

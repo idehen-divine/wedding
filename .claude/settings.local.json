@@ -36,7 +36,8 @@
       "Bash(php:*)",
       "Bash(mv:*)",
       "mcp__laravel-boost__read-log-entries",
-      "WebFetch(domain:remixicon.com)"
+      "WebFetch(domain:remixicon.com)",
+      "Bash(touch:*)"
     ],
     "deny": [],
     "ask": [],
