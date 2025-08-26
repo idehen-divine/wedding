@@ -3,15 +3,23 @@
         mobileMenuOpen: false,
         musicPlaying: false,
         init() {
-            // Preload audio for better user experience across all pages
-            const audioLink = document.createElement('link');
-            audioLink.rel = 'prefetch';
-            audioLink.href = '/assets/audio/harmony.mp3';
-            document.head.appendChild(audioLink);
+            // Initialize music player if background music is available
+            if (window.backgroundMusicUrl) {
+                console.log('Navigation initializing with music:', window.backgroundMusicUrl);
+                
+                // Preload audio for better user experience across all pages
+                const audioLink = document.createElement('link');
+                audioLink.rel = 'prefetch';
+                audioLink.href = window.backgroundMusicUrl;
+                document.head.appendChild(audioLink);
 
-            // Initialize music player if it exists
-            if (window.musicPlayer) {
-                window.musicPlayer.init();
+                // Initialize music player if it exists with dynamic audio source
+                if (window.musicPlayer) {
+                    console.log('Navigation calling musicPlayer.init() with:', window.backgroundMusicUrl);
+                    window.musicPlayer.init(window.backgroundMusicUrl);
+                }
+            } else {
+                console.log('No background music URL available yet');
             }
 
             // Sync with global music state (including restored state)
