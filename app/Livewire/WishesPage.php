@@ -61,6 +61,8 @@ class WishesPage extends Component
             ->orderBy('created_at', 'desc')
             ->paginate(6);
 
-        return view('livewire.wishes-page', compact('approvedWishes'));
+        return view('livewire.wishes-page', [
+            'approvedWishes' => $approvedWishes
+        ]);
     }
 }
