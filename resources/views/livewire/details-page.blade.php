@@ -10,12 +10,12 @@
             <div class="grid md:grid-cols-3 gap-8 mb-16">
                 <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow">
                     <div class="w-16 h-16 flex items-center justify-center bg-primary/20 rounded-full mx-auto mb-6">
-                        <i class="ri-church-line text-primary text-2xl"></i>
+                        <i class="ri-building-2-line text-primary text-2xl"></i>
                     </div>
                     <h3 class="font-playfair text-2xl font-medium text-primary mb-4">Ceremony</h3>
-                    <p class="text-gray-700 mb-2">St. Mary's Cathedral</p>
-                    <p class="text-gray-600 mb-2">123 Wedding Lane, Love City</p>
-                    <p class="text-primary font-medium">4:00 PM</p>
+                    <p class="text-gray-700 mb-2">{{ $ceremonyName }}</p>
+                    <p class="text-gray-600 mb-2">{{ $ceremonyAddress }}</p>
+                    <p class="text-primary font-medium">{{ $ceremonyTime }}</p>
                 </div>
 
                 <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow">
@@ -23,9 +23,9 @@
                         <i class="ri-goblet-line text-primary text-2xl"></i>
                     </div>
                     <h3 class="font-playfair text-2xl font-medium text-primary mb-4">Reception</h3>
-                    <p class="text-gray-700 mb-2">Grand Ballroom</p>
-                    <p class="text-gray-600 mb-2">456 Celebration Ave, Love City</p>
-                    <p class="text-primary font-medium">6:00 PM - 11:00 PM</p>
+                    <p class="text-gray-700 mb-2">{{ $receptionName }}</p>
+                    <p class="text-gray-600 mb-2">{{ $receptionAddress }}</p>
+                    <p class="text-primary font-medium">{{ $receptionTimeFormatted }}</p>
                 </div>
 
                 <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow">
@@ -33,9 +33,9 @@
                         <i class="ri-shirt-line text-primary text-2xl"></i>
                     </div>
                     <h3 class="font-playfair text-2xl font-medium text-primary mb-4">Dress Code</h3>
-                    <p class="text-gray-700 mb-2">Formal Attire</p>
-                    <p class="text-gray-600 mb-2">Cocktail dresses & suits</p>
-                    <p class="text-primary font-medium">Blush & Gold Welcome</p>
+                    <p class="text-gray-700 mb-2">{{ $dressCodeTitle }}</p>
+                    <p class="text-gray-600 mb-2">{{ $dressCodeDescription }}</p>
+                    <p class="text-primary font-medium">{{ $dressCodeColors }}</p>
                 </div>
             </div>
 
@@ -49,5 +49,5 @@
         </div>
     </section>
 
-    <livewire:footer />
+@include('partials.footer')
 </div>
