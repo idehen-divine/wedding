@@ -42,8 +42,25 @@
             <!-- Map -->
             <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 shadow-lg mb-8">
                 <h3 class="font-playfair text-2xl font-medium text-primary mb-6 text-center">Venue Location</h3>
-                <div class="w-full h-96 rounded-xl overflow-hidden"
-                    style="background-image: url('{{ asset('assets/images/map-placeholder.png') }}'); background-size: cover; background-position: center;">
+                <div class="w-full h-96 rounded-xl overflow-hidden border border-gray-200">
+                    <iframe 
+                        src="{{ $mapUrl }}"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="rounded-xl">
+                    </iframe>
+                </div>
+                <div class="mt-4 text-center">
+                    <a href="https://maps.google.com/maps?q={{ urlencode($ceremonyAddress) }}" 
+                       target="_blank" 
+                       class="inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-colors">
+                        <i class="ri-external-link-line"></i>
+                        <span>Open in Google Maps</span>
+                    </a>
                 </div>
             </div>
         </div>
