@@ -7,15 +7,16 @@
     <div class="max-w-6xl mx-auto relative z-10">
         <div class="grid md:grid-cols-4 gap-8 mb-4">
             <div class="text-center md:text-left">
-                <a href="{{ route('home') }}" class="font-playfair text-2xl font-medium text-primary mb-4">Precious & Franklin</a>
-                <p class="text-gray-600">Celebrating love, family, and the beginning of our forever journey
-                    together.</p>
+                <a href="{{ route('home') }}" class="font-playfair text-2xl font-medium text-primary mb-4">
+                    {{ $footerData['bride_name'] }} & {{ $footerData['groom_name'] }}
+                </a>
+                <p class="text-gray-600">{{ $footerData['footer_tagline'] }}</p>
             </div>
 
             <div class="text-center md:text-left">
                 <h4 class="font-medium text-gray-800 mb-4">Contact</h4>
-                <p class="text-gray-600 mb-2">wedding@preciousfranklin.com</p>
-                <p class="text-gray-600">+1 (555) 123-4567</p>
+                <p class="text-gray-600 mb-2">{{ $footerData['contact_email'] }}</p>
+                <p class="text-gray-600">{{ $footerData['contact_phone'] }}</p>
             </div>
 
             <div class="text-center md:text-left">
@@ -33,24 +34,32 @@
             <div class="text-center md:text-left">
                 <h4 class="font-medium text-gray-800 mb-4">Follow Us</h4>
                 <div class="flex justify-center md:justify-start space-x-4">
-                    <a href="#"
-                        class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
-                        <i class="ri-instagram-line"></i>
-                    </a>
-                    <a href="#"
-                        class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
-                        <i class="ri-facebook-line"></i>
-                    </a>
-                    <a href="#"
-                        class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
-                        <i class="ri-twitter-line"></i>
-                    </a>
+                    @if($footerData['instagram_url'] && $footerData['instagram_url'] !== '#')
+                        <a href="{{ $footerData['instagram_url'] }}"
+                            class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                    @endif
+                    
+                    @if($footerData['facebook_url'] && $footerData['facebook_url'] !== '#')
+                        <a href="{{ $footerData['facebook_url'] }}"
+                            class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
+                            <i class="ri-facebook-line"></i>
+                        </a>
+                    @endif
+                    
+                    @if($footerData['twitter_url'] && $footerData['twitter_url'] !== '#')
+                        <a href="{{ $footerData['twitter_url'] }}"
+                            class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
+                            <i class="ri-twitter-line"></i>
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>
 
         <div class="border-t border-primary/20 py-4 text-center">
-            <p class="text-gray-600">&copy; 2025 Precious & Franklin Wedding. Made with love for our special day.
+            <p class="text-gray-600">&copy; 2025 {{ $footerData['bride_name'] }} & {{ $footerData['groom_name'] }} Wedding. Made with love for our special day.
             </p>
         </div>
     </div>
