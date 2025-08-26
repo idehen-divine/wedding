@@ -101,7 +101,4 @@ use Illuminate\Support\Facades\Storage;
             </div>
         </div>
     </section>
-
-
-@include('partials.footer')
 </div>
