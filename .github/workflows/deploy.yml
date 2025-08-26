@@ -1,67 +1,61 @@
-name: Deploy Laravel App
+name: Deploy Wedding Website
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🚀 Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: 🔑 Setup SSH
-        uses: webfactory/ssh-agent@v0.8.0
+      - name: Deploy Wedding Website
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: 📤 Deploy to VPS
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            set -e
-
-            echo "📂 Navigating to project directory"
-            cd /home/lonely/wedding/wedding
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: 22
+          sync: true
+          source: "./"
+          target: "wedding/wedding"
+          exclude: ".git,.github"
+          script: |
+            cd wedding/wedding
 
             echo "⚙️ Setting up environment file"
-            if [ -f "/home/lonely/wedding/wedding.env" ]; then
-              cp /home/lonely/wedding/wedding.env .env
-            else
-              cp .env.example .env
-              sed -i "s|^APP_NAME=.*|APP_NAME=\"Wedding\"|" .env
-              sed -i "s|^APP_ENV=.*|APP_ENV=production|" .env
-              sed -i "s|^APP_URL=.*|APP_URL=http://www.preshlin25.com|" .env
-              sed -i "s|^DB_CONNECTION=.*|DB_CONNECTION=sqlite|" .env
-              cp .env /home/lonely/wedding/wedding.env
-            fi
+            php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+            echo "🔧 Updating environment variables"
+            sed -i "s|^APP_NAME=.*|APP_NAME=\"Wedding\"|" .env
+            sed -i "s|^APP_ENV=.*|APP_ENV=production|" .env
+            sed -i "s|^APP_URL=.*|APP_URL=http://www.preshlin25.com|" .env
+            sed -i "s|^DB_CONNECTION=.*|DB_CONNECTION=sqlite|" .env
 
             echo "🗄️ Setting up SQLite database"
-            if [ -f "/home/lonely/wedding/weddingdatabase.sqlite" ]; then
-              cp /home/lonely/wedding/weddingdatabase.sqlite database/database.sqlite
-            else
-              touch database/database.sqlite
-              cp database/database.sqlite /home/lonely/wedding/weddingdatabase.sqlite
-            fi
+            touch database/database.sqlite
 
             echo "📦 Installing PHP dependencies"
-            composer install --optimize-autoloader --no-dev --no-interaction
+            composer install --optimize-autoloader --no-dev
+
+            echo "🗃️ Setting up database"
+            php artisan wedding:setup
 
             echo "🔑 Generating app key"
             php artisan key:generate --force
 
-            echo "🗃️ Running database migrations"
-            php artisan migrate --force
-
-            echo "🧹 Optimizing application"
+            echo "🧹 Clearing caches"
+            php artisan optimize:clear
             php artisan optimize
 
             echo "🔒 Setting permissions"
-            chown -R www-data:www-data /home/lonely/wedding/wedding
-            chmod -R 755 /home/lonely/wedding/wedding
-            chmod -R 775 /home/lonely/wedding/wedding/storage /home/lonely/wedding/wedding/bootstrap/cache
-            chmod 644 /home/lonely/wedding/wedding/database/database.sqlite
+            chmod -R 755 storage bootstrap/cache
+            chmod -R 755 storage/app/public
+            chmod 644 database/database.sqlite
 
-            echo "✅ Deployment finished"
-          EOF
+            echo "🎉 Wedding website deployment successful!"
