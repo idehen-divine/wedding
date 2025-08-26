@@ -72,24 +72,32 @@ use Illuminate\Support\Facades\Storage;
 
             <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg mb-8">
                 <div class="text-4xl mb-4">📸</div>
-                <h3 class="font-playfair text-2xl font-medium text-primary mb-4">#PreciousAndFranklinForever</h3>
+                <h3 class="font-playfair text-2xl font-medium text-primary mb-4">{{ $weddingHashtag }}</h3>
                 <p class="text-gray-600">Tag us in your photos and stories so we can see our special day through your
                     eyes!</p>
             </div>
 
             <div class="flex justify-center space-x-6">
-                <a href="#"
-                    class="w-12 h-12 flex items-center justify-center bg-pink-500 hover:bg-pink-600 text-white rounded-full transition-colors">
-                    <i class="ri-instagram-line text-xl"></i>
-                </a>
-                <a href="#"
-                    class="w-12 h-12 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors">
-                    <i class="ri-facebook-line text-xl"></i>
-                </a>
-                <a href="#"
-                    class="w-12 h-12 flex items-center justify-center bg-blue-400 hover:bg-blue-500 text-white rounded-full transition-colors">
-                    <i class="ri-twitter-line text-xl"></i>
-                </a>
+                @if($instagramUrl && $instagramUrl !== '#')
+                    <a href="{{ $instagramUrl }}"
+                        class="w-12 h-12 flex items-center justify-center bg-pink-500 hover:bg-pink-600 text-white rounded-full transition-colors">
+                        <i class="ri-instagram-line text-xl"></i>
+                    </a>
+                @endif
+                
+                @if($facebookUrl && $facebookUrl !== '#')
+                    <a href="{{ $facebookUrl }}"
+                        class="w-12 h-12 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors">
+                        <i class="ri-facebook-line text-xl"></i>
+                    </a>
+                @endif
+                
+                @if($twitterUrl && $twitterUrl !== '#')
+                    <a href="{{ $twitterUrl }}"
+                        class="w-12 h-12 flex items-center justify-center bg-blue-400 hover:bg-blue-500 text-white rounded-full transition-colors">
+                        <i class="ri-twitter-line text-xl"></i>
+                    </a>
+                @endif
             </div>
         </div>
     </section>
