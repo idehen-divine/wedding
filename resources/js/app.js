@@ -4,41 +4,8 @@ import './bootstrap';
 // Only essential JS that can't be handled by Livewire
 
 // ========================================
-// COUNTDOWN TIMER - Client-side for real-time updates
+// COUNTDOWN TIMER - Removed duplicate, now handled in home-page.blade.php
 // ========================================
-function initializeCountdown() {
-    const weddingDate = new Date("2025-08-30T14:00:00");
-
-    function updateCountdown() {
-        const now = new Date();
-        const timeDiff = weddingDate - now;
-
-        if (timeDiff > 0) {
-            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-
-            const daysEl = document.getElementById("days");
-            const hoursEl = document.getElementById("hours");
-            const minutesEl = document.getElementById("minutes");
-            const secondsEl = document.getElementById("seconds");
-
-            if (daysEl) daysEl.textContent = days.toString().padStart(2, "0");
-            if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, "0");
-            if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, "0");
-            if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, "0");
-        }
-    }
-
-    updateCountdown();
-    
-    // Clear any existing intervals to prevent duplicates
-    if (window.countdownInterval) {
-        clearInterval(window.countdownInterval);
-    }
-    window.countdownInterval = setInterval(updateCountdown, 1000);
-}
 
 // ========================================
 // GLOBAL MUSIC PLAYER - Persistent across navigation and page reloads
@@ -304,9 +271,6 @@ window.musicPlayer = {
 // ========================================
 function initializeApp() {
     console.log('Initializing app...');
-    
-    // Initialize countdown timer
-    initializeCountdown();
     
     // Initialize music player
     if (window.musicPlayer) {
