@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\SettingGroup;
+use App\Enums\SettingType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('key')->unique();
             $table->text('value')->nullable();
-            $table->enum('type', ['text', 'textarea', 'date', 'time', 'url', 'boolean'])->default('text');
-            $table->enum('group', ['general', 'ceremony', 'reception', 'social', 'contact'])->default('general');
+            $table->enum('type', array_column(SettingType::cases(), 'value'))->default(SettingType::TEXT->value);
+            $table->enum('group', array_column(SettingGroup::cases(), 'value'))->default(SettingGroup::GENERAL->value);
             $table->string('label');
             $table->text('description')->nullable();
             $table->integer('sort_order')->default(0);
