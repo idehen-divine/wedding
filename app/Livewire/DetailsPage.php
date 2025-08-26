@@ -13,6 +13,7 @@ class DetailsPage extends Component
     public string $ceremonyName;
     public string $ceremonyAddress;
     public string $ceremonyTime;
+    public string $ceremonyTimeFormatted;
     public string $receptionName;
     public string $receptionAddress;
     public string $receptionStartTime;
@@ -37,7 +38,7 @@ class DetailsPage extends Component
         $this->dressCodeColors = WeddingSetting::get('dress_code_colors', 'Blush & Gold Welcome');
 
         // Format times for display with robust parsing
-        $this->ceremonyTime = $this->formatTime($this->ceremonyTime, '4:00 PM');
+        $this->ceremonyTimeFormatted = $this->formatTime($this->ceremonyTime, '4:00 PM');
         $startTime = $this->formatTime($this->receptionStartTime, '6:00 PM');
         $endTime = $this->formatTime($this->receptionEndTime, '11:00 PM');
         $this->receptionTimeFormatted = $startTime . ' - ' . $endTime;

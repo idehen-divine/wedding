@@ -15,7 +15,7 @@
                     <h3 class="font-playfair text-2xl font-medium text-primary mb-4">Ceremony</h3>
                     <p class="text-gray-700 mb-2">{{ $ceremonyName }}</p>
                     <p class="text-gray-600 mb-2">{{ $ceremonyAddress }}</p>
-                    <p class="text-primary font-medium">{{ $ceremonyTime }}</p>
+                    <p class="text-primary font-medium">{{ $ceremonyTimeFormatted }}</p>
                 </div>
 
                 <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow">
