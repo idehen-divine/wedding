@@ -35,11 +35,15 @@
       "mcp__laravel-boost__get-config",
       "Bash(php:*)",
       "Bash(mv:*)",
-      "mcp__laravel-boost__read-log-entries"
+      "mcp__laravel-boost__read-log-entries",
+      "WebFetch(domain:remixicon.com)"
     ],
     "deny": [],
     "ask": [],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "acceptEdits",
+    "additionalDirectories": [
+      "D:\\"
+    ]
   },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
