@@ -1,0 +1,85 @@
+name: Deploy Wedding Website
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
+      - name: 📂 Sync Files via rsync
+        run: |
+          sshpass -p "${{ secrets.VPS_PASSWORD }}" rsync -avz --delete \
+          --exclude=".git" \
+          --exclude=".github" \
+          --exclude=".env" \
+          --exclude="vendor" \
+          --exclude="node_modules" \
+          --exclude="storage/logs" \
+          --exclude="database/database.sqlite" \
+          -e "ssh -p 22 -o StrictHostKeyChecking=no" ./ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:wedding/wedding
+
+      - name: Deploy Wedding Website
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+            host: ${{ secrets.VPS_HOST }}
+            username: ${{ secrets.VPS_USER }}
+            password: ${{ secrets.VPS_PASSWORD }}
+            port: 22
+            script: |
+                # Change to Wedding Website Directory
+                echo "📍 Entering Wedding Website folder"
+                cd ./wedding/wedding/
+
+                # Check Environment File
+                echo "⚙️ Setting up environment file"
+                php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+                # Update Environment variables
+                echo "🔧 Updating environment variables"
+                sed -i "s|^APP_NAME=.*|APP_NAME=\"Wedding\"|" .env
+                sed -i "s|^APP_ENV=.*|APP_ENV=production|" .env
+                sed -i "s|^APP_URL=.*|APP_URL=http://www.preshlin25.com|" .env
+                sed -i "s|^DB_CONNECTION=.*|DB_CONNECTION=sqlite|" .env
+
+                # Create SQLite database if it doesn't exist
+                echo "🗄️ Setting up SQLite database"
+                touch database/database.sqlite
+
+                # Install PHP dependencies
+                echo "📦 Installing PHP dependencies"
+                composer install --optimize-autoloader --no-dev
+
+                # Clear and optimize caches
+                echo "🧹 Clearing caches"
+                php artisan optimize:clear
+
+                # Generate App Key if needed
+                echo "🔑 Generating app key"
+                php artisan key:generate --force
+
+                # Optimize for production
+                echo "⚡ Optimizing for production"
+                php artisan optimize
+
+                # Set proper permissions
+                echo "🔒 Setting permissions"
+                chmod -R 755 storage bootstrap/cache
+                chmod -R 755 storage/app/public
+                chmod 644 database/database.sqlite
+
+                echo "🎉 Wedding website deployment successful!"
