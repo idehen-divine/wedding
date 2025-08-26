@@ -18,9 +18,18 @@ window.musicPlayer = {
     autoPlayTriggered: false,
     storageKey: 'wedding-music-state',
     
-    init() {
+    init(audioSrc = null) {
         if (!this.audio) {
-            this.audio = new Audio("/assets/audio/harmony.mp3");
+            // Always use the dynamic audio source from Laravel/database
+            const musicSrc = audioSrc || window.backgroundMusicUrl;
+            
+            if (!musicSrc) {
+                console.log('No background music configured, skipping music player initialization');
+                return;
+            }
+            
+            console.log('Initializing music player with:', musicSrc);
+            this.audio = new Audio(musicSrc);
             this.audio.loop = true;
             this.audio.preload = "auto";
             
@@ -155,7 +164,10 @@ window.musicPlayer = {
     },
     
     play() {
-        if (!this.audio) this.init();
+        if (!this.audio) {
+            console.log('⚠️ Audio not initialized, attempting to initialize with window.backgroundMusicUrl');
+            this.init(window.backgroundMusicUrl);
+        }
         
         if (!this.hasUserInteracted) {
             this.shouldAutoPlay = true;
@@ -269,13 +281,21 @@ window.musicPlayer = {
 // ========================================
 // INITIALIZATION - Handle both initial load and SPA navigation
 // ========================================
+let appInitialized = false;
+
 function initializeApp() {
-    console.log('Initializing app...');
+    // Prevent multiple initializations
+    if (appInitialized) {
+        console.log('App already initialized, skipping...');
+        return;
+    }
     
-    // Initialize music player
+    console.log('Initializing app...');
+    appInitialized = true;
+    
+    // Music player initialization is handled by navigation component
+    // Just enable autoplay interaction if music player exists
     if (window.musicPlayer) {
-        window.musicPlayer.init();
-        // Enable autoplay on first user interaction
         window.musicPlayer.enableAutoPlayOnInteraction();
     }
 }
