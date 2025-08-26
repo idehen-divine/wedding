@@ -14,11 +14,11 @@
 
     <div class="relative z-10 text-center max-w-4xl mx-auto px-6">
         <h1 class="font-playfair text-7xl 2xl:text-8xl font-light text-primary mb-4 italic">
-            Precious<br>
+            {{ $brideName }}<br>
             <span class="text-5xl lg:text-6xl xl:text-7xl">&</span><br>
-            Franklin
+            {{ $groomName }}
         </h1>
-        <p class="text-primary font-inter text-xl md:text-2xl tracking-wider uppercase mb-8">August 30, 2025</p>
+        <p class="text-primary font-inter text-xl md:text-2xl tracking-wider uppercase mb-8">{{ $formattedDate }}</p>
 
         <!-- Countdown Timer -->
         <div class="flex justify-center space-x-4 md:space-x-6 mb-2">
@@ -57,3 +57,61 @@
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Countdown Timer
+    const weddingDateTime = '{{ $weddingDateTime }}';
+    
+    // Validate the datetime string before creating Date object
+    if (!weddingDateTime || weddingDateTime === '') {
+        console.error('Wedding datetime not available');
+        return;
+    }
+    
+    const weddingDate = new Date(weddingDateTime).getTime();
+    
+    // Check if the date is valid
+    if (isNaN(weddingDate)) {
+        console.error('Invalid wedding date:', weddingDateTime);
+        return;
+    }
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+
+        // Check if elements exist
+        if (!daysEl || !hoursEl || !minutesEl || !secondsEl) {
+            return;
+        }
+
+        if (distance < 0) {
+            daysEl.innerHTML = '00';
+            hoursEl.innerHTML = '00';
+            minutesEl.innerHTML = '00';
+            secondsEl.innerHTML = '00';
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        daysEl.innerHTML = days.toString().padStart(2, '0');
+        hoursEl.innerHTML = hours.toString().padStart(2, '0');
+        minutesEl.innerHTML = minutes.toString().padStart(2, '0');
+        secondsEl.innerHTML = seconds.toString().padStart(2, '0');
+    }
+
+    // Update countdown immediately and then every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+});
+</script>
