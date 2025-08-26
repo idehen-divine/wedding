@@ -7,8 +7,14 @@ use App\Enums\SettingType;
 use App\Models\WeddingSetting;
 use Illuminate\Database\Seeder;
 
+/**
+ * Seeder for wedding configuration settings
+ */
 class WeddingSettingSeeder extends Seeder
 {
+    /**
+     * Seed wedding settings with default configuration values
+     */
     public function run(): void
     {
         $settings = [

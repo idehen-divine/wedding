@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Filament configuration for wedding admin panel
+ */
 return [
 
     /*

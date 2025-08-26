@@ -11,17 +11,29 @@ use Livewire\Component;
 class DetailsPage extends Component
 {
     public string $ceremonyName;
+
     public string $ceremonyAddress;
+
     public string $ceremonyTime;
+
     public string $ceremonyTimeFormatted;
+
     public string $receptionName;
+
     public string $receptionAddress;
+
     public string $receptionStartTime;
+
     public string $receptionEndTime;
+
     public string $dressCodeTitle;
+
     public string $dressCodeDescription;
+
     public string $dressCodeColors;
+
     public string $receptionTimeFormatted;
+
     public string $mapUrl;
 
     public function mount(): void
@@ -37,22 +49,19 @@ class DetailsPage extends Component
         $this->dressCodeDescription = WeddingSetting::get('dress_code_description', 'Cocktail dresses & suits');
         $this->dressCodeColors = WeddingSetting::get('dress_code_colors', 'Blush & Gold Welcome');
 
-        // Format times for display with robust parsing
         $this->ceremonyTimeFormatted = $this->formatTime($this->ceremonyTime, '4:00 PM');
         $startTime = $this->formatTime($this->receptionStartTime, '6:00 PM');
         $endTime = $this->formatTime($this->receptionEndTime, '11:00 PM');
-        $this->receptionTimeFormatted = $startTime . ' - ' . $endTime;
+        $this->receptionTimeFormatted = $startTime.' - '.$endTime;
 
-        // Create Google Maps embed URL based on ceremony address
         $this->mapUrl = $this->generateMapUrl($this->ceremonyAddress);
     }
 
     private function formatTime(string $time, string $fallback): string
     {
         try {
-            // Try multiple time formats to handle different inputs
             $formats = ['H:i:s', 'H:i', 'G:i:s', 'G:i'];
-            
+
             foreach ($formats as $format) {
                 try {
                     return Carbon::createFromFormat($format, $time)->format('g:i A');
@@ -60,8 +69,7 @@ class DetailsPage extends Component
                     continue;
                 }
             }
-            
-            // If all formats fail, return fallback
+
             return $fallback;
         } catch (\Exception $e) {
             return $fallback;
@@ -70,8 +78,8 @@ class DetailsPage extends Component
 
     private function generateMapUrl(string $address): string
     {
-        // Use Google Maps search URL for iframe - no API key needed
         $encodedAddress = urlencode($address);
+
         return "https://maps.google.com/maps?q={$encodedAddress}&output=embed";
     }
 

@@ -1,15 +1,4 @@
 import './bootstrap';
-
-// Wedding Website JavaScript - Minimal for Livewire
-// Only essential JS that can't be handled by Livewire
-
-// ========================================
-// COUNTDOWN TIMER - Removed duplicate, now handled in home-page.blade.php
-// ========================================
-
-// ========================================
-// GLOBAL MUSIC PLAYER - Persistent across navigation and page reloads
-// ========================================
 window.musicPlayer = {
     audio: null,
     isPlaying: false,
@@ -20,7 +9,6 @@ window.musicPlayer = {
     
     init(audioSrc = null) {
         if (!this.audio) {
-            // Always use the dynamic audio source from Laravel/database
             const musicSrc = audioSrc || window.backgroundMusicUrl;
             
             if (!musicSrc) {
@@ -33,17 +21,13 @@ window.musicPlayer = {
             this.audio.loop = true;
             this.audio.preload = "auto";
             
-            // Save current time periodically when playing
             this.audio.addEventListener('timeupdate', () => {
                 if (this.isPlaying) {
                     this.saveState();
                 }
             });
             
-            // Restore music state from localStorage
             this.restoreState();
-            
-            // Listen for user interaction to enable auto-play
             this.setupUserInteractionListener();
         }
     },
@@ -69,7 +53,6 @@ window.musicPlayer = {
             if (saved) {
                 const state = JSON.parse(saved);
                 
-                // Check if state is expired (24 hours = 86400000 ms)
                 const now = Date.now();
                 const stateAge = now - (state.timestamp || 0);
                 const dayInMs = 24 * 60 * 60 * 1000;
@@ -82,17 +65,14 @@ window.musicPlayer = {
                 
                 this.hasUserInteracted = state.hasUserInteracted || false;
                 
-                // If user explicitly paused the music, don't auto-play
                 if (state.userPaused) {
                     console.log('🚫 User previously paused music, not auto-playing');
                     this.shouldAutoPlay = false;
                     return;
                 }
                 
-                // If music was playing and user had interacted before, prepare to resume
                 if (state.isPlaying && this.hasUserInteracted) {
                     this.shouldAutoPlay = true;
-                    // Restore audio position
                     if (this.audio && state.currentTime) {
                         this.audio.currentTime = state.currentTime;
                     }
@@ -104,7 +84,6 @@ window.musicPlayer = {
     },
     
     setupUserInteractionListener() {
-        // Enhanced events for mobile compatibility
         const trustedEvents = ['click', 'touchstart', 'touchend', 'mousedown', 'pointerdown'];
         
         const enableAutoPlay = (event) => {
@@ -253,9 +232,7 @@ window.musicPlayer = {
         return this.isPlaying;
     },
     
-    // Method to start music automatically on first user interaction
     enableAutoPlayOnInteraction() {
-        // Only enable auto-play if user hasn't explicitly paused it
         const saved = localStorage.getItem(this.storageKey);
         if (saved) {
             try {
@@ -270,7 +247,6 @@ window.musicPlayer = {
         }
         
         this.shouldAutoPlay = true;
-        // Reset autoPlayTriggered to allow music to start if user interacts again
         this.autoPlayTriggered = false;
         if (this.hasUserInteracted) {
             this.play();
@@ -278,13 +254,9 @@ window.musicPlayer = {
     }
 };
 
-// ========================================
-// INITIALIZATION - Handle both initial load and SPA navigation
-// ========================================
 let appInitialized = false;
 
 function initializeApp() {
-    // Prevent multiple initializations
     if (appInitialized) {
         console.log('App already initialized, skipping...');
         return;
@@ -293,20 +265,15 @@ function initializeApp() {
     console.log('Initializing app...');
     appInitialized = true;
     
-    // Music player initialization is handled by navigation component
-    // Just enable autoplay interaction if music player exists
     if (window.musicPlayer) {
         window.musicPlayer.enableAutoPlayOnInteraction();
     }
 }
 
-// Handle initial page load
 document.addEventListener('DOMContentLoaded', initializeApp);
 
-// Handle Livewire SPA navigation
 document.addEventListener('livewire:navigated', initializeApp);
 
-// Also initialize immediately if DOM is already loaded
 if (document.readyState !== 'loading') {
     initializeApp();
 }

@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
+/**
+ * Wedding website setup command
+ *
+ * Handles complete setup including migrations, storage, and default data
+ */
 class WeddingSetup extends Command
 {
     /**
@@ -29,7 +34,9 @@ class WeddingSetup extends Command
     protected $description = 'Set up wedding website with default data and configurations';
 
     /**
-     * Execute the console command.
+     * Execute the wedding setup command
+     *
+     * @return int Command exit status
      */
     public function handle(): int
     {
@@ -57,7 +64,7 @@ class WeddingSetup extends Command
 
         // Step 3: Create storage link
         $this->info('🔗 Creating storage symbolic link...');
-        if (! File::exists(public_path('storage'))) {
+        if (!File::exists(public_path('storage'))) {
             $this->call('storage:link');
         } else {
             $this->info('Storage link already exists');
@@ -116,6 +123,9 @@ class WeddingSetup extends Command
         return SymfonyCommand::SUCCESS;
     }
 
+    /**
+     * Clean up storage files from specified directories
+     */
     private function cleanupStorageFiles(): void
     {
         $directories = [
@@ -129,12 +139,10 @@ class WeddingSetup extends Command
         foreach ($directories as $dir) {
             $storageDir = storage_path("app/public/{$dir}");
             if (File::exists($storageDir)) {
-                // Get all files in directory
                 $files = File::allFiles($storageDir);
                 $fileCount = count($files);
 
                 if ($fileCount > 0) {
-                    // Delete all files in the directory
                     File::cleanDirectory($storageDir);
                     $this->info("Cleaned: {$dir}/ ({$fileCount} files removed)");
                 } else {
@@ -144,6 +152,9 @@ class WeddingSetup extends Command
         }
     }
 
+    /**
+     * Create necessary storage directories
+     */
     private function setupStorageDirectories(): void
     {
         $directories = [
@@ -165,6 +176,9 @@ class WeddingSetup extends Command
         }
     }
 
+    /**
+     * Copy story images from assets to storage
+     */
     private function copyStoryImages(): void
     {
         $assetsDir = public_path('assets/images');
@@ -186,12 +200,14 @@ class WeddingSetup extends Command
         }
     }
 
+    /**
+     * Copy audio files from assets to storage
+     */
     private function copyAudioFiles(): void
     {
         $assetsDir = public_path('assets/audio');
         $storageDir = storage_path('app/public/audio');
 
-        // Get all audio files from assets directory
         if (File::exists($assetsDir)) {
             $audioFiles = File::files($assetsDir);
 
@@ -214,9 +230,13 @@ class WeddingSetup extends Command
         }
     }
 
+    /**
+     * Create or update the admin user account
+     *
+     * @param  bool  $reset  Whether to reset existing admin user
+     */
     private function createAdminUser(bool $reset): void
     {
-        // Check if admin user already exists
         $adminExists = User::where('email', 'admin@wedding.com')->exists();
 
         if (! $reset && $adminExists) {
@@ -230,7 +250,6 @@ class WeddingSetup extends Command
             $this->info('Removed existing admin user');
         }
 
-        // Create admin user
         $user = User::create([
             'name' => 'Wedding Admin',
             'email' => 'admin@wedding.com',
@@ -244,9 +263,11 @@ class WeddingSetup extends Command
         $this->warn('  ⚠️  Change the password after first login!');
     }
 
+    /**
+     * Verify that all setup steps completed successfully
+     */
     private function verifySetup(): void
     {
-        // Check database
         $storyCount = StoryTimeline::count();
         $this->line("• Story timeline events: {$storyCount}");
 
@@ -261,19 +282,15 @@ class WeddingSetup extends Command
         $settingCount = WeddingSetting::count();
         $this->line("• Wedding settings: {$settingCount}");
 
-        // Check storage directories
         $storageExists = File::exists(storage_path('app/public/story-images'));
         $this->line('• Story images directory: '.($storageExists ? '✓' : '✗'));
 
-        // Check symlink
         $symlinkExists = File::exists(public_path('storage'));
         $this->line('• Storage symlink: '.($symlinkExists ? '✓' : '✗'));
 
-        // Check sample images
         $imageCount = count(File::glob(storage_path('app/public/story-images/*.jpg')));
         $this->line("• Story images copied: {$imageCount}");
 
-        // Check audio files
         $audioCount = count(File::glob(storage_path('app/public/audio/*.{mp3,wav,ogg}'), GLOB_BRACE));
         $this->line("• Audio files copied: {$audioCount}");
     }

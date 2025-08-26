@@ -2,55 +2,46 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\WeddingWish;
-use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
+use Livewire\Component;
 use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 #[Layout('components.layouts.wedding')]
 class WishesPage extends Component
 {
-    use WithPagination, WithoutUrlPagination;
+    use WithoutUrlPagination, WithPagination;
 
     public string $name = '';
+
     public string $wish = '';
 
     public function submitWish(): void
     {
         try {
-            // Basic safety checks to prevent database errors
             if (empty(trim($this->name)) || empty(trim($this->wish))) {
                 $this->dispatch('wish-error', 'Please fill in all required fields.');
+
                 return;
             }
 
-            // Validate the data
             $this->validate([
                 'name' => 'required|string|min:2|max:255',
                 'wish' => 'required|string|min:10|max:1000',
             ]);
 
-            // Save wish to database
             WeddingWish::create([
                 'name' => trim($this->name),
                 'wish' => trim($this->wish),
-                'approved' => true
+                'approved' => true,
             ]);
 
-            // Reset form data
             $this->reset(['name', 'wish']);
-
-            // Reset to page 1 to show the new wish
             $this->resetPage();
-
-            // Dispatch success event for SweetAlert2
             $this->dispatch('wish-submitted');
-
-            // Flash success message
             session()->flash('wish_success', 'Thank you for your beautiful wish! It has been added.');
         } catch (\Exception $e) {
-            // Only catch genuine errors (database issues, etc.)
             $this->dispatch('wish-error', 'Something went wrong. Please try again.');
         }
     }
@@ -62,7 +53,7 @@ class WishesPage extends Component
             ->paginate(6);
 
         return view('livewire.wishes-page', [
-            'approvedWishes' => $approvedWishes
+            'approvedWishes' => $approvedWishes,
         ]);
     }
 }

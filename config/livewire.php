@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Livewire configuration for the wedding website
+ *
+ * Customized for wedding-specific layout and SPA navigation
+ */
 return [
 
     /*

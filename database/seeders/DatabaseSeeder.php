@@ -3,18 +3,18 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+/**
+ * Main database seeder for wedding application
+ */
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Seed the application's database with wedding data
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         User::factory()->create(attributes: [
             'name' => 'Idehen Divine',
             'email' => 'idehendivine16@gmail.com',

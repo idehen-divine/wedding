@@ -60,20 +60,15 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Countdown Timer
     const weddingDateTime = '{{ $weddingDateTime }}';
-    
-    // Debug: Show what we're trying to parse
     console.log('Debug weddingDateTime received:', weddingDateTime);
-    
-    // Validate the datetime string before creating Date object
     if (!weddingDateTime || weddingDateTime === '') {
         console.error('Wedding datetime not available');
         return;
     }
-    
+
     const weddingDate = new Date(weddingDateTime).getTime();
-    
+
     // Check if the date is valid
     if (isNaN(weddingDate)) {
         console.error('Invalid wedding date:', weddingDateTime);
