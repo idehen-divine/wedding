@@ -21,6 +21,7 @@ class DetailsPage extends Component
     public string $dressCodeDescription;
     public string $dressCodeColors;
     public string $receptionTimeFormatted;
+    public string $mapUrl;
 
     public function mount(): void
     {
@@ -40,6 +41,9 @@ class DetailsPage extends Component
         $startTime = $this->formatTime($this->receptionStartTime, '6:00 PM');
         $endTime = $this->formatTime($this->receptionEndTime, '11:00 PM');
         $this->receptionTimeFormatted = $startTime . ' - ' . $endTime;
+
+        // Create Google Maps embed URL based on ceremony address
+        $this->mapUrl = $this->generateMapUrl($this->ceremonyAddress);
     }
 
     private function formatTime(string $time, string $fallback): string
@@ -61,6 +65,13 @@ class DetailsPage extends Component
         } catch (\Exception $e) {
             return $fallback;
         }
+    }
+
+    private function generateMapUrl(string $address): string
+    {
+        // Use Google Maps search URL for iframe - no API key needed
+        $encodedAddress = urlencode($address);
+        return "https://maps.google.com/maps?q={$encodedAddress}&output=embed";
     }
 
     public function render()
