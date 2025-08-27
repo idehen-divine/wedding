@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emma & James Wedding - August 30, 2024</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" />
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#D4A574",
+                        secondary: "#F5C2A1",
+                    },
+                    borderRadius: {
+                        none: "0px",
+                        sm: "4px",
+                        DEFAULT: "8px",
+                        md: "12px",
+                        lg: "16px",
+                        xl: "20px",
+                        "2xl": "24px",
+                        "3xl": "32px",
+                        full: "9999px",
+                        button: "8px",
+                    },
+                    fontFamily: {
+                        playfair: ["Playfair Display", "serif"],
+                        inter: ["Inter", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+
+<body class="font-inter text-gray-800 overflow-x-hidden"
+    style="background: linear-gradient(135deg, #FDF4F0 0%, #F9E8E1 50%, #F5DDD4 100%);">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-primary/20">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="font-playfair text-2xl font-semibold text-primary">
+                    E & J
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-primary transition-colors">Home</a>
+                    <a href="#details" class="text-gray-700 hover:text-primary transition-colors">Event Details</a>
+                    <a href="#rsvp" class="text-gray-700 hover:text-primary transition-colors">RSVP</a>
+                    <a href="#gallery" class="text-gray-700 hover:text-primary transition-colors">Gallery</a>
+                    <a href="#wishes" class="text-gray-700 hover:text-primary transition-colors">Wishes</a>
+                    <a href="#story" class="text-gray-700 hover:text-primary transition-colors">Our Story</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="musicToggle"
+                        class="w-10 h-10 flex items-center justify-center bg-primary/20 rounded-full hover:bg-primary/30 transition-colors">
+                        <i class="ri-music-line text-primary"></i>
+                    </button>
+                    <button id="mobileMenu" class="md:hidden w-10 h-10 flex items-center justify-center">
+                        <i class="ri-menu-line text-gray-700"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 px-6 bg-gradient-to-br from-white/40 to-primary/10">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">
+                    Photo Gallery
+                </h2>
+                <p class="text-gray-600 text-lg">
+                    Cherished moments from our special day
+                </p>
+            </div>
+
+            <div class="mb-12">
+                <div class="flex items-center justify-center gap-4 mb-8">
+                    <button
+                        class="bg-primary text-white px-6 py-2 !rounded-button font-medium transition-colors whitespace-nowrap active">
+                        All Photos
+                    </button>
+                    <button
+                        class="bg-white/80 text-gray-700 px-6 py-2 !rounded-button font-medium transition-colors whitespace-nowrap hover:bg-white">
+                        Ceremony
+                    </button>
+                    <button
+                        class="bg-white/80 text-gray-700 px-6 py-2 !rounded-button font-medium transition-colors whitespace-nowrap hover:bg-white">
+                        Reception
+                    </button>
+                    <button
+                        class="bg-white/80 text-gray-700 px-6 py-2 !rounded-button font-medium transition-colors whitespace-nowrap hover:bg-white">
+                        Family
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="group relative cursor-pointer" onclick="openLightbox(0)">
+                    <img src="https://readdy.ai/api/search-image?query=elegant%20wedding%20ceremony%20in%20church%20soft%20natural%20lighting%20bride%20and%20groom%20at%20altar%20romantic%20atmosphere%20stained%20glass%20windows%20in%20background%20wedding%20photography%20style&width=600&height=800&seq=wedding-1&orientation=portrait"
+                        alt="Wedding Ceremony" class="w-full h-80 object-cover rounded-2xl shadow-lg" />
+                    <div
+                        class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl flex items-center justify-center">
+                        <i class="ri-zoom-in-line text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="group relative cursor-pointer" onclick="openLightbox(1)">
+                    <img src="https://readdy.ai/api/search-image?query=bride%20and%20groom%20first%20dance%20at%20wedding%20reception%20elegant%20ballroom%20setting%20warm%20lighting%20romantic%20moment%20wedding%20photography%20candid%20emotional&width=800&height=600&seq=wedding-2&orientation=landscape"
+                        alt="First Dance" class="w-full h-80 object-cover rounded-2xl shadow-lg" />
+                    <div
+                        class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl flex items-center justify-center">
+                        <i class="ri-zoom-in-line text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="group relative cursor-pointer" onclick="openLightbox(2)">
+                    <img src="https://readdy.ai/api/search-image?query=wedding%20couple%20portrait%20in%20garden%20sunset%20golden%20hour%20lighting%20romantic%20pose%20among%20flowers%20and%20greenery%20elegant%20wedding%20photography%20style&width=600&height=800&seq=wedding-3&orientation=portrait"
+                        alt="Couple Portrait" class="w-full h-80 object-cover rounded-2xl shadow-lg" />
+                    <div
+                        class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl flex items-center justify-center">
+                        <i class="ri-zoom-in-line text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="group relative cursor-pointer" onclick="openLightbox(3)">
+                    <img src="https://readdy.ai/api/search-image?query=wedding%20cake%20cutting%20ceremony%20elegant%20white%20tiered%20cake%20with%20floral%20decorations%20bride%20and%20groom%20together%20romantic%20moment%20reception%20photography&width=800&height=600&seq=wedding-4&orientation=landscape"
+                        alt="Cake Cutting" class="w-full h-80 object-cover rounded-2xl shadow-lg" />
+                    <div
+                        class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl flex items-center justify-center">
+                        <i class="ri-zoom-in-line text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="group relative cursor-pointer" onclick="openLightbox(4)">
+                    <img src="https://readdy.ai/api/search-image?query=wedding%20reception%20table%20setting%20elegant%20floral%20centerpieces%20crystal%20glassware%20golden%20candleholders%20luxury%20wedding%20decor%20romantic%20lighting&width=800&height=600&seq=wedding-5&orientation=landscape"
+                        alt="Reception Details" class="w-full h-80 object-cover rounded-2xl shadow-lg" />
+                    <div
+                        class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl flex items-center justify-center">
+                        <i class="ri-zoom-in-line text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="group relative cursor-pointer" onclick="openLightbox(5)">
+                    <img src="https://readdy.ai/api/search-image?query=bridal%20party%20group%20photo%20elegant%20garden%20setting%20bridesmaids%20in%20blush%20dresses%20groomsmen%20in%20suits%20natural%20candid%20moment%20wedding%20photography&width=800&height=600&seq=wedding-6&orientation=landscape"
+                        alt="Bridal Party" class="w-full h-80 object-cover rounded-2xl shadow-lg" />
+                    <div
+                        class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl flex items-center justify-center">
+                        <i class="ri-zoom-in-line text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="group relative cursor-pointer" onclick="openLightbox(6)">
+                    <img src="https://readdy.ai/api/search-image?query=wedding%20ceremony%20exit%20bride%20and%20groom%20walking%20through%20flower%20petal%20toss%20guests%20celebrating%20joyful%20moment%20wedding%20photography%20style&width=600&height=800&seq=wedding-7&orientation=portrait"
+                        alt="Ceremony Exit" class="w-full h-80 object-cover rounded-2xl shadow-lg" />
+                    <div
+                        class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl flex items-center justify-center">
+                        <i class="ri-zoom-in-line text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="group relative cursor-pointer" onclick="openLightbox(7)">
+                    <img src="https://readdy.ai/api/search-image?query=wedding%20reception%20dancing%20guests%20elegant%20ballroom%20setting%20festive%20atmosphere%20chandelier%20lighting%20celebration%20moment%20wedding%20photography&width=800&height=600&seq=wedding-8&orientation=landscape"
+                        alt="Reception Dancing" class="w-full h-80 object-cover rounded-2xl shadow-lg" />
+                    <div
+                        class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl flex items-center justify-center">
+                        <i class="ri-zoom-in-line text-white text-3xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button
+                    class="bg-primary hover:bg-primary/90 text-white px-8 py-3 !rounded-button font-medium transition-colors whitespace-nowrap">
+                    <i class="ri-download-line mr-2"></i>Download All Photos
+                </button>
+            </div>
+        </div>
+
+        <!-- Lightbox -->
+        <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden">
+            <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/80 hover:text-white">
+                <i class="ri-close-line text-3xl"></i>
+            </button>
+            <button id="prevButton" onclick="navigateImage(-1)"
+                class="absolute left-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white">
+                <i class="ri-arrow-left-line text-3xl"></i>
+            </button>
+            <button id="nextButton" onclick="navigateImage(1)"
+                class="absolute right-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white">
+                <i class="ri-arrow-right-line text-3xl"></i>
+            </button>
+            <div class="flex items-center justify-center h-full">
+                <img id="lightboxImage" src="" alt="Lightbox image" class="max-h-[80vh] max-w-[80vw] object-contain" />
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-primary/20 py-16 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10"
+            style="background-image: url('https://readdy.ai/api/search-image?query=delicate%20watercolor%20floral%20pattern%20background%20blush%20peach%20and%20cream%20roses%20with%20eucalyptus%20leaves%20seamless%20pattern%20wedding%20decoration%20soft%20romantic%20botanical%20design&width=800&height=400&seq=footer-bg&orientation=landscape'); background-size: cover; background-position: center;">
+        </div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="text-center md:text-left">
+                    <h3 class="font-playfair text-2xl font-medium text-primary mb-4">
+                        Emma & James
+                    </h3>
+                    <p class="text-gray-600">
+                        Celebrating love, family, and the beginning of our forever journey
+                        together.
+                    </p>
+                </div>
+                <div class="text-center md:text-left">
+                    <h4 class="font-medium text-gray-800 mb-4">Contact</h4>
+                    <p class="text-gray-600 mb-2">wedding@emmajames.com</p>
+                    <p class="text-gray-600">+1 (555) 123-4567</p>
+                </div>
+                <div class="text-center md:text-left">
+                    <h4 class="font-medium text-gray-800 mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="#details" class="block text-gray-600 hover:text-primary transition-colors">Event
+                            Details</a>
+                        <a href="#rsvp" class="block text-gray-600 hover:text-primary transition-colors">RSVP</a>
+                        <a href="#gallery" class="block text-gray-600 hover:text-primary transition-colors">Gallery</a>
+                        <a href="#story" class="block text-gray-600 hover:text-primary transition-colors">Our Story</a>
+                    </div>
+                </div>
+                <div class="text-center md:text-left">
+                    <h4 class="font-medium text-gray-800 mb-4">Follow Us</h4>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#"
+                            class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="#"
+                            class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
+                            <i class="ri-facebook-line"></i>
+                        </a>
+                        <a href="#"
+                            class="w-8 h-8 flex items-center justify-center bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors">
+                            <i class="ri-twitter-line"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-primary/20 pt-8 text-center">
+                <p class="text-gray-600">
+                    &copy; 2024 Emma & James Wedding. Made with love for our special
+                    day.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script id="navigation-scroll">
+        document.addEventListener("DOMContentLoaded", function () {
+            function scrollToSection(sectionId) {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                }
+            }
+            window.scrollToSection = scrollToSection;
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute("href").substring(1);
+                    scrollToSection(targetId);
+                });
+            });
+        });
+    </script>
+    <script id="music-toggle">
+        document.addEventListener("DOMContentLoaded", function () {
+            const musicToggle = document.getElementById("musicToggle");
+            let isPlaying = false;
+            musicToggle.addEventListener("click", function () {
+                isPlaying = !isPlaying;
+                const icon = musicToggle.querySelector("i");
+                if (isPlaying) {
+                    icon.className = "ri-pause-line text-primary";
+                    musicToggle.classList.add("bg-primary/30");
+                } else {
+                    icon.className = "ri-music-line text-primary";
+                    musicToggle.classList.remove("bg-primary/30");
+                }
+            });
+        });
+    </script>
+    <script id="mobile-menu">
+        document.addEventListener("DOMContentLoaded", function () {
+            const mobileMenu = document.getElementById("mobileMenu");
+            mobileMenu.addEventListener("click", function () {
+                alert("Mobile menu functionality would be implemented here");
+            });
+        });
+    </script>
+    <script id="gallery-lightbox">
+        document.addEventListener("DOMContentLoaded", function () {
+            const lightbox = document.getElementById("lightbox");
+            const lightboxImage = document.getElementById("lightboxImage");
+            let currentImageIndex = 0;
+
+            const images = [
+                "https://readdy.ai/api/search-image?query=elegant%20wedding%20ceremony%20in%20church%20soft%20natural%20lighting%20bride%20and%20groom%20at%20altar%20romantic%20atmosphere%20stained%20glass%20windows%20in%20background%20wedding%20photography%20style&width=600&height=800&seq=wedding-1&orientation=portrait",
+                "https://readdy.ai/api/search-image?query=bride%20and%20groom%20first%20dance%20at%20wedding%20reception%20elegant%20ballroom%20setting%20warm%20lighting%20romantic%20moment%20wedding%20photography%20candid%20emotional&width=800&height=600&seq=wedding-2&orientation=landscape",
+                "https://readdy.ai/api/search-image?query=wedding%20couple%20portrait%20in%20garden%20sunset%20golden%20hour%20lighting%20romantic%20pose%20among%20flowers%20and%20greenery%20elegant%20wedding%20photography%20style&width=600&height=800&seq=wedding-3&orientation=portrait",
+                "https://readdy.ai/api/search-image?query=wedding%20cake%20cutting%20ceremony%20elegant%20white%20tiered%20cake%20with%20floral%20decorations%20bride%20and%20groom%20together%20romantic%20moment%20reception%20photography&width=800&height=600&seq=wedding-4&orientation=landscape",
+                "https://readdy.ai/api/search-image?query=wedding%20reception%20table%20setting%20elegant%20floral%20centerpieces%20crystal%20glassware%20golden%20candleholders%20luxury%20wedding%20decor%20romantic%20lighting&width=800&height=600&seq=wedding-5&orientation=landscape",
+                "https://readdy.ai/api/search-image?query=bridal%20party%20group%20photo%20elegant%20garden%20setting%20bridesmaids%20in%20blush%20dresses%20groomsmen%20in%20suits%20natural%20candid%20moment%20wedding%20photography&width=800&height=600&seq=wedding-6&orientation=landscape",
+                "https://readdy.ai/api/search-image?query=wedding%20ceremony%20exit%20bride%20and%20groom%20walking%20through%20flower%20petal%20toss%20guests%20celebrating%20joyful%20moment%20wedding%20photography%20style&width=600&height=800&seq=wedding-7&orientation=portrait",
+                "https://readdy.ai/api/search-image?query=wedding%20reception%20dancing%20guests%20elegant%20ballroom%20setting%20festive%20atmosphere%20chandelier%20lighting%20celebration%20moment%20wedding%20photography&width=800&height=600&seq=wedding-8&orientation=landscape",
+            ];
+
+            window.openLightbox = function (index) {
+                currentImageIndex = index;
+                lightboxImage.src = images[index];
+                lightbox.classList.remove("hidden");
+                document.body.style.overflow = "hidden";
+            };
+
+            window.closeLightbox = function () {
+                lightbox.classList.add("hidden");
+                document.body.style.overflow = "";
+            };
+
+            window.navigateImage = function (direction) {
+                currentImageIndex =
+                    (currentImageIndex + direction + images.length) % images.length;
+                lightboxImage.src = images[currentImageIndex];
+            };
+
+            document.addEventListener("keydown", function (e) {
+                if (lightbox.classList.contains("hidden")) return;
+
+                if (e.key === "Escape") closeLightbox();
+                if (e.key === "ArrowLeft") navigateImage(-1);
+                if (e.key === "ArrowRight") navigateImage(1);
+            });
+        });
+    </script>
+</body>
+
+</html>
