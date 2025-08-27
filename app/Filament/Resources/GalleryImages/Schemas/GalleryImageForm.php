@@ -19,6 +19,7 @@ class GalleryImageForm
                     ->image()
                     ->multiple()
                     ->required()
+                    ->disk('public')
                     ->directory('gallery-images')
                     ->visibility('public')
                     ->getUploadedFileNameForStorageUsing(

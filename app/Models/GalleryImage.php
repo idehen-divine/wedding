@@ -23,7 +23,7 @@ class GalleryImage extends Model
     protected function imageUrl(): Attribute
     {
         return Attribute::make(
-            get: fn() => Storage::url($this->image_path)
+            get: fn() => url('storage/' . ltrim($this->image_path, '/'))
         );
     }
 
@@ -51,19 +51,5 @@ class GalleryImage extends Model
         $count = self::count() + 1;
         $number = str_pad($count, 4, '0', STR_PAD_LEFT);
         return "precious-and-franklin-2025-{$number}.{$extension}";
-    }
-
-    public function getCategories()
-    {
-        $categories = $this->categories()->pluck('category');
-
-        $category = $categories->map(function ($value) {
-            $enum = GalleryCategory::from($value);
-
-            return [
-                'name' => $enum->value,
-                'color' => $enum->getColor()
-            ];
-        })->toArray();
     }
 }
