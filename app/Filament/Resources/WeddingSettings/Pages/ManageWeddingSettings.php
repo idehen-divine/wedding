@@ -11,10 +11,13 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\Page;
+use Filament\Schemas\Components\Fieldset;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -169,11 +172,11 @@ class ManageWeddingSettings extends Page implements HasForms
                     ->description('Background music settings')
                     ->collapsible()
                     ->schema([
-                        \Filament\Schemas\Components\Grid::make(2)
+                        Grid::make(2)
                             ->extraAttributes(['class' => 'gap-6 items-stretch'])
                             ->schema([
                                 // Select Column
-                                \Filament\Schemas\Components\Fieldset::make('Select from Library')
+                                Fieldset::make('Select from Library')
                                     ->extraAttributes(['class' => 'h-full w-full'])
                                     ->schema([
                                         Select::make('background_music')
@@ -213,7 +216,7 @@ class ManageWeddingSettings extends Page implements HasForms
                                     ]),
 
                                 // Preview Column
-                                \Filament\Schemas\Components\Fieldset::make('Preview')
+                                Fieldset::make('Preview')
                                     ->extraAttributes(['class' => 'h-full w-full'])
                                     ->schema([
                                         Placeholder::make('current_preview')
@@ -234,7 +237,7 @@ class ManageWeddingSettings extends Page implements HasForms
                                     ]),
                             ]),
 
-                        \Filament\Schemas\Components\Fieldset::make('Upload New File')
+                        Fieldset::make('Upload New File')
                             ->schema([
                                 FileUpload::make('pending_upload')
                                     ->label('Choose File to Upload')
@@ -286,65 +289,39 @@ class ManageWeddingSettings extends Page implements HasForms
                     ->description('Control gallery visibility and publishing')
                     ->collapsible()
                     ->schema([
-                        \Filament\Schemas\Components\Grid::make(2)
+                        Grid::make(2)
                             ->schema([
                                 // Status Column
-                                \Filament\Schemas\Components\Fieldset::make('Gallery Status')
+                                Fieldset::make('Gallery Status')
                                     ->schema([
-                                        \Filament\Forms\Components\Toggle::make('gallery_published')
+                                        Toggle::make('gallery_published')
                                             ->label('Gallery Published')
                                             ->helperText('Toggle to publish or unpublish the photo gallery for guests')
                                             ->onColor('success')
-                                            ->offColor('gray')
-                                            ->live()
-                                            ->afterStateUpdated(function ($state, callable $set) {
-                                                // Auto-save the setting when toggled
-                                                WeddingSetting::where('key', 'gallery_published')
-                                                    ->update(['value' => $state ? '1' : '0']);
-
-                                                Notification::make()
-                                                    ->title($state ? 'Gallery Published!' : 'Gallery Unpublished')
-                                                    ->body($state
-                                                        ? 'The photo gallery is now visible to guests.'
-                                                        : 'The photo gallery is now hidden from guests.')
-                                                    ->success()
-                                                    ->send();
-                                            }),
+                                            ->offColor('gray'),
                                     ]),
 
                                 // Actions Column
-                                \Filament\Schemas\Components\Fieldset::make('Gallery Actions')
+                                Fieldset::make('Gallery Actions')
                                     ->schema([
                                         Placeholder::make('gallery_actions')
                                             ->hiddenLabel()
-                                            ->content(function (callable $get) {
-                                                $isPublished = $get('gallery_published');
-                                                $publishText = $isPublished ? 'Published' : 'Coming Soon';
-                                                $statusColor = $isPublished ? 'text-green-600' : 'text-gray-500';
-
-                                                return new \Illuminate\Support\HtmlString('
-                                                    <div class="space-y-3">
-                                                        <div class="flex items-center gap-2">
-                                                            <div class="w-3 h-3 rounded-full '.($isPublished ? 'bg-green-500' : 'bg-gray-400').'"></div>
-                                                            <span class="font-medium '.$statusColor.'">'.$publishText.'</span>
-                                                        </div>
-                                                        <p class="text-sm text-gray-600">
-                                                            '.($isPublished
-                                                                ? 'Guests can now view the photo gallery page.'
-                                                                : 'Guests will see a "Coming Soon" message.').'
-                                                        </p>
-                                                        <div class="pt-2">
-                                                            <a href="/gallery" target="_blank"
-                                                               class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-blue-600 hover:text-blue-800 underline">
-                                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002 2v-2M17 6l5 5-5 5M8 14l9-9"/>
-                                                                </svg>
-                                                                View Gallery Page
-                                                            </a>
-                                                        </div>
+                                            ->content(new \Illuminate\Support\HtmlString('
+                                                <div class="space-y-3">
+                                                    <p class="text-sm text-gray-600">
+                                                        Use the toggle to control whether guests can view the photo gallery or see a "Coming Soon" message.
+                                                    </p>
+                                                    <div class="pt-2">
+                                                        <a href="/gallery" target="_blank"
+                                                           class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-blue-600 hover:text-blue-800 underline">
+                                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002 2v-2M17 6l5 5-5 5M8 14l9-9"/>
+                                                            </svg>
+                                                            Preview Gallery Page
+                                                        </a>
                                                     </div>
-                                                ');
-                                            }),
+                                                </div>
+                                            ')),
                                     ]),
                             ]),
                     ]),
@@ -364,18 +341,36 @@ class ManageWeddingSettings extends Page implements HasForms
             // Validate the form first
             $data = $this->form->getState();
 
+            // Check if gallery status changed
+            $oldGalleryStatus = WeddingSetting::where('key', 'gallery_published')->value('value') === '1';
+            $newGalleryStatus = isset($data['gallery_published']) && $data['gallery_published'];
+
             // Save each setting
             foreach ($data as $key => $value) {
-                $settingValue = $value === null ? '' : $value;
+                $settingValue = $value === null ? '' : ($value === true ? '1' : ($value === false ? '0' : $value));
                 WeddingSetting::where('key', $key)->update([
                     'value' => $settingValue,
                 ]);
             }
 
-            Notification::make()
-                ->title('Settings saved successfully!')
-                ->success()
-                ->send();
+            // Show specific notification for gallery status change
+            if (isset($data['gallery_published']) && $oldGalleryStatus !== $newGalleryStatus) {
+                Notification::make()
+                    ->title($newGalleryStatus ? 'Gallery Published!' : 'Gallery Unpublished')
+                    ->body($newGalleryStatus 
+                        ? 'The photo gallery is now visible to guests.' 
+                        : 'The photo gallery is now hidden from guests.')
+                    ->success()
+                    ->send();
+            } else {
+                Notification::make()
+                    ->title('Settings saved successfully!')
+                    ->success()
+                    ->send();
+            }
+
+            // Emit saved event for JavaScript
+            $this->dispatch('saved');
 
         } catch (\Exception $e) {
             // Log the actual error for debugging
