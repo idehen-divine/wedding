@@ -281,6 +281,73 @@ class ManageWeddingSettings extends Page implements HasForms
                             ]),
 
                     ]),
+
+                Section::make('Gallery Settings')
+                    ->description('Control gallery visibility and publishing')
+                    ->collapsible()
+                    ->schema([
+                        \Filament\Schemas\Components\Grid::make(2)
+                            ->schema([
+                                // Status Column
+                                \Filament\Schemas\Components\Fieldset::make('Gallery Status')
+                                    ->schema([
+                                        \Filament\Forms\Components\Toggle::make('gallery_published')
+                                            ->label('Gallery Published')
+                                            ->helperText('Toggle to publish or unpublish the photo gallery for guests')
+                                            ->onColor('success')
+                                            ->offColor('gray')
+                                            ->live()
+                                            ->afterStateUpdated(function ($state, callable $set) {
+                                                // Auto-save the setting when toggled
+                                                WeddingSetting::where('key', 'gallery_published')
+                                                    ->update(['value' => $state ? '1' : '0']);
+
+                                                Notification::make()
+                                                    ->title($state ? 'Gallery Published!' : 'Gallery Unpublished')
+                                                    ->body($state
+                                                        ? 'The photo gallery is now visible to guests.'
+                                                        : 'The photo gallery is now hidden from guests.')
+                                                    ->success()
+                                                    ->send();
+                                            }),
+                                    ]),
+
+                                // Actions Column
+                                \Filament\Schemas\Components\Fieldset::make('Gallery Actions')
+                                    ->schema([
+                                        Placeholder::make('gallery_actions')
+                                            ->hiddenLabel()
+                                            ->content(function (callable $get) {
+                                                $isPublished = $get('gallery_published');
+                                                $publishText = $isPublished ? 'Published' : 'Coming Soon';
+                                                $statusColor = $isPublished ? 'text-green-600' : 'text-gray-500';
+
+                                                return new \Illuminate\Support\HtmlString('
+                                                    <div class="space-y-3">
+                                                        <div class="flex items-center gap-2">
+                                                            <div class="w-3 h-3 rounded-full '.($isPublished ? 'bg-green-500' : 'bg-gray-400').'"></div>
+                                                            <span class="font-medium '.$statusColor.'">'.$publishText.'</span>
+                                                        </div>
+                                                        <p class="text-sm text-gray-600">
+                                                            '.($isPublished
+                                                                ? 'Guests can now view the photo gallery page.'
+                                                                : 'Guests will see a "Coming Soon" message.').'
+                                                        </p>
+                                                        <div class="pt-2">
+                                                            <a href="/gallery" target="_blank"
+                                                               class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-blue-600 hover:text-blue-800 underline">
+                                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002 2v-2M17 6l5 5-5 5M8 14l9-9"/>
+                                                                </svg>
+                                                                View Gallery Page
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                ');
+                                            }),
+                                    ]),
+                            ]),
+                    ]),
             ])
             ->statePath('data')
             ->model(WeddingSetting::class);
