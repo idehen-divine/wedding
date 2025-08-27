@@ -41,7 +41,8 @@
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     @foreach ($galleryImages as $index => $image)
                         <div class="group relative cursor-pointer" onclick="openLightbox({{ $index }})">
-                            <img src="{{ $image->image_url }}" alt="{{ $image->category->getLabel() }} Photo"
+                            <img src="{{ $image->image_url }}"
+                                alt="{{ $image->category ? $image->category->getLabel() . ' Photo' : 'Wedding Photo' }}"
                                 class="w-full h-80 object-cover rounded-2xl shadow-lg" loading="lazy" />
                             <div
                                 class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl flex items-center justify-center">
