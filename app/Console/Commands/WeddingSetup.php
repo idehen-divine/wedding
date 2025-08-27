@@ -92,11 +92,19 @@ class WeddingSetup extends Command
 
             // Truncate tables before seeding
             $this->info('Truncating existing data...');
-            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-            StoryTimeline::truncate();
-            WeddingWish::truncate();
-            WeddingSetting::truncate();
-            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+            if (config('database.default') === 'sqlite') {
+                DB::statement('PRAGMA foreign_keys = OFF;');
+                StoryTimeline::truncate();
+                WeddingWish::truncate();
+                WeddingSetting::truncate();
+                DB::statement('PRAGMA foreign_keys = ON;');
+            } else {
+                DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+                StoryTimeline::truncate();
+                WeddingWish::truncate();
+                WeddingSetting::truncate();
+                DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+            }
 
             $this->call('db:seed');
             $this->newLine();
