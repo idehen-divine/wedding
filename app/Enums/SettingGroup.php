@@ -10,4 +10,5 @@ enum SettingGroup: string
     case SOCIAL = 'social';
     case CONTACT = 'contact';
     case MUSIC = 'music';
+    case GALLERY = 'gallery';
 }
