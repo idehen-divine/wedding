@@ -46,10 +46,10 @@ class GalleryImage extends Model
         return $query->orderBy('created_at', 'desc');
     }
 
-    public static function generateFileName($extension = 'jpg'): string
+    public static function generateFileName(string $extension = 'jpg'): string
     {
-        $count = self::count() + 1;
-        $number = str_pad($count, 4, '0', STR_PAD_LEFT);
-        return "precious-and-franklin-2025-{$number}.{$extension}";
+        $name = WeddingSetting::get('bride_name') . '-and-' . WeddingSetting::get('groom_name');
+        return "{$name}-" . now()->format('y-m-d') . '-' . uniqid() . ".{$extension}";
     }
 }
+
