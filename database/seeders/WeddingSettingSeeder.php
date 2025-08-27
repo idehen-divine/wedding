@@ -220,6 +220,17 @@ class WeddingSettingSeeder extends Seeder
                 'description' => 'Background music for the website',
                 'sort_order' => 60,
             ],
+
+            // Gallery Settings
+            [
+                'key' => 'gallery_published',
+                'value' => '0',
+                'type' => SettingType::BOOLEAN->value,
+                'group' => SettingGroup::GALLERY->value,
+                'label' => 'Gallery Published',
+                'description' => 'Whether the photo gallery is published and visible to guests',
+                'sort_order' => 70,
+            ],
         ];
 
         foreach ($settings as $settingData) {
