@@ -1,14 +1,14 @@
 <!-- Hero Section -->
 <section class="h-screen flex items-center justify-center relative overflow-hidden pt-20 pb-10"
-    style="background-image: url('/assets/images/hero-bg.jpg'); background-size: cover; background-position: center;">
+    style="background-image: url('{{ asset('assets/images/hero-bg.jpg') }}'); background-size: cover; background-position: center;">
     <div class="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-primary/20"></div>
 
     <!-- Floating Floral Elements -->
     <div class="absolute top-32 left-20 w-32 h-32 opacity-30">
-        <img src="/assets/images/floral-1.png" alt="Floral decoration" class="w-full h-full object-contain" loading="lazy">
+        <img src="{{ asset('assets/images/floral-1.png') }}" alt="Floral decoration" class="w-full h-full object-contain" loading="lazy">
     </div>
     <div class="absolute bottom-32 right-20 w-40 h-40 opacity-25">
-        <img src="/assets/images/floral-2.png" alt="Floral decoration" class="w-full h-full object-contain"
+        <img src="{{ asset('assets/images/floral-2.png') }}" alt="Floral decoration" class="w-full h-full object-contain"
             loading="lazy">
     </div>
 
