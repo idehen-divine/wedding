@@ -18,8 +18,9 @@ class GalleryImagesTable
             ->columns([
                 ImageColumn::make('image_path')
                     ->label('Image')
+                    ->disk('public')
                     ->square()
-                    ->size(120),
+                    ->size(150),
                 TextColumn::make('custom')
                     ->label('Categories')
                     ->getStateUsing(function ($record) {

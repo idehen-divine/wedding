@@ -19,7 +19,7 @@ class StoryTimelinesTable
                 ImageColumn::make('image_path')
                     ->label('Image')
                     ->disk('public')
-                    ->size(80),
+                    ->size(100),
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable()
