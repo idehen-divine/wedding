@@ -64,8 +64,13 @@
             // Track form changes
             Livewire.hook('morph.updated', ({ el, component }) => {
                 // Check if the component has any modified form fields
-                formHasChanges = component.fingerprint.memo.data && 
-                    Object.keys(component.fingerprint.memo.data).length > 0;
+                try {
+                    formHasChanges = component.fingerprint?.memo?.data && 
+                        Object.keys(component.fingerprint.memo.data).length > 0;
+                } catch (e) {
+                    // Fallback - assume changes if we can't access memo
+                    formHasChanges = true;
+                }
             });
 
             // Listen for form input changes
