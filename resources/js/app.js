@@ -251,6 +251,15 @@ window.musicPlayer = {
         if (this.hasUserInteracted) {
             this.play();
         }
+    },
+
+    resetMusicState() {
+        console.log('🔄 Resetting music state');
+        localStorage.removeItem(this.storageKey);
+        this.hasUserInteracted = false;
+        this.shouldAutoPlay = false;
+        this.autoPlayTriggered = false;
+        this.isPlaying = false;
     }
 };
 
@@ -266,6 +275,7 @@ function initializeApp() {
     appInitialized = true;
     
     if (window.musicPlayer) {
+        window.musicPlayer.resetMusicState();
         window.musicPlayer.enableAutoPlayOnInteraction();
     }
 }
