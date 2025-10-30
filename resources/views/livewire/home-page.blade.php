@@ -46,11 +46,11 @@
         </p>
 
         <div class="flex flex-row gap-3 md:gap-4 justify-center my-4 sm:my-0">
-            <a href="{{ route('rsvp') }}"
+            <a href="{{ route('rsvp') }}" wire:navigate.hover
                 class="bg-primary hover:bg-primary/90 text-white px-6 md:px-8 py-2.5 md:py-3 rounded-[8px] font-medium transition-all whitespace-nowrap inline-block text-center text-sm md:text-base">
                 RSVP
             </a>
-            <a href="{{ route('details') }}"
+            <a href="{{ route('details') }}" wire:navigate.hover
                 class="bg-white/80 hover:bg-white text-primary border border-primary px-6 md:px-8 py-2.5 md:py-3 rounded-[8px] font-medium transition-all whitespace-nowrap inline-block text-center text-sm md:text-base">
                 Event Details
             </a>

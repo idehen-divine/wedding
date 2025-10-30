@@ -15,11 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create(attributes: [
-            'name' => 'Idehen Divine',
-            'email' => 'idehendivine16@gmail.com',
-            'password' => bcrypt('Password'),
-        ]);
+        // User::factory()->create(attributes: [
+        //     'name' => 'Idehen Divine',
+        //     'email' => 'idehendivine16@preshlin.com',
+        //     'password' => bcrypt('Password'),
+        // ]);
 
         $this->call([
             WeddingWishSeeder::class,

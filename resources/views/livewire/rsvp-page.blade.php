@@ -228,17 +228,17 @@
                             <button
                                 onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Precious%20%26%20Franklin%20Wedding&dates=20250830T170000Z/20250830T230000Z&details=Join%20us%20for%20our%20special%20day!', '_blank')"
                                 class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-button text-sm font-medium transition-colors whitespace-nowrap">
-                                <i class="ri-google-line mr-1"></i>Add to Google
+                                <i class="ri-google-line mr-1"></i>Add to Google Calendar
                             </button>
                             <button
                                 onclick="window.open('data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0ADTSTART:20250830T170000Z%0ADTEND:20250830T230000Z%0ASUMMARY:Precious & Franklin Wedding%0ADESCRIPTION:Join us for our special day!%0AEND:VEVENT%0AEND:VCALENDAR')"
                                 class="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-button text-sm font-medium transition-colors whitespace-nowrap">
-                                <i class="ri-apple-line mr-1"></i>Add to Apple
+                                <i class="ri-apple-line mr-1"></i>Add to Apple Calendar
                             </button>
                             <button
                                 onclick="window.open('https://outlook.live.com/calendar/0/deeplink/compose?subject=Precious%20%26%20Franklin%20Wedding&startdt=2025-08-30T17:00:00Z&enddt=2025-08-30T23:00:00Z&body=Join%20us%20for%20our%20special%20day!', '_blank')"
                                 class="bg-blue-800 hover:bg-blue-900 text-white px-4 py-2 rounded-button text-sm font-medium transition-colors whitespace-nowrap">
-                                <i class="ri-microsoft-line mr-1"></i>Add to Outlook
+                                <i class="ri-microsoft-line mr-1"></i>Add to Outlook Calendar
                             </button>
                         </div>
                         <button

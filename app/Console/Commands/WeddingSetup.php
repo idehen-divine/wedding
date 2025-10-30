@@ -2,13 +2,14 @@
 
 namespace App\Console\Commands;
 
-use App\Models\StoryTimeline;
 use App\Models\User;
-use App\Models\WeddingSetting;
 use App\Models\WeddingWish;
+use App\Models\StoryTimeline;
+use App\Models\WeddingSetting;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
@@ -182,6 +183,7 @@ class WeddingSetup extends Command
                 $this->line("Exists: {$dir}/");
             }
         }
+        Artisan::call('storage:link');
     }
 
     /**
