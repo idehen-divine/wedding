@@ -25,7 +25,7 @@ class RsvpsTable
                     ->label('WhatsApp')
                     ->searchable()
                     ->placeholder('Not provided')
-                    ->formatStateUsing(fn(string $state = null): string => $state ?: 'Not provided'),
+                    ->formatStateUsing(fn(?string $state = null): string => $state ?: 'Not provided'),
 
                 TextColumn::make('guests')
                     ->label('# Guests')
