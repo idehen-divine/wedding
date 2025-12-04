@@ -72,23 +72,25 @@ class WeddingSetup extends Command
         }
         $this->newLine();
 
-        // Step 4: Set up storage directories
-        $this->info('📁 Setting up storage directories...');
-        $this->setupStorageDirectories();
-        $this->newLine();
+        if ($reset) {
+            // Step 4: Set up storage directories
+            $this->info('📁 Setting up storage directories...');
+            $this->setupStorageDirectories();
+            $this->newLine();
 
-        // Step 5: Copy story images
-        $this->info('🖼️  Copying story images to storage...');
-        $this->copyStoryImages();
-        $this->newLine();
+            // Step 5: Copy story images
+            $this->info('🖼️  Copying story images to storage...');
+            $this->copyStoryImages();
+            $this->newLine();
 
-        // Step 7: Copy audio files
-        $this->info('🎵 Copying audio files to storage...');
-        $this->copyAudioFiles();
-        $this->newLine();
+            // Step 7: Copy audio files
+            $this->info('🎵 Copying audio files to storage...');
+            $this->copyAudioFiles();
+            $this->newLine();
+        }
 
         // Step 8: Seed database
-        if ($reset || $this->confirm('Seed the database with default data?', false)) {
+        if ($reset) {
             $this->info('🌱 Seeding database with default data...');
 
             // Truncate tables before seeding
@@ -176,7 +178,7 @@ class WeddingSetup extends Command
 
         foreach ($directories as $dir) {
             $storageDir = storage_path("app/public/{$dir}");
-            if (! File::exists($storageDir)) {
+            if (!File::exists($storageDir)) {
                 File::makeDirectory($storageDir, 0755, true);
                 $this->info("Created: {$dir}/");
             } else {
@@ -196,10 +198,10 @@ class WeddingSetup extends Command
         $imageFiles = ['story-1.jpg', 'story-2.jpg', 'story-3.jpg', 'story-4.jpg'];
 
         foreach ($imageFiles as $file) {
-            $sourcePath = $assetsDir.'/'.$file;
-            $destinationPath = $storageDir.'/'.$file;
+            $sourcePath = $assetsDir . '/' . $file;
+            $destinationPath = $storageDir . '/' . $file;
 
-            if (File::exists($sourcePath) && ! File::exists($destinationPath)) {
+            if (File::exists($sourcePath) && !File::exists($destinationPath)) {
                 File::copy($sourcePath, $destinationPath);
                 $this->info("Copied: {$file}");
             } elseif (File::exists($destinationPath)) {
@@ -225,9 +227,9 @@ class WeddingSetup extends Command
                 if (in_array($file->getExtension(), ['mp3', 'wav', 'ogg'])) {
                     $fileName = $file->getFilename();
                     $sourcePath = $file->getPathname();
-                    $destinationPath = $storageDir.'/'.$fileName;
+                    $destinationPath = $storageDir . '/' . $fileName;
 
-                    if (! File::exists($destinationPath)) {
+                    if (!File::exists($destinationPath)) {
                         File::copy($sourcePath, $destinationPath);
                         $this->info("Copied: {$fileName}");
                     } else {
@@ -249,7 +251,7 @@ class WeddingSetup extends Command
     {
         $adminExists = User::where('email', 'admin@wedding.com')->exists();
 
-        if (! $reset && $adminExists) {
+        if (!$reset && $adminExists) {
             $this->info('Admin user already exists: admin@wedding.com');
 
             return;
@@ -287,16 +289,16 @@ class WeddingSetup extends Command
 
         $userCount = User::count();
         $adminExists = User::where('email', 'admin@wedding.com')->exists();
-        $this->line("• Users: {$userCount} ".($adminExists ? '(admin ✓)' : '(no admin)'));
+        $this->line("• Users: {$userCount} " . ($adminExists ? '(admin ✓)' : '(no admin)'));
 
         $settingCount = WeddingSetting::count();
         $this->line("• Wedding settings: {$settingCount}");
 
         $storageExists = File::exists(storage_path('app/public/story-images'));
-        $this->line('• Story images directory: '.($storageExists ? '✓' : '✗'));
+        $this->line('• Story images directory: ' . ($storageExists ? '✓' : '✗'));
 
         $symlinkExists = File::exists(public_path('storage'));
-        $this->line('• Storage symlink: '.($symlinkExists ? '✓' : '✗'));
+        $this->line('• Storage symlink: ' . ($symlinkExists ? '✓' : '✗'));
 
         $imageCount = count(File::glob(storage_path('app/public/story-images/*.jpg')));
         $this->line("• Story images copied: {$imageCount}");

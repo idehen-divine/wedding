@@ -27,11 +27,9 @@ Route::withoutMiddleware([VerifyCsrfToken::class])
         // Clear caches
         Artisan::call('optimize:clear');
 
-        // Run setup with --reset
-        Artisan::call('wedding:setup', [
-            '--reset' => true,
-        ]);
-
+        // Run setup without --reset
+        Artisan::call('wedding:setup');
+ 
         // Re-optimize
         Artisan::call('optimize');
 
