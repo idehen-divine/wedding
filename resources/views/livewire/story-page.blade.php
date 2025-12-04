@@ -3,9 +3,9 @@
 @endphp
 <div>
     <!-- Love Story Timeline -->
-    <section class="pt-32 pb-20 px-6">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16">
+    <section class="pt-24 pb-16 px-4 md:px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
                 <h1 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">Our Love Story</h1>
                 <p class="text-gray-600 text-lg">The journey that brought us together</p>
             </div>
@@ -17,28 +17,40 @@
                     <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 bg-primary/30 h-full">
                     </div>
                     <!-- Timeline items -->
-                    <div class="space-y-16">
+                    <div class="space-y-12">
                         @foreach ($storyEvents as $index => $event)
+                            @php
+                                $isEven = $index % 2 === 0;
+                                // Even index: Image LEFT (order-1), Text RIGHT (order-3)
+                                // Odd index: Image RIGHT (order-3), Text LEFT (order-1)
+                                $imageOrder = $isEven ? '1' : '3';
+                                $textOrder = $isEven ? '3' : '1';
+                                $textAlign = $isEven ? 'right' : 'left';
+                                $imagePadding = $isEven ? 'md:pr-6' : 'md:pl-6';
+                                $textPadding = $isEven ? 'md:pl-6' : 'md:pr-6';
+                            @endphp
                             <div class="flex flex-col md:flex-row items-center md:items-stretch">
-                                {{-- Image first in DOM so it stacks above text on mobile --}}
+                                {{-- Image --}}
                                 <div
-                                    class="w-full md:w-1/2 order-1 md:order-{{ $index % 2 === 0 ? '3' : '1' }} md:pr-8 mt-0 md:mt-0">
+                                    class="w-full md:w-1/2 order-1 md:order-{{ $imageOrder }} {{ $imagePadding }} mt-0 md:mt-0">
                                     @if ($event->image_path)
-                                        <img src="{{ url('storage/' . ltrim($event->image_path, '/')) }}"
-                                            alt="{{ $event->title }}"
-                                            class="w-full h-64 md:h-48 object-cover rounded-2xl shadow-lg"
-                                            loading="lazy">
+                                        <div class="w-full aspect-[4/3] md:aspect-[4/3] lg:aspect-[5/4] overflow-hidden rounded-2xl shadow-lg">
+                                            <img src="{{ url('storage/' . ltrim($event->image_path, '/')) }}"
+                                                alt="{{ $event->title }}"
+                                                class="w-full h-full object-cover"
+                                                loading="lazy">
+                                        </div>
                                     @endif
                                 </div>
 
                                 {{-- Dot (center) visible only on md+ --}}
                                 <div
-                                    class="hidden md:block w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10 mx-4 md:order-2">
+                                    class="hidden md:block w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg relative z-10 mx-3 md:order-2 flex-shrink-0">
                                 </div>
 
                                 {{-- Text block --}}
                                 <div
-                                    class="w-full md:w-1/2 order-2 md:order-{{ $index % 2 === 0 ? '1' : '3' }} mt-6 md:mt-0 text-center md:text-{{ $index % 2 === 0 ? 'right' : 'left' }}">
+                                    class="w-full md:w-1/2 order-2 md:order-{{ $textOrder }} {{ $textPadding }} mt-6 md:mt-0 text-center md:text-{{ $textAlign }}">
                                     <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
                                         <h3 class="font-playfair text-xl font-medium text-primary mb-2">
                                             {{ $event->title }}</h3>
@@ -59,8 +71,8 @@
     </section>
 
     <!-- Social Media & Hashtag Section -->
-    <section class="py-20 px-6 bg-gradient-to-br from-primary/10 to-white/40">
-        <div class="max-w-4xl mx-auto text-center">
+    <section class="py-16 px-4 md:px-6 bg-gradient-to-br from-primary/10 to-white/40">
+        <div class="max-w-6xl mx-auto text-center">
             <h2 class="font-playfair text-4xl md:text-5xl font-light text-primary mb-4">Share the Love</h2>
             <p class="text-gray-600 text-lg mb-8">Follow our journey and share your photos using our wedding hashtag</p>
 
